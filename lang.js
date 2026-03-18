@@ -115,6 +115,9 @@ const translations = {
   'experts': '名のエキスパート',
   'calls done': '通話完了',
   'updated': '更新',
+  'Log system': 'ログ',
+  'comment_info_banner': 'このセクションにコメントを入力して、エキスパートについてご質問ください。Archesスタッフにエキスパートの追加情報の更新を依頼することもできます。',
+  'Send': '送信',
 
   // Interview tab
   'Interview Management': 'インタビュー管理',

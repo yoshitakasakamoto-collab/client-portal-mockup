@@ -283,19 +283,102 @@
 
             <!-- Activities -->
             <div id="activities" style="display:none;">
-              <div class="card">
-                <div class="activity-item">
-                  <div class="activity-dot"></div>
-                  <div>
-                    <div class="activity-text">Profile proposed by <strong>Luci Dao (Arches)</strong></div>
-                    <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+              <!-- Activities Sub-tabs -->
+              <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
+                <div class="activity-subtab active" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;" data-lang="Log system">Log system</div>
+                <div class="activity-subtab" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;">Comments (2)</div>
+              </div>
+
+              <!-- Log System Sub-tab -->
+              <div id="logsystem">
+                <div class="card">
+                  <div class="activity-item">
+                    <div class="activity-dot"></div>
+                    <div>
+                      <div class="activity-text">Profile proposed by <strong>Arches Team</strong></div>
+                      <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-dot"></div>
+                    <div>
+                      <div class="activity-text">Screening answers updated</div>
+                      <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-dot"></div>
+                    <div>
+                      <div class="activity-text">Availability slots added (3 slots)</div>
+                      <div class="activity-time">Mar 15, 2026 - 10:30 AM</div>
+                    </div>
                   </div>
                 </div>
-                <div class="activity-item">
-                  <div class="activity-dot"></div>
-                  <div>
-                    <div class="activity-text">Screening answers updated</div>
-                    <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+              </div>
+
+              <!-- Comments Sub-tab -->
+              <div id="comments" style="display:none;">
+                <!-- Info banner -->
+                <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
+                  <span style="font-size:16px;">&#9432;</span>
+                  <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
+                </div>
+
+                <!-- Comment Thread -->
+                <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">
+                  <!-- Client comment -->
+                  <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+                    <div style="flex:1;">
+                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                        <span style="font-weight:600;font-size:13px;">Emily Turner</span>
+                        <span style="font-size:11px;color:#999;">BCG SEA</span>
+                        <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 2:30 PM</span>
+                      </div>
+                      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
+                        Could you check if this expert has direct experience with LNG regasification terminals? Our client is particularly interested in that area as well.
+                      </div>
+                      <!-- Arches reply -->
+                      <div style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;margin-left:20px;">
+                        <div style="width:28px;height:28px;border-radius:50%;background:#6b21a8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;">AR</div>
+                        <div style="flex:1;">
+                          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                            <span style="font-weight:600;font-size:13px;">Arches Team</span>
+                            <span style="font-size:11px;color:#6b21a8;background:#f3e8ff;padding:1px 6px;border-radius:4px;">Arches Staff</span>
+                            <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 4:15 PM</span>
+                          </div>
+                          <div style="background:#faf5ff;border:1px solid #e0d4f5;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
+                            We confirmed with the expert — she has 2 years of indirect experience with LNG regasification through her work at Shell Energy, where she handled congestion analysis for assets near Sabine Pass. We've updated the screening answers to reflect this. Let us know if you need more detail!
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Another client comment -->
+                  <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+                    <div style="flex:1;">
+                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                        <span style="font-weight:600;font-size:13px;">Emily Turner</span>
+                        <span style="font-size:11px;color:#999;">BCG SEA</span>
+                        <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 5:00 PM</span>
+                      </div>
+                      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
+                        Great, thank you! That's helpful. We'll proceed with booking an interview.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comment Input -->
+                <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
+                  <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+                    <div style="flex:1;display:flex;gap:8px;">
+                      <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
+                      <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -416,6 +499,23 @@ Available slots:
       tabs.forEach((t, i) => {
         const names = ['expertInfo', 'activities', 'availability'];
         t.classList.toggle('active', names[i] === tab);
+      });
+    }
+
+    function showActivitySubTab(tab) {
+      document.getElementById('logsystem').style.display = tab === 'logsystem' ? 'block' : 'none';
+      document.getElementById('comments').style.display = tab === 'comments' ? 'block' : 'none';
+      const subtabs = document.querySelectorAll('.activity-subtab');
+      subtabs.forEach(t => {
+        if ((tab === 'logsystem' && t.textContent.includes('Log')) || (tab === 'comments' && t.textContent.includes('Comment'))) {
+          t.style.borderBottomColor = '#e67e22';
+          t.style.color = '#e67e22';
+          t.style.fontWeight = '600';
+        } else {
+          t.style.borderBottomColor = 'transparent';
+          t.style.color = '#999';
+          t.style.fontWeight = '500';
+        }
       });
     }
 
