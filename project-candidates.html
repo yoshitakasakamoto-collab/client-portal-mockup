@@ -11,8 +11,13 @@
   <div class="app">
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <div class="company-name">BCG SEA</div>
-        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+        <div class="sidebar-logo-inner">
+          <div class="sidebar-icon">A</div>
+          <div class="sidebar-texts">
+            <div class="company-name">BCG SEA</div>
+            <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span></div>
+          </div>
+        </div>
       </div>
       <nav class="sidebar-nav">
         <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
@@ -223,9 +228,9 @@
     </div>
   </div>
 
-  <!-- Book Modal (Calendar View) -->
+  <!-- Book Modal (VisasQ-style Timeline) -->
   <div class="modal-overlay" id="bookModal">
-    <div class="modal" style="width:600px;">
+    <div class="modal" style="width:820px;max-width:95vw;">
       <div class="modal-header">
         <h3 data-lang="Book Interview">Book for Interview</h3>
         <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
@@ -233,64 +238,98 @@
       <div class="modal-body" style="padding:20px;">
         <p id="bookModalDesc" style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-1041870 - Luci Dao</strong>.</p>
 
-        <!-- Mini Calendar -->
+        <!-- Duration Selection (first, like VisasQ) -->
         <div class="form-group">
-          <label style="font-weight:600;margin-bottom:8px;">1. Select a date with available slots</label>
-          <div id="miniCalendar" style="border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
-            <!-- Calendar Header -->
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#fafafa;border-bottom:1px solid #e0e0e0;">
-              <span id="calMonthLabel" style="font-weight:600;font-size:14px;">March 2026</span>
-            </div>
-            <!-- Weekday headers -->
-            <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:11px;color:#999;padding:8px 0;border-bottom:1px solid #f0f0f0;">
-              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-            </div>
-            <!-- Calendar Grid (dynamically filled) -->
-            <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;padding:4px;">
-            </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Interview Duration</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="30" style="accent-color:#e67e22;"> 30 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="60" style="accent-color:#e67e22;" checked> 60 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="80" style="accent-color:#e67e22;"> 80 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="100" style="accent-color:#e67e22;"> 100 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="120" style="accent-color:#e67e22;"> 120 min</label>
           </div>
         </div>
 
-        <!-- Time Slot Selection -->
-        <div class="form-group" id="timeSlotSection" style="display:none;">
-          <label style="font-weight:600;margin-bottom:8px;">2. Available time slots for <span id="selectedDateLabel"></span></label>
-          <div id="timeSlotList" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <!-- 2-week Timeline Calendar -->
+        <div class="form-group">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;">Select your preferred date & time</span>
+          </div>
+          <div style="font-size:11px;color:#999;margin-bottom:8px;">* Times shown in expert's local timezone</div>
+
+          <!-- Timeline Nav -->
+          <div style="display:flex;align-items:center;margin-bottom:0;">
+            <div onclick="shiftWeek(-1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;">
+              <div style="font-size:16px;">&lsaquo;</div>
+              <div>Prev<br>2 weeks</div>
+            </div>
+            <div style="flex:1;overflow-x:auto;" id="timelineWrapper">
+              <!-- Timeline Header (dates) -->
+              <div style="min-width:650px;">
+                <div id="timelineHeader" style="display:flex;border-bottom:1px solid #e0e0e0;background:#f5f5f5;"></div>
+                <!-- Timeline Grid (time rows) -->
+                <div id="timelineGrid" style="position:relative;"></div>
+              </div>
+            </div>
+            <div onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;">
+              <div style="font-size:16px;">&rsaquo;</div>
+              <div>Next<br>2 weeks</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#777;">
+            <span><span style="display:inline-block;width:12px;height:12px;background:#c8e6c9;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Available</span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#e67e22;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Selected</span>
+          </div>
         </div>
 
-        <!-- Interview Duration -->
-        <div class="form-group" id="durationSection" style="display:none;">
-          <label style="font-weight:600;margin-bottom:8px;">3. Interview duration</label>
-          <div style="display:flex;gap:8px;">
-            <label class="dur-option" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:13px;">
-              <input type="radio" name="duration" value="30" style="accent-color:#e67e22;"> 30 min
-            </label>
-            <label class="dur-option" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:13px;">
-              <input type="radio" name="duration" value="45" style="accent-color:#e67e22;"> 45 min
-            </label>
-            <label class="dur-option" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:13px;">
-              <input type="radio" name="duration" value="60" style="accent-color:#e67e22;" checked> 60 min
-            </label>
-            <label class="dur-option" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:13px;">
-              <input type="radio" name="duration" value="90" style="accent-color:#e67e22;"> 90 min
-            </label>
+        <!-- Selected Time Display -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Preferred Date & Time</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
+          <input type="text" id="selectedTimeDisplay" class="form-control" placeholder="Click a green slot on the calendar above" readonly style="flex:1;background:#f9f9f9;cursor:default;">
+        </div>
+
+        <!-- Attendee -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Your Name</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <input type="text" class="form-control" value="Emily Turner" style="flex:1;">
+        </div>
+
+        <!-- Number of attendees -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;">Number of Attendees</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
+          <input type="number" class="form-control" value="1" min="1" max="10" style="width:60px;">
+          <span style="font-size:12px;color:#999;">* If more than 1, please note in comments</span>
+        </div>
+
+        <!-- Interpretation option -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;">Options</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+            <input type="checkbox" style="accent-color:#e67e22;"> Request interpretation service
+          </label>
         </div>
 
         <!-- Notes -->
         <div class="form-group">
-          <label>Notes for the team (optional)</label>
-          <textarea class="form-control" placeholder="Any specific topics or questions you'd like to cover..."></textarea>
-        </div>
-
-        <!-- Booking Summary -->
-        <div id="bookingSummary" style="display:none;background:#f0faf0;border:1px solid #c8e6c9;border-radius:8px;padding:12px 16px;font-size:13px;">
-          <div style="font-weight:600;margin-bottom:6px;color:#2e7d32;">Booking Summary</div>
-          <div id="summaryContent" style="color:#333;line-height:1.8;"></div>
+          <label style="font-weight:600;font-size:13px;">Additional Notes</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:8px;">Optional</span>
+          <textarea class="form-control" placeholder="Any specific topics or questions you'd like to cover..." style="margin-top:6px;"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
-        <button class="btn btn-primary" id="confirmBookBtn" onclick="this.closest('.modal-overlay').classList.remove('show')">Confirm Booking</button>
+        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="this.closest('.modal-overlay').classList.remove('show')">Confirm Booking</button>
       </div>
     </div>
   </div>
@@ -630,14 +669,14 @@
       if (typeof applyLanguage === 'function') applyLanguage();
     }
 
-    /* ========== Calendar / Booking Logic ========== */
-    let selectedBookDate = null;
-    let selectedSlotIdx = null;
+    /* ========== 2-Week Timeline Booking (VisasQ-style) ========== */
+    let weekOffset = 0;
+    let selectedSlotKey = null;
 
     function updateModalExpert() {
       const e = experts[currentExpertId];
-      selectedBookDate = null;
-      selectedSlotIdx = null;
+      weekOffset = 0;
+      selectedSlotKey = null;
 
       // Update decline modal
       const declineP = document.querySelector('#declineModal .modal-body p');
@@ -647,141 +686,125 @@
       const bookP = document.getElementById('bookModalDesc');
       if (bookP) bookP.innerHTML = `Select a time slot to schedule an interview with <strong>${e.id} - ${e.name}</strong>.`;
 
-      // Reset sections
-      document.getElementById('timeSlotSection').style.display = 'none';
-      document.getElementById('durationSection').style.display = 'none';
-      document.getElementById('bookingSummary').style.display = 'none';
-
-      // Build calendar
-      renderCalendar(e);
+      document.getElementById('selectedTimeDisplay').value = '';
+      renderTimeline();
     }
 
-    function parseSlotDates(slots) {
-      // Extract day numbers from slot strings like "Mar 18 (Tue), 10:00 AM - 12:00 PM EST"
-      const dates = {};
+    function shiftWeek(dir) {
+      weekOffset += dir;
+      renderTimeline();
+    }
+
+    function parseSlotToBlocks(slots) {
+      // Parse "Mar 18 (Tue), 10:00 AM - 12:00 PM EST" into { day, startHour, endHour }
+      const blocks = [];
       slots.forEach((s, i) => {
-        const match = s.match(/Mar\s+(\d+)/);
-        if (match) {
-          const day = parseInt(match[1]);
-          if (!dates[day]) dates[day] = [];
-          dates[day].push({ idx: i, text: s });
+        const dayMatch = s.match(/Mar\s+(\d+)/);
+        const timeMatch = s.match(/(\d{1,2}):(\d{2})\s*(AM|PM)\s*-\s*(\d{1,2}):(\d{2})\s*(AM|PM)/);
+        if (dayMatch && timeMatch) {
+          let sh = parseInt(timeMatch[1]);
+          if (timeMatch[3] === 'PM' && sh !== 12) sh += 12;
+          if (timeMatch[3] === 'AM' && sh === 12) sh = 0;
+          let eh = parseInt(timeMatch[4]);
+          if (timeMatch[6] === 'PM' && eh !== 12) eh += 12;
+          if (timeMatch[6] === 'AM' && eh === 12) eh = 0;
+          blocks.push({ day: parseInt(dayMatch[1]), startHour: sh, endHour: eh, text: s, idx: i });
         }
       });
-      return dates;
+      return blocks;
     }
 
-    function renderCalendar(expert) {
-      const grid = document.getElementById('calGrid');
-      const slotDates = parseSlotDates(expert.slots);
-      const today = 18; // March 18
-      // March 2026 starts on Sunday (day 0)
-      const firstDay = 0; // Sunday
-      const daysInMonth = 31;
-
-      let html = '';
-      // Empty cells before day 1
-      for (let i = 0; i < firstDay; i++) {
-        html += '<div style="padding:8px;"></div>';
-      }
-      for (let d = 1; d <= daysInMonth; d++) {
-        const hasSlot = slotDates[d];
-        const isPast = d < today;
-        const isToday = d === today;
-        let style = 'padding:8px;font-size:13px;border-radius:6px;cursor:default;margin:2px;';
-        let cls = '';
-
-        if (hasSlot && !isPast) {
-          style += 'background:#e8f5e9;color:#2e7d32;font-weight:600;cursor:pointer;';
-          cls = `onclick="selectCalDate(${d})" id="calDay${d}"`;
-        } else if (isPast) {
-          style += 'color:#ccc;';
-        } else if (isToday) {
-          style += 'border:1px solid #e67e22;color:#333;';
-        } else {
-          style += 'color:#666;';
-        }
-        html += `<div style="${style}" ${cls}>${d}</div>`;
-      }
-      grid.innerHTML = html;
-    }
-
-    function selectCalDate(day) {
+    function renderTimeline() {
       const e = experts[currentExpertId];
-      selectedBookDate = day;
-      selectedSlotIdx = null;
+      const blocks = parseSlotToBlocks(e.slots);
+      const header = document.getElementById('timelineHeader');
+      const grid = document.getElementById('timelineGrid');
 
-      // Highlight selected day
-      document.querySelectorAll('#calGrid > div').forEach(d => {
-        d.style.outline = 'none';
-      });
-      const el = document.getElementById('calDay' + day);
-      if (el) {
-        el.style.outline = '2px solid #e67e22';
-        el.style.outlineOffset = '-2px';
-      }
+      // Calculate 14-day range starting from today + weekOffset*14
+      const baseDate = new Date(2026, 2, 18); // March 18, 2026
+      const startDate = new Date(baseDate);
+      startDate.setDate(startDate.getDate() + weekOffset * 14);
 
-      // Show time slots for this day
-      const slotDates = parseSlotDates(e.slots);
-      const daySlots = slotDates[day] || [];
-      const section = document.getElementById('timeSlotSection');
-      const label = document.getElementById('selectedDateLabel');
-      const list = document.getElementById('timeSlotList');
-
+      const days = [];
       const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      const dow = new Date(2026, 2, day).getDay();
-      label.textContent = `Mar ${day} (${dayNames[dow]})`;
-
-      list.innerHTML = daySlots.map((s, i) => {
-        // Extract time part
-        const timePart = s.text.replace(/^.*?\),\s*/, '');
-        return `<label onclick="selectTimeSlot(${s.idx})" id="slotOpt${s.idx}" style="display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #ddd;border-radius:6px;cursor:pointer;transition:all 0.15s;">
-          <input type="radio" name="timeSlot" value="${s.idx}" style="accent-color:#e67e22;">
-          <span style="font-size:13px;">${timePart}</span>
-        </label>`;
-      }).join('');
-
-      section.style.display = 'block';
-      document.getElementById('durationSection').style.display = 'none';
-      document.getElementById('bookingSummary').style.display = 'none';
-    }
-
-    function selectTimeSlot(idx) {
-      selectedSlotIdx = idx;
-      // Highlight selected slot
-      document.querySelectorAll('#timeSlotList label').forEach(l => {
-        l.style.borderColor = '#ddd';
-        l.style.background = '#fff';
-      });
-      const el = document.getElementById('slotOpt' + idx);
-      if (el) {
-        el.style.borderColor = '#e67e22';
-        el.style.background = '#fef5ec';
+      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(startDate);
+        d.setDate(d.getDate() + i);
+        days.push(d);
       }
-      // Show duration section
-      document.getElementById('durationSection').style.display = 'block';
-      updateBookingSummary();
 
-      // Listen for duration changes
-      document.querySelectorAll('input[name="duration"]').forEach(r => {
-        r.onchange = updateBookingSummary;
+      // Find time range to display (show 8:00-22:00 or fit to slots)
+      const minHour = 8, maxHour = 22;
+      const hours = [];
+      for (let h = minHour; h <= maxHour; h++) hours.push(h);
+
+      // Header
+      let prevMonth = '';
+      let headerHtml = '<div style="width:50px;flex-shrink:0;border-right:1px solid #e0e0e0;"></div>';
+      days.forEach(d => {
+        const isToday = d.getDate() === 18 && d.getMonth() === 2 && d.getFullYear() === 2026;
+        const mon = monthNames[d.getMonth()];
+        const showMonth = mon !== prevMonth;
+        prevMonth = mon;
+        headerHtml += `<div style="flex:1;min-width:44px;text-align:center;padding:6px 2px;border-right:1px solid #f0f0f0;${isToday ? 'background:#fef5ec;' : ''}">
+          <div style="font-size:10px;color:#999;">${dayNames[d.getDay()]}</div>
+          <div style="font-size:13px;font-weight:600;${isToday ? 'color:#e67e22;' : ''}">${showMonth ? mon + ' ' : ''}${d.getDate()}</div>
+        </div>`;
       });
+      header.innerHTML = headerHtml;
+
+      // Grid rows
+      let gridHtml = '';
+      hours.forEach(h => {
+        const label = h < 12 ? `${h}:00` : h === 12 ? '12:00' : `${h}:00`;
+        gridHtml += `<div style="display:flex;border-bottom:1px solid #f0f0f0;">`;
+        gridHtml += `<div style="width:50px;flex-shrink:0;border-right:1px solid #e0e0e0;padding:4px 6px;font-size:11px;color:#999;text-align:right;">${label}</div>`;
+        days.forEach(d => {
+          const dayOfMonth = d.getDate();
+          const month = d.getMonth(); // 2 = March
+          // Check if any slot covers this hour on this day
+          let isAvail = false;
+          let slotInfo = null;
+          if (month === 2) { // March
+            blocks.forEach(b => {
+              if (b.day === dayOfMonth && h >= b.startHour && h < b.endHour) {
+                isAvail = true;
+                slotInfo = b;
+              }
+            });
+          }
+          const cellKey = `${dayOfMonth}-${h}`;
+          const isSelected = selectedSlotKey === cellKey;
+          let cellStyle = 'flex:1;min-width:44px;height:28px;border-right:1px solid #f5f5f5;';
+          if (isSelected) {
+            cellStyle += 'background:#e67e22;cursor:pointer;';
+          } else if (isAvail) {
+            cellStyle += 'background:#c8e6c9;cursor:pointer;';
+          }
+          const onclick = isAvail ? `onclick="selectTimelineSlot(${dayOfMonth},${h},'${slotInfo ? slotInfo.text.replace(/'/g,"\\'") : ''}')"` : '';
+          gridHtml += `<div style="${cellStyle}" ${onclick} id="tc_${cellKey}"></div>`;
+        });
+        gridHtml += `</div>`;
+      });
+      grid.innerHTML = gridHtml;
     }
 
-    function updateBookingSummary() {
-      const e = experts[currentExpertId];
-      if (selectedSlotIdx === null) return;
-      const slot = e.slots[selectedSlotIdx];
-      const dur = document.querySelector('input[name="duration"]:checked');
-      const durVal = dur ? dur.value : '60';
+    function selectTimelineSlot(day, hour, slotText) {
+      selectedSlotKey = `${day}-${hour}`;
+      const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const d = new Date(2026, 2, day);
+      const dow = dayNames[d.getDay()];
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const h12 = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+      const dur = document.querySelector('input[name="bookDuration"]:checked');
+      const durVal = dur ? parseInt(dur.value) : 60;
+      const endHour = hour + Math.ceil(durVal / 60);
+      const endAmpm = endHour >= 12 ? 'PM' : 'AM';
+      const endH12 = endHour > 12 ? endHour - 12 : endHour === 0 ? 12 : endHour;
 
-      const summary = document.getElementById('bookingSummary');
-      const content = document.getElementById('summaryContent');
-      content.innerHTML = `
-        <strong>Expert:</strong> ${e.id} - ${e.name}<br>
-        <strong>Date & Time:</strong> ${slot}<br>
-        <strong>Duration:</strong> ${durVal} minutes<br>
-        <strong>Rate:</strong> ${e.cost}`;
-      summary.style.display = 'block';
+      document.getElementById('selectedTimeDisplay').value = `Mar ${day} (${dow}), ${h12}:00 ${ampm} - ${endH12}:00 ${endAmpm}`;
+      renderTimeline(); // re-render to update highlight
     }
 
     /* ========== UI Functions ========== */
