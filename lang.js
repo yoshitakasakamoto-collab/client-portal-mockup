@@ -206,10 +206,14 @@ function initLang() {
 
 function updateLangButton(btn) {
   if (currentLang === 'en') {
-    btn.innerHTML = '🇬🇧 EN';
+    btn.innerHTML = '&#127482;&#127480;';
+    btn.title = 'Switch to Japanese';
   } else {
-    btn.innerHTML = '🇯🇵 JP';
+    btn.innerHTML = '&#127471;&#127477;';
+    btn.title = 'Switch to English';
   }
+  btn.style.fontSize = '20px';
+  btn.style.lineHeight = '1';
 }
 
 function applyLang() {
@@ -223,5 +227,8 @@ function applyLang() {
     }
   });
 }
+
+// Alias for dynamic content re-rendering
+function applyLanguage() { applyLang(); }
 
 document.addEventListener('DOMContentLoaded', initLang);
