@@ -56,16 +56,16 @@ a:hover { text-decoration: underline; }
 .sidebar:hover .sidebar-logo .sidebar-logo-inner {
   opacity: 1;
 }
-.sidebar-logo .company-name {
-  font-weight: 700;
-  font-size: 14px;
-  color: #333;
-  line-height: 1.2;
+.sidebar-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
 }
-.sidebar-logo .powered-by {
-  font-size: 10px;
+.sidebar-logo-sub {
+  font-size: 9px;
   color: #999;
-  margin-top: 1px;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 .sidebar-nav { padding: 12px 0; flex: 1; }
 .sidebar-nav a {

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+  <!-- Left arch -->
+  <path d="M30 42 Q30 10 50 8 Q55 8 55 14" fill="none" stroke="#D4941A" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Right arch -->
+  <path d="M80 42 Q80 10 60 8 Q55 8 55 14" fill="none" stroke="#D4941A" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="55" cy="7" r="3.5" fill="#E67E22"/>
+  <!-- Left inner arch -->
+  <path d="M40 42 Q42 18 55 16" fill="none" stroke="#E6A817" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right inner arch -->
+  <path d="M70 42 Q68 18 55 16" fill="none" stroke="#E6A817" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Arches text -->
+  <text x="95" y="34" font-family="Inter, 'Noto Sans JP', sans-serif" font-size="22" font-weight="500" fill="#546E7A" letter-spacing="0.5">Arches</text>
+</svg>
