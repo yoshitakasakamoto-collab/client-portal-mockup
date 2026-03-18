@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - Interview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="company-name">BCG SEA</div>
+        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
+        <div class="header-title">A109919 BCG US GFPs, Gas infra and power transmission</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;<span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header"><span data-lang="Notifications">Notifications</span><a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a></div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="Transcript ready">Transcript ready</div>
+                <div class="notif-desc">Recording & transcript for Luci Dao interview available</div>
+                <div class="notif-time" data-lang="3 hours ago">3 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="tabs">
+          <div class="tab" onclick="window.location='project-general.html'"><span class="dot"></span> <span data-lang="General">General</span></div>
+          <div class="tab" onclick="window.location='project-candidates.html'"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+          <div class="tab active"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+          <div class="tab" onclick="window.location='project-billing.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <select class="form-control" style="width:140px;">
+            <option>All Candidates</option>
+            <option>Pretty Dewati (Cathy)</option>
+            <option>Robert Chen</option>
+            <option>Luci Dao</option>
+            <option>Thomas Wright</option>
+          </select>
+          <select class="form-control" style="width:130px;">
+            <option>All Status</option>
+            <option>Booked</option>
+            <option>To be booked</option>
+            <option>Conducted</option>
+            <option>Canceled</option>
+          </select>
+          <select class="form-control" style="width:130px;">
+            <option>All Segments</option>
+            <option>Gas-fired generation</option>
+            <option>Gas pipelines</option>
+            <option>Electric transmission</option>
+          </select>
+        </div>
+
+        <!-- Status Summary -->
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+          <div class="stat-card" style="padding:14px;">
+            <div class="stat-label" data-lang="Booked">Booked</div>
+            <div class="stat-value" style="font-size:22px;color:#1565c0;">1</div>
+          </div>
+          <div class="stat-card" style="padding:14px;">
+            <div class="stat-label" data-lang="To Be Booked">To Be Booked</div>
+            <div class="stat-value" style="font-size:22px;color:#f57f17;">1</div>
+          </div>
+          <div class="stat-card" style="padding:14px;">
+            <div class="stat-label" data-lang="Conducted">Conducted</div>
+            <div class="stat-value" style="font-size:22px;color:#2e7d32;">3</div>
+          </div>
+          <div class="stat-card" style="padding:14px;">
+            <div class="stat-label" data-lang="Canceled">Canceled</div>
+            <div class="stat-value" style="font-size:22px;color:#c62828;">0</div>
+          </div>
+        </div>
+
+        <!-- Interview List -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th data-lang="Expert">Expert</th>
+                <th data-lang="Segment">Segment</th>
+                <th data-lang="Status">Status</th>
+                <th data-lang="Date & Time">Date & Time</th>
+                <th data-lang="Duration">Duration</th>
+                <th data-lang="Cost">Cost</th>
+                <th>Recording / Transcript / Summary</th>
+                <th data-lang="Actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Booked -->
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1041837 - Pretty Dewati (Cathy)</div>
+                  <div style="font-size:11px;color:#999;">Third Coast - VP, Corporate Dev</div>
+                </td>
+                <td><span class="tag tag-orange">Gas pipelines</span></td>
+                <td><span class="badge-status badge-booked" data-lang="Booked">Booked</span></td>
+                <td>
+                  <div style="font-size:13px;">Mar 17, 2026</div>
+                  <div style="font-size:12px;color:#777;">9:00 AM - 10:00 AM EST</div>
+                </td>
+                <td>--</td>
+                <td>$700</td>
+                <td><span style="color:#999;">--</span></td>
+                <td>
+                  <button class="btn btn-danger btn-sm" onclick="document.getElementById('cancelModal').classList.add('show')" data-lang="Cancel">Cancel</button>
+                </td>
+              </tr>
+
+              <!-- To Be Booked -->
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1041870 - Luci Dao</div>
+                  <div style="font-size:11px;color:#999;">ENGIE North America - Sr. Advisor</div>
+                </td>
+                <td><span class="tag tag-orange">Gas-fired generation</span></td>
+                <td><span class="badge-status badge-to-book" data-lang="To Be Booked">To be booked</span></td>
+                <td><span style="color:#999;font-size:13px;">Pending scheduling</span></td>
+                <td>--</td>
+                <td>$800</td>
+                <td><span style="color:#999;">--</span></td>
+                <td>
+                  <button class="btn btn-primary btn-sm" data-lang="Book Now">Book</button>
+                </td>
+              </tr>
+
+              <!-- Conducted 1 -->
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1041955 - Robert Chen</div>
+                  <div style="font-size:11px;color:#999;">Calpine Corp - VP, Plant Ops</div>
+                </td>
+                <td><span class="tag tag-orange">Gas-fired generation</span></td>
+                <td><span class="badge-status badge-conducted" data-lang="Conducted">Conducted</span></td>
+                <td>
+                  <div style="font-size:13px;">Mar 13, 2026</div>
+                  <div style="font-size:12px;color:#777;">3:00 PM - 3:45 PM EST</div>
+                </td>
+                <td>45 <span data-lang="min">min</span></td>
+                <td>$1,000</td>
+                <td>
+                  <div class="btn-group" style="flex-wrap:wrap;">
+                    <button class="btn btn-outline btn-sm">&#11015; Recording</button>
+                    <button class="btn btn-outline btn-sm">&#11015; Transcript</button>
+                    <button class="btn btn-outline btn-sm">&#11015; AI Summary</button>
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-outline btn-sm" onclick="document.getElementById('feedbackModal').classList.add('show')" data-lang="Rate Expert">Rate</button>
+                </td>
+              </tr>
+
+              <!-- Conducted 2 -->
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1042019 - Thomas Wright</div>
+                  <div style="font-size:11px;color:#999;">East Texas Electric - VP, Power</div>
+                </td>
+                <td><span class="tag tag-orange">Electric transmission</span></td>
+                <td><span class="badge-status badge-conducted" data-lang="Conducted">Conducted</span></td>
+                <td>
+                  <div style="font-size:13px;">Mar 12, 2026</div>
+                  <div style="font-size:12px;color:#777;">10:00 AM - 10:58 AM EST</div>
+                </td>
+                <td>58 <span data-lang="min">min</span></td>
+                <td>$500</td>
+                <td>
+                  <div class="btn-group" style="flex-wrap:wrap;">
+                    <button class="btn btn-outline btn-sm">&#11015; Recording</button>
+                    <button class="btn btn-outline btn-sm">&#11015; Transcript</button>
+                    <button class="btn btn-outline btn-sm">&#11015; AI Summary</button>
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-outline btn-sm" data-lang="Rate Expert">Rate</button>
+                </td>
+              </tr>
+
+              <!-- Conducted 3 -->
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1042200 - Michael Liu</div>
+                  <div style="font-size:11px;color:#999;">AES Corp - Director, Development</div>
+                </td>
+                <td><span class="tag tag-orange">Gas pipelines</span></td>
+                <td><span class="badge-status badge-conducted" data-lang="Conducted">Conducted</span></td>
+                <td>
+                  <div style="font-size:13px;">Mar 11, 2026</div>
+                  <div style="font-size:12px;color:#777;">2:00 PM - 2:55 PM EST</div>
+                </td>
+                <td>55 <span data-lang="min">min</span></td>
+                <td>$900</td>
+                <td>
+                  <div class="btn-group" style="flex-wrap:wrap;">
+                    <button class="btn btn-outline btn-sm">&#11015; Recording</button>
+                    <button class="btn btn-outline btn-sm">&#11015; Transcript</button>
+                    <button class="btn btn-outline btn-sm">&#11015; AI Summary</button>
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-outline btn-sm" data-lang="Rate Expert">Rate</button>
+                </td>
+              </tr>
+
+              <!-- Same expert, 2nd interview example -->
+              <tr style="background:#fafafa;">
+                <td>
+                  <div style="font-weight:600;font-size:13px;">EX-1041955 - Robert Chen <span style="font-size:11px;color:#e67e22;">(2nd call)</span></div>
+                  <div style="font-size:11px;color:#999;">Calpine Corp - VP, Plant Ops</div>
+                </td>
+                <td><span class="tag tag-orange">Gas-fired generation</span></td>
+                <td><span class="badge-status badge-conducted" data-lang="Conducted">Conducted</span></td>
+                <td>
+                  <div style="font-size:13px;">Mar 10, 2026</div>
+                  <div style="font-size:12px;color:#777;">11:00 AM - 11:30 AM EST</div>
+                </td>
+                <td>30 <span data-lang="min">min</span></td>
+                <td>$1,000</td>
+                <td>
+                  <div class="btn-group" style="flex-wrap:wrap;">
+                    <button class="btn btn-outline btn-sm">&#11015; Recording</button>
+                    <button class="btn btn-outline btn-sm">&#11015; Transcript</button>
+                    <button class="btn btn-outline btn-sm">&#11015; AI Summary</button>
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-outline btn-sm" data-lang="Rate Expert">Rate</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancel Modal -->
+  <div class="modal-overlay" id="cancelModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-lang="Cancel Interview">Cancel Interview</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:#555;margin-bottom:16px;">You are about to cancel the interview with <strong>EX-1041837 - Pretty Dewati (Cathy)</strong> scheduled for <strong>Mar 17, 9:00 AM EST</strong>.</p>
+        <div class="form-group">
+          <label><span data-lang="Cancellation Reason">Reason for cancellation</span> <span style="color:#c62828;">*</span></label>
+          <select class="form-control" required>
+            <option value="">Select a reason...</option>
+            <option>Schedule conflict</option>
+            <option>No longer needed for this segment</option>
+            <option>Project scope changed</option>
+            <option>Client-side delay</option>
+            <option>Expert unavailable</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional details</label>
+          <textarea class="form-control" placeholder="Please provide more context..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')">Keep Interview</button>
+        <button class="btn btn-danger" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Submit Cancellation">Confirm Cancellation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="modal-overlay" id="feedbackModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-lang="Expert Feedback">Expert Feedback</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:#555;margin-bottom:16px;" data-lang="How would you rate this expert?">How would you rate this expert?</p>
+        <div class="star-rating" style="margin-bottom:16px;">
+          <span class="star" onclick="setRating(1)">&#9733;</span>
+          <span class="star" onclick="setRating(2)">&#9733;</span>
+          <span class="star" onclick="setRating(3)">&#9733;</span>
+          <span class="star" onclick="setRating(4)">&#9733;</span>
+          <span class="star" onclick="setRating(5)">&#9733;</span>
+        </div>
+        <div class="form-group">
+          <label data-lang="Your feedback:">Your feedback:</label>
+          <textarea class="form-control" placeholder="Share your experience with this expert..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
+        <button class="btn btn-primary" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Submit Feedback">Submit Feedback</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function toggleNotifications() {
+      document.getElementById('notifDropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+
+    function setRating(n) {
+      document.querySelectorAll('.star-rating .star').forEach((s, i) => {
+        s.classList.toggle('filled', i < n);
+      });
+    }
+  </script>
+</body>
+</html>

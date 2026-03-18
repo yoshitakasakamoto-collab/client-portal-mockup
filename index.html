@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - Project Management</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="company-name">BCG SEA</div>
+        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="active">
+          <span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span>
+        </a>
+        <a href="#">
+          <span class="icon">&#128100;</span> <span data-lang="User management">User management</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <!-- Header -->
+      <header class="header">
+        <div></div>
+        <div class="header-title" data-lang="Project Management">Project Management</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;
+            <span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <span data-lang="Notifications">Notifications</span>
+                <a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="New expert proposed">New expert proposed</div>
+                <div class="notif-desc" data-lang="2 new experts proposed for A109919 BCG US GFPs project">2 new experts proposed for A109919 BCG US GFPs project</div>
+                <div class="notif-time" data-lang="10 minutes ago">10 minutes ago</div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="Interview scheduled">Interview scheduled</div>
+                <div class="notif-desc" data-lang="Pretty Dewati (Cathy) - Interview confirmed for Mar 17, 9:00 AM">Pretty Dewati (Cathy) - Interview confirmed for Mar 17, 9:00 AM</div>
+                <div class="notif-time" data-lang="1 hour ago">1 hour ago</div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="Transcript ready">Transcript ready</div>
+                <div class="notif-desc" data-lang="Recording & transcript available for Luci Dao interview">Recording & transcript available for Luci Dao interview</div>
+                <div class="notif-time" data-lang="3 hours ago">3 hours ago</div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-title" data-lang="Expert approved">Expert approved</div>
+                <div class="notif-desc" data-lang="Enrico Tranchina approved Pretty Dewati (Cathy) for interview">Enrico Tranchina approved Pretty Dewati (Cathy) for interview</div>
+                <div class="notif-time" data-lang="Yesterday">Yesterday</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="content">
+        <!-- Project Tabs: Ongoing / Past -->
+        <div class="project-tabs">
+          <div class="project-tab active" onclick="switchProjectTab('ongoing')"><span data-lang="Ongoing Projects">Ongoing Projects</span> <span class="count">2</span></div>
+          <div class="project-tab" onclick="switchProjectTab('past')"><span data-lang="Past Projects">Past Projects</span> <span class="count">1</span></div>
+        </div>
+
+        <!-- Ongoing Projects -->
+        <div id="ongoingPanel" class="project-panel">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th data-lang="Project">Project</th>
+                  <th data-lang="Status">Status</th>
+                  <th data-lang="Start date">Start date</th>
+                  <th><span data-lang="CDD stats">CDD stats</span> <span class="info-icon">i</span></th>
+                  <th><span data-lang="IV stats">IV stats</span> <span class="info-icon">i</span></th>
+                  <th><span data-lang="Total price">Total price</span> <span class="info-icon">i</span></th>
+                  <th data-lang="Arches team">Arches team</th>
+                  <th data-lang="Geography">Geography</th>
+                  <th data-lang="Project/Expert tags">Project/Expert tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="window.location='project-general.html'" style="cursor:pointer;">
+                  <td>
+                    <a href="project-general.html" style="font-weight:600;">A109919 - BCG US GFPs, Gas infra a...</a><br>
+                    <span style="font-size:12px;color:#999;">BCG SEA</span>
+                  </td>
+                  <td><span class="badge-status badge-ongoing" data-lang="On going">On going</span></td>
+                  <td>2026-03-09</td>
+                  <td>
+                    <span style="color:#e67e22;">5</span> <span data-lang="Proposed">Proposed</span><br>
+                    <span style="color:#2e7d32;">2</span> <span data-lang="Approved">Approved</span>
+                  </td>
+                  <td>
+                    <span>1</span> <span data-lang="Waiting">Waiting</span><br>
+                    <span>0</span> <span data-lang="Accept">Accept</span><br>
+                    <span style="color:#2e7d32;">3</span> <span data-lang="Finished">Finished</span>
+                  </td>
+                  <td><strong>2,100</strong> <span style="color:#e67e22;">USD</span></td>
+                  <td>Zoe Thao, Luci Dao</td>
+                  <td>United States</td>
+                  <td><span class="tag tag-orange">gas</span> <span class="tag tag-orange">power</span></td>
+                </tr>
+                <tr style="cursor:pointer;">
+                  <td>
+                    <a href="#" style="font-weight:600;">A109845 - BCG Energy Storage Market...</a><br>
+                    <span style="font-size:12px;color:#999;">BCG SEA</span>
+                  </td>
+                  <td><span class="badge-status badge-ongoing" data-lang="On going">On going</span></td>
+                  <td>2026-02-20</td>
+                  <td>
+                    <span style="color:#e67e22;">3</span> <span data-lang="Proposed">Proposed</span><br>
+                    <span style="color:#2e7d32;">3</span> <span data-lang="Approved">Approved</span>
+                  </td>
+                  <td>
+                    <span>0</span> <span data-lang="Waiting">Waiting</span><br>
+                    <span>0</span> <span data-lang="Accept">Accept</span><br>
+                    <span style="color:#2e7d32;">2</span> <span data-lang="Finished">Finished</span>
+                  </td>
+                  <td><strong>1,400</strong> <span style="color:#e67e22;">USD</span></td>
+                  <td>Zoe Thao</td>
+                  <td>United States</td>
+                  <td><span class="tag tag-orange">BESS</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Past Projects -->
+        <div id="pastPanel" class="project-panel" style="display:none;">
+          <div class="past-search">
+            <label style="font-size:13px;color:#555;margin-right:8px;" data-lang="Date range:">Date range:</label>
+            <input type="date" class="form-control" style="width:150px;display:inline-block;" value="2025-01-01">
+            <span style="margin:0 8px;color:#999;">〜</span>
+            <input type="date" class="form-control" style="width:150px;display:inline-block;" value="2026-03-17">
+            <button class="btn btn-primary btn-sm" style="margin-left:12px;" data-lang="Search">Search</button>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th data-lang="Project">Project</th>
+                  <th data-lang="Status">Status</th>
+                  <th data-lang="Start date">Start date</th>
+                  <th><span data-lang="CDD stats">CDD stats</span> <span class="info-icon">i</span></th>
+                  <th><span data-lang="IV stats">IV stats</span> <span class="info-icon">i</span></th>
+                  <th><span data-lang="Total price">Total price</span> <span class="info-icon">i</span></th>
+                  <th data-lang="Arches team">Arches team</th>
+                  <th data-lang="Geography">Geography</th>
+                  <th data-lang="Project/Expert tags">Project/Expert tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor:pointer;">
+                  <td>
+                    <a href="#" style="font-weight:600;">A109720 - BCG SEA Renewables Due...</a><br>
+                    <span style="font-size:12px;color:#999;">BCG SEA</span>
+                  </td>
+                  <td><span class="badge-status badge-closed" data-lang="Closed">Closed</span></td>
+                  <td>2026-01-15</td>
+                  <td>
+                    <span style="color:#e67e22;">8</span> <span data-lang="Proposed">Proposed</span><br>
+                    <span style="color:#2e7d32;">5</span> <span data-lang="Approved">Approved</span>
+                  </td>
+                  <td>
+                    <span>0</span> <span data-lang="Waiting">Waiting</span><br>
+                    <span>0</span> <span data-lang="Accept">Accept</span><br>
+                    <span style="color:#2e7d32;">5</span> <span data-lang="Finished">Finished</span>
+                  </td>
+                  <td><strong>3,500</strong> <span style="color:#e67e22;">USD</span></td>
+                  <td>Luci Dao</td>
+                  <td>Southeast Asia</td>
+                  <td><span class="tag tag-orange">solar</span> <span class="tag tag-orange">wind</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function toggleNotifications() {
+      const dd = document.getElementById('notifDropdown');
+      dd.classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+
+    function switchProjectTab(tab) {
+      const tabs = document.querySelectorAll('.project-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      document.getElementById('ongoingPanel').style.display = 'none';
+      document.getElementById('pastPanel').style.display = 'none';
+      if (tab === 'ongoing') {
+        tabs[0].classList.add('active');
+        document.getElementById('ongoingPanel').style.display = 'block';
+      } else {
+        tabs[1].classList.add('active');
+        document.getElementById('pastPanel').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

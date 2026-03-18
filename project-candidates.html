@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - Candidates</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="company-name">BCG SEA</div>
+        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
+        <div class="header-title">A109919 BCG US GFPs, Gas infra and power transmission</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;
+            <span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header"><span data-lang="Notifications">Notifications</span><a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a></div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="New expert proposed">New expert proposed</div>
+                <div class="notif-desc">2 new experts proposed for this project</div>
+                <div class="notif-time" data-lang="10 minutes ago">10 minutes ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <div class="content" style="padding:0;">
+        <div style="padding:16px 24px 0;">
+          <div class="tabs">
+            <div class="tab" onclick="window.location='project-general.html'"><span class="dot"></span> <span data-lang="General">General</span></div>
+            <div class="tab active"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+            <div class="tab" onclick="window.location='project-interview.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+            <div class="tab" onclick="window.location='project-billing.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+          </div>
+
+          <!-- Toolbar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="btn btn-outline btn-sm">&#128196; <span data-lang="Export List">Export (Excel)</span></button>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="btn btn-primary btn-sm" id="bulkApproveBtn" style="display:none;">Approve selected</button>
+              <button class="btn btn-danger btn-sm" id="bulkDeclineBtn" style="display:none;">Decline selected</button>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="filter-bar">
+            <select class="form-control" style="width:130px;">
+              <option>All Status</option>
+              <option>Proposed</option>
+              <option>Approved</option>
+              <option>Declined</option>
+              <option>Call Done</option>
+            </select>
+            <select class="form-control" style="width:130px;">
+              <option>All Segments</option>
+              <option>Gas-fired generation</option>
+              <option>Gas pipelines</option>
+              <option>Electric transmission</option>
+            </select>
+            <select class="form-control" style="width:130px;">
+              <option>Sort by: Date</option>
+              <option>Sort by: Name</option>
+              <option>Sort by: Cost</option>
+              <option>Sort by: Status</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search experts..." style="max-width:200px;">
+          </div>
+        </div>
+
+        <!-- Split View -->
+        <div class="split-view">
+          <!-- Left: Expert List (no avatars, ID - Name format) -->
+          <div class="split-left">
+            <div class="segment-section">
+              <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+                <span>&#9660; Gas-fired generation</span>
+                <span class="segment-meta">2 <span data-lang="experts">experts</span> &middot; 1 <span data-lang="calls done">call done</span></span>
+              </div>
+              <div>
+                <div class="expert-item active" onclick="showExpert(1)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1041870 - Luci Dao</div>
+                      <div class="expert-role">ENGIE North America Inc. - Engineering Senior Advisor</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(2)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1041955 - Robert Chen</div>
+                      <div class="expert-role">Calpine Corp - VP, Plant Operations</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$1,000/call</span>
+                        <span class="badge-status badge-conducted" style="font-size:11px;padding:1px 6px;">Call Done</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-section">
+              <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+                <span>&#9660; Gas pipelines</span>
+                <span class="segment-meta">2 <span data-lang="experts">experts</span> &middot; 1 <span data-lang="calls done">call done</span></span>
+              </div>
+              <div>
+                <div class="expert-item" onclick="showExpert(3)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1041837 - Pretty Dewati (Cathy)</div>
+                      <div class="expert-role">Third Coast - Vice President, Corporate Development</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$700/call</span>
+                        <span class="badge-status badge-approved" style="font-size:11px;padding:1px 6px;" data-lang="Approved">Approved</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(4)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1042100 - James Morton</div>
+                      <div class="expert-role">Williams Companies - Director, Pipeline Engineering</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$600/call</span>
+                        <span class="badge-status badge-declined" style="font-size:11px;padding:1px 6px;">Declined</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-section">
+              <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+                <span>&#9660; Electric transmission</span>
+                <span class="segment-meta">1 expert &middot; 1 <span data-lang="calls done">call done</span></span>
+              </div>
+              <div>
+                <div class="expert-item" onclick="showExpert(5)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1042019 - Thomas Wright</div>
+                      <div class="expert-role">East Texas Electric Cooperative - VP, Power Supply</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$500/call</span>
+                        <span class="badge-status badge-conducted" style="font-size:11px;padding:1px 6px;">Call Done</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Expert Detail (matching screenshot format) -->
+          <div class="split-right" id="expertDetail">
+            <!-- Expert Header: ID - Name + Status inline -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <h2 style="font-size:18px;font-weight:600;">EX-1041870 - Luci Dao</h2>
+              <span class="badge-status badge-candidates" data-lang="Proposed">Proposed</span>
+            </div>
+            <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated 2026/03/15</div>
+
+            <!-- Action Buttons -->
+            <div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">
+              <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show')">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>
+              <button class="btn btn-success"><span data-lang="Approve">&#10003; Approve</span></button>
+              <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show')"><span data-lang="Decline">&#10005; Decline</span></button>
+            </div>
+
+            <!-- Availability Quick View -->
+            <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
+              <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;" data-lang="Availability">Availability (next slots)</div>
+              <div>
+                <span class="avail-slot">Mar 18, 10:00-12:00 EST</span>
+                <span class="avail-slot">Mar 19, 14:00-16:00 EST</span>
+                <span class="avail-slot">Mar 20, 09:00-11:00 EST</span>
+              </div>
+              <div style="margin-top:6px;">
+                <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy as text</span></button>
+              </div>
+            </div>
+
+            <!-- Subtabs -->
+            <div class="tabs" style="margin-bottom:16px;">
+              <div class="tab active" onclick="showSubTab('expertInfo')"><span data-lang="Expert info">Expert info</span></div>
+              <div class="tab" onclick="showSubTab('activities')"><span data-lang="Activities">Activities</span></div>
+              <div class="tab" onclick="showSubTab('availability')"><span data-lang="Availability">Availability</span></div>
+            </div>
+
+            <!-- Expert Info (matching screenshot format) -->
+            <div id="expertInfo">
+              <!-- Experience section - bullet point format -->
+              <div style="margin-bottom:20px;">
+                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;" data-lang="Experience">Experience</h4>
+                <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">
+                  <p style="margin-bottom:8px;">This expert currently serves as <strong>Engineering Senior Advisor - Transmission and Interconnection</strong> at <strong>ENGIE North America</strong>, leading congestion analysis and siting for BESS, wind, and solar assets.</p>
+                  <p style="margin-bottom:8px;">Previously served as <strong>Nodal Trader</strong> at <strong>EDF Trading</strong> and <strong>Congestion Trader</strong> at <strong>Shell Energy</strong>, trading CRRs/FTRs and day-ahead markets.</p>
+                  <p style="margin-bottom:8px;">Possesses deep understanding of the <strong><u>U.S. power and energy infrastructure market</u></strong>, including battery revenue generation and profitability in the Electric Reliability Council of Texas market.</p>
+                  <p style="margin-bottom:8px;">Experienced in analyzing <strong><u>transmission modeling, congestion analysis, and power market fundamentals</u></strong>, including building production cost models (Uplan/PowerWorld).</p>
+                  <p style="margin-bottom:8px;">Knowledgeable about <strong><u>optimal interconnection points and evaluating future transmission impacts</u></strong> on project economics, directly informing where BESS projects capture the most value in wholesale markets.</p>
+                  <p>Provides insights on <strong><u>LMP formation, congestion, and asset-backed trading strategies</u></strong>, giving hands-on understanding of day-ahead market dynamics.</p>
+                </div>
+              </div>
+
+              <!-- Working History table -->
+              <div style="margin-bottom:20px;">
+                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;">Working history</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Company</th>
+                      <th>Position</th>
+                      <th>From</th>
+                      <th>To</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>ENGIE North America</strong></td>
+                      <td>Engineering Senior Advisor - Transmission and Interconnection</td>
+                      <td>2021/01</td>
+                      <td>2025/12</td>
+                    </tr>
+                    <tr>
+                      <td><strong>EDF Trading</strong></td>
+                      <td>Nodal Trader</td>
+                      <td>2018/03</td>
+                      <td>2021/01</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Shell Energy</strong></td>
+                      <td>Congestion Trader</td>
+                      <td>2015/06</td>
+                      <td>2018/03</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Screening Answers -->
+              <div style="margin:16px 0;">
+                <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Screening Answers</h4>
+                <div style="background:#f9f9f9;padding:12px;border-radius:8px;font-size:13px;line-height:1.7;color:#555;">
+                  <p><strong>Q: Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.</strong></p>
+                  <p>20+ years working on transmission modeling, congestion analysis, and power market fundamentals,
+                  including building production cost models (Uplan/PowerWorld) used to forecast prices and optimize asset placement.
+                  Extensive experience identifying optimal interconnection points and evaluating future transmission impacts on project economics.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activities -->
+            <div id="activities" style="display:none;">
+              <div class="card">
+                <div class="activity-item">
+                  <div class="activity-dot"></div>
+                  <div>
+                    <div class="activity-text">Profile proposed by <strong>Luci Dao (Arches)</strong></div>
+                    <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot"></div>
+                  <div>
+                    <div class="activity-text">Screening answers updated</div>
+                    <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Availability -->
+            <div id="availability" style="display:none;">
+              <div class="card">
+                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Available Time Slots</h4>
+                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 18 (Tue), 10:00 AM - 12:00 PM EST</span></div>
+                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 19 (Wed), 2:00 PM - 4:00 PM EST</span></div>
+                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 20 (Thu), 9:00 AM - 11:00 AM EST</span></div>
+                <div style="margin-top:12px;">
+                  <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button>
+                </div>
+                <div style="margin-top:12px;padding:12px;background:#f9f9f9;border-radius:6px;display:none;" id="availTextBox">
+                  <div style="font-size:12px;color:#999;margin-bottom:4px;">Plain text (copied to clipboard):</div>
+                  <pre style="font-size:12px;white-space:pre-wrap;">EX-1041870 - Luci Dao - ENGIE North America
+Available slots:
+- Mar 18 (Tue), 10:00 AM - 12:00 PM EST
+- Mar 19 (Wed), 2:00 PM - 4:00 PM EST
+- Mar 20 (Thu), 9:00 AM - 11:00 AM EST</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decline Modal -->
+  <div class="modal-overlay" id="declineModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-lang="Decline Reason">Decline Expert</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:#555;margin-bottom:16px;">You are about to decline <strong>EX-1041870 - Luci Dao</strong>. Please let us know why (optional).</p>
+        <div class="form-group">
+          <label>Reason for declining</label>
+          <select class="form-control">
+            <option>Select a reason...</option>
+            <option>Not relevant experience</option>
+            <option>Too expensive</option>
+            <option>Already have coverage in this area</option>
+            <option>Competitor/conflict of interest</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional comments (optional)</label>
+          <textarea class="form-control" placeholder="Any additional feedback..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
+        <button class="btn btn-danger" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Submit & Decline">Confirm Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Modal -->
+  <div class="modal-overlay" id="bookModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-lang="Book Interview">Book for Interview</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-1041870 - Luci Dao</strong>.</p>
+        <div class="form-group">
+          <label>Available slots</label>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+              <input type="radio" name="slot" value="1" style="accent-color:#e67e22;">
+              Mar 18 (Tue), 10:00 AM - 12:00 PM EST
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+              <input type="radio" name="slot" value="2" style="accent-color:#e67e22;">
+              Mar 19 (Wed), 2:00 PM - 4:00 PM EST
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+              <input type="radio" name="slot" value="3" style="accent-color:#e67e22;">
+              Mar 20 (Thu), 9:00 AM - 11:00 AM EST
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes for the team (optional)</label>
+          <textarea class="form-control" placeholder="Any specific topics or questions you'd like to cover..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
+        <button class="btn btn-primary" onclick="this.closest('.modal-overlay').classList.remove('show')">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function toggleNotifications() {
+      document.getElementById('notifDropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+
+    function showSubTab(tab) {
+      document.getElementById('expertInfo').style.display = tab === 'expertInfo' ? 'block' : 'none';
+      document.getElementById('activities').style.display = tab === 'activities' ? 'block' : 'none';
+      document.getElementById('availability').style.display = tab === 'availability' ? 'block' : 'none';
+      const tabs = document.querySelectorAll('.split-right .tabs .tab');
+      tabs.forEach((t, i) => {
+        const names = ['expertInfo', 'activities', 'availability'];
+        t.classList.toggle('active', names[i] === tab);
+      });
+    }
+
+    function showExpert(id) {
+      document.querySelectorAll('.expert-item').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+
+    function updateBulkActions() {
+      const checked = document.querySelectorAll('.expert-item input[type="checkbox"]:checked');
+      document.getElementById('bulkApproveBtn').style.display = checked.length > 0 ? 'inline-flex' : 'none';
+      document.getElementById('bulkDeclineBtn').style.display = checked.length > 0 ? 'inline-flex' : 'none';
+    }
+
+    function copyAvailability() {
+      const text = `EX-1041870 - Luci Dao - ENGIE North America\nAvailable slots:\n- Mar 18 (Tue), 10:00 AM - 12:00 PM EST\n- Mar 19 (Wed), 2:00 PM - 4:00 PM EST\n- Mar 20 (Thu), 9:00 AM - 11:00 AM EST`;
+      navigator.clipboard.writeText(text).then(() => {
+        const box = document.getElementById('availTextBox');
+        if (box) { box.style.display = 'block'; }
+        alert('Availability copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>

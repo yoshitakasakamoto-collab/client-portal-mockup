@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - General</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="company-name">BCG SEA</div>
+        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
+        <div class="header-title">A109919 BCG US GFPs, Gas infra and power transmission</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;
+            <span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <span data-lang="Notifications">Notifications</span>
+                <a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="New expert proposed">New expert proposed</div>
+                <div class="notif-desc">2 new experts proposed for this project</div>
+                <div class="notif-time" data-lang="10 minutes ago">10 minutes ago</div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="Interview scheduled">Interview scheduled</div>
+                <div class="notif-desc">Pretty Dewati (Cathy) - confirmed for Mar 17, 9:00 AM</div>
+                <div class="notif-time" data-lang="1 hour ago">1 hour ago</div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="Transcript ready">Transcript ready</div>
+                <div class="notif-desc">Recording & transcript for Luci Dao interview available</div>
+                <div class="notif-time" data-lang="3 hours ago">3 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="tabs">
+          <div class="tab active"><span class="dot"></span> <span data-lang="General">General</span></div>
+          <div class="tab" onclick="window.location='project-candidates.html'"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+          <div class="tab" onclick="window.location='project-interview.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+          <div class="tab" onclick="window.location='project-billing.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+        </div>
+
+        <!-- Project Info Bar -->
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+          <span style="font-size:16px;font-weight:600;">A109919 BCG US GFPs, Gas infra and power transmission</span>
+          <span class="badge-status badge-ongoing" data-lang="On going">On going</span>
+          <span style="font-size:13px;color:#999;">Start: 2026-03-10</span>
+          <span style="font-size:13px;color:#999;">Inquiry: 2026-03-10</span>
+        </div>
+
+        <!-- Dashboard Stats (3 cards only) -->
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="stat-card highlight">
+            <div class="stat-label" data-lang="Experts Proposed">Experts Proposed</div>
+            <div class="stat-value">5</div>
+            <div class="stat-sub">
+              <span style="color:#e67e22;">2 Pending</span> &middot;
+              <span style="color:#2e7d32;">2 <span data-lang="Approved">Approved</span></span> &middot;
+              <span style="color:#c62828;">1 Declined</span>
+            </div>
+          </div>
+          <div class="stat-card highlight">
+            <div class="stat-label" data-lang="Interview">Interviews</div>
+            <div class="stat-value">4</div>
+            <div class="stat-sub">
+              <span style="color:#2e7d32;">3 <span data-lang="Finished">Finished</span></span> &middot;
+              <span style="color:#1565c0;">1 <span data-lang="Booked">Booked</span></span>
+            </div>
+          </div>
+          <div class="stat-card highlight">
+            <div class="stat-label">Total Duration</div>
+            <div class="stat-value">3.5h</div>
+            <div class="stat-sub">Avg. 52 <span data-lang="min">min</span> per call</div>
+          </div>
+        </div>
+
+        <!-- Segment Breakdown + Team Activity -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Breakdown by Segment</div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th data-lang="Segment">Segment</th>
+                  <th data-lang="Proposed">Proposed</th>
+                  <th data-lang="Approved">Approved</th>
+                  <th>Calls Done</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="tag tag-orange">Gas-fired generation</span></td>
+                  <td>2</td><td>1</td><td>1</td>
+                </tr>
+                <tr>
+                  <td><span class="tag tag-orange">Gas pipelines</span></td>
+                  <td>2</td><td>1</td><td>1</td>
+                </tr>
+                <tr>
+                  <td><span class="tag tag-orange">Electric transmission</span></td>
+                  <td>1</td><td>0</td><td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title" data-lang="Team Activity">Team Activity</div>
+            </div>
+            <div style="margin-bottom:12px;font-size:12px;color:#999;">Actions by your team members on this project</div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div class="activity-text"><strong>Enrico Tranchina</strong> approved <strong>Pretty Dewati (Cathy)</strong></div>
+                <div class="activity-time">Mar 15, 2026 - 2:30 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#c62828;"></div>
+              <div>
+                <div class="activity-text"><strong>Enrico Tranchina</strong> declined <strong>James Morton</strong></div>
+                <div class="activity-time">Mar 14, 2026 - 11:00 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>Enrico Tranchina</strong> completed call with <strong>Robert Chen</strong> (45 min)</div>
+                <div class="activity-time">Mar 13, 2026 - 3:00 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div class="activity-text"><strong>Sarah Kim</strong> approved <strong>Luci Dao</strong></div>
+                <div class="activity-time">Mar 12, 2026 - 10:15 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>Sarah Kim</strong> completed call with <strong>Luci Dao</strong> (58 min)</div>
+                <div class="activity-time">Mar 11, 2026 - 9:00 AM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Details -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Project Details</div>
+          </div>
+          <div style="display:grid;grid-template-columns:150px 1fr;row-gap:12px;font-size:13px;">
+            <div style="color:#999;font-weight:500;" data-lang="Your team:">Your team:</div>
+            <div>Enrico Tranchina, Sarah Kim</div>
+            <div style="color:#999;font-weight:500;" data-lang="Arches team:">Arches team:</div>
+            <div>Zoe Thao, Luci Dao</div>
+            <div style="color:#999;font-weight:500;" data-lang="Geography:">Geography:</div>
+            <div>United States</div>
+            <div style="color:#999;font-weight:500;" data-lang="Project/Expert tags:">Project/Expert tags:</div>
+            <div><span class="tag tag-orange">gas</span> <span class="tag tag-orange">power</span></div>
+            <div style="color:#999;font-weight:500;" data-lang="Billing code:">Billing code:</div>
+            <div>10030869.1.2</div>
+          </div>
+        </div>
+
+        <!-- Briefing -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title" data-lang="Briefing">Project Briefing</div>
+          </div>
+          <div style="font-size:13px;line-height:1.7;color:#555;">
+            <p><strong>Email content 1:</strong></p>
+            <p>Hi Team,</p>
+            <p>Hoping you can support with the request below -</p>
+            <p><strong>Context:</strong><br>
+            We are supporting an Independent Power Producer (IPP) in assessing the US market for<br>
+            - gas fired power plants,<br>
+            - gas pipeline infrastructure<br>
+            - power transmission infrastructure.</p>
+            <p>We are seeking experts with direct experience of either investing in or operating in the above 3 areas that will have likely worked for power providers (utilities, IPPs, or developers), midstream pipeline or transmission line operators or power/gas infrastructure investors, specifically in the US market.</p>
+            <p>We would like to start doing calls tomorrow (Tues 11th Mar).</p>
+            <p><strong>Screening Questions:</strong></p>
+            <ul style="margin-left:20px;">
+              <li>Can you describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets, including your role (investment, development, operations) and the regions you have worked in?</li>
+              <li>How are revenues typically generated in the US for gas-fired power plants, gas pipelines, and/or transmission assets, including the mix between merchant exposure and contracted revenues (e.g., PPAs, capacity payments)?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function toggleNotifications() {
+      document.getElementById('notifDropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

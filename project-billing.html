@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - Billing</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="company-name">BCG SEA</div>
+        <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span> &#9730;</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
+        <div class="header-title">A109919 BCG US GFPs, Gas infra and power transmission</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;<span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header"><span data-lang="Notifications">Notifications</span><a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a></div>
+              <div class="notif-item unread">
+                <div class="notif-title">Invoice generated</div>
+                <div class="notif-desc">New invoice INV-2026-0047 ready for download</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="tabs">
+          <div class="tab" onclick="window.location='project-general.html'"><span class="dot"></span> <span data-lang="General">General</span></div>
+          <div class="tab" onclick="window.location='project-candidates.html'"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+          <div class="tab" onclick="window.location='project-interview.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+          <div class="tab active"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+        </div>
+
+        <!-- Billing Summary -->
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px;">
+          <div class="stat-card highlight">
+            <div class="stat-label" data-lang="Total Billed">Total Billed</div>
+            <div class="stat-value" style="color:#e67e22;">$2,750</div>
+            <div class="stat-sub">3 calls + 1 additional service</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Discount Applied</div>
+            <div class="stat-value" style="color:#2e7d32;">-$100</div>
+            <div class="stat-sub">Volume discount</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label" data-lang="Invoices Issued">Invoices Issued</div>
+            <div class="stat-value">2</div>
+            <div class="stat-sub">1 <span data-lang="Paid">paid</span> &middot; 1 outstanding</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label" data-lang="Billing code:">Billing Code</div>
+            <div class="stat-value" style="font-size:16px;">10030869.1.2</div>
+          </div>
+        </div>
+
+        <!-- Call Cost Breakdown -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Call Cost Breakdown</div>
+            <button class="btn btn-outline btn-sm">&#11015; Export (Excel)</button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th data-lang="Expert">Expert</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th data-lang="Duration">Duration</th>
+                  <th>Rate</th>
+                  <th>Discount</th>
+                  <th data-lang="Cost">Cost</th>
+                  <th data-lang="Status">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="font-weight:500;">EX-1041955 - Robert Chen</div>
+                    <div style="font-size:11px;color:#999;">Calpine Corp - VP, Plant Ops</div>
+                  </td>
+                  <td>Mar 13, 2026</td>
+                  <td><span class="tag">Interview</span></td>
+                  <td>45 <span data-lang="min">min</span></td>
+                  <td>$1,000/call</td>
+                  <td style="color:#999;">--</td>
+                  <td style="font-weight:600;">$1,000</td>
+                  <td><span class="badge-status badge-conducted">Billed</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight:500;">EX-1042019 - Thomas Wright</div>
+                    <div style="font-size:11px;color:#999;">East Texas Electric - VP, Power</div>
+                  </td>
+                  <td>Mar 12, 2026</td>
+                  <td><span class="tag">Interview</span></td>
+                  <td>58 <span data-lang="min">min</span></td>
+                  <td>$500/call</td>
+                  <td style="color:#2e7d32;">-$50</td>
+                  <td style="font-weight:600;">$450</td>
+                  <td><span class="badge-status badge-conducted">Billed</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight:500;">EX-1042200 - Michael Liu</div>
+                    <div style="font-size:11px;color:#999;">AES Corp - Director, Development</div>
+                  </td>
+                  <td>Mar 11, 2026</td>
+                  <td><span class="tag">Interview</span></td>
+                  <td>55 <span data-lang="min">min</span></td>
+                  <td>$900/call</td>
+                  <td style="color:#2e7d32;">-$50</td>
+                  <td style="font-weight:600;">$850</td>
+                  <td><span class="badge-status badge-conducted">Billed</span></td>
+                </tr>
+                <tr style="background:#f9f6ff;">
+                  <td>
+                    <div style="font-weight:500;">EX-1041955 - Robert Chen</div>
+                    <div style="font-size:11px;color:#999;">Calpine Corp - VP, Plant Ops</div>
+                  </td>
+                  <td>Mar 14, 2026</td>
+                  <td><span class="tag" style="background:#e8f0fe;color:#1565c0;">Follow-up Q&A</span></td>
+                  <td>--</td>
+                  <td>$200/session</td>
+                  <td style="color:#999;">--</td>
+                  <td style="font-weight:600;">$200</td>
+                  <td><span class="badge-status badge-conducted">Billed</span></td>
+                </tr>
+                <tr style="background:#f9f6ff;">
+                  <td>
+                    <div style="font-weight:500;">--</div>
+                    <div style="font-size:11px;color:#999;">Project-level service</div>
+                  </td>
+                  <td>Mar 11, 2026</td>
+                  <td><span class="tag" style="background:#fce4ec;color:#c62828;">Interpretation</span></td>
+                  <td>55 <span data-lang="min">min</span></td>
+                  <td>$250/session</td>
+                  <td style="color:#999;">--</td>
+                  <td style="font-weight:600;">$250</td>
+                  <td><span class="badge-status badge-conducted">Billed</span></td>
+                </tr>
+                <tr style="background:#fff8f0;">
+                  <td>
+                    <div style="font-weight:500;">EX-1041837 - Pretty Dewati (Cathy)</div>
+                    <div style="font-size:11px;color:#999;">Third Coast - VP, Corporate Dev</div>
+                  </td>
+                  <td>Mar 17, 2026</td>
+                  <td><span class="tag">Interview</span></td>
+                  <td>--</td>
+                  <td>$700/call</td>
+                  <td style="color:#999;">--</td>
+                  <td style="font-weight:600;color:#999;">$700 (est.)</td>
+                  <td><span class="badge-status badge-booked" data-lang="Booked">Booked</span></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="background:#fafafa;font-weight:700;">
+                  <td colspan="5" style="text-align:right;">Subtotal</td>
+                  <td style="color:#2e7d32;">-$100</td>
+                  <td style="color:#e67e22;font-size:16px;">$2,750</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Invoices -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title" data-lang="Invoices Issued">Invoices</div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th data-lang="Invoice Number">Invoice #</th>
+                  <th data-lang="Issue Date">Date Issued</th>
+                  <th>Period</th>
+                  <th data-lang="Amount">Amount</th>
+                  <th data-lang="Status">Status</th>
+                  <th data-lang="Actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:600;">INV-2026-0047</td>
+                  <td>Mar 14, 2026</td>
+                  <td>Mar 11 - Mar 14, 2026</td>
+                  <td style="font-weight:600;">$2,750</td>
+                  <td><span class="badge-status badge-pending">Outstanding</span></td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-outline btn-sm">&#11015; PDF</button>
+                      <button class="btn btn-outline btn-sm">&#128065; View</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;">INV-2026-0031</td>
+                  <td>Feb 28, 2026</td>
+                  <td>Feb 20 - Feb 27, 2026</td>
+                  <td style="font-weight:600;">$1,400</td>
+                  <td><span class="badge-status badge-conducted" data-lang="Paid">Paid</span></td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-outline btn-sm">&#11015; PDF</button>
+                      <button class="btn btn-outline btn-sm">&#128065; View</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function toggleNotifications() {
+      document.getElementById('notifDropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
