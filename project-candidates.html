@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AIS Client Portal - Candidates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="auth.js"></script>
 </head>
@@ -241,16 +244,28 @@
             <label style="font-weight:600;font-size:13px;white-space:nowrap;">Your Timezone</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
-          <select id="clientTimezone" class="form-control" style="flex:1;max-width:340px;" onchange="renderTimeline()">
-            <option value="-5">EST (UTC-5) — Eastern Standard Time</option>
-            <option value="-6">CST (UTC-6) — Central Standard Time</option>
-            <option value="-7">MST (UTC-7) — Mountain Standard Time</option>
-            <option value="-8">PST (UTC-8) — Pacific Standard Time</option>
-            <option value="0">GMT (UTC+0) — Greenwich Mean Time</option>
-            <option value="1">CET (UTC+1) — Central European Time</option>
-            <option value="8">SGT (UTC+8) — Singapore Time</option>
-            <option value="9" selected>JST (UTC+9) — Japan Standard Time</option>
-            <option value="10">AEST (UTC+10) — Australian Eastern Time</option>
+          <select id="clientTimezone" class="form-control" style="flex:1;max-width:380px;" onchange="renderTimeline()">
+            <option value="-10">HST (UTC-10) — Hawaii</option>
+            <option value="-9">AKST (UTC-9) — Alaska</option>
+            <option value="-8">PST (UTC-8) — US Pacific</option>
+            <option value="-7">MST (UTC-7) — US Mountain</option>
+            <option value="-6">CST (UTC-6) — US Central</option>
+            <option value="-5">EST (UTC-5) — US Eastern</option>
+            <option value="-4">AST (UTC-4) — Atlantic</option>
+            <option value="-3">BRT (UTC-3) — Brazil</option>
+            <option value="0">GMT (UTC+0) — Greenwich / London</option>
+            <option value="1">CET (UTC+1) — Central Europe</option>
+            <option value="2">EET (UTC+2) — Eastern Europe / Cairo</option>
+            <option value="3">MSK (UTC+3) — Moscow / Riyadh</option>
+            <option value="4">GST (UTC+4) — Dubai / Abu Dhabi</option>
+            <option value="5">PKT (UTC+5) — Pakistan / Karachi</option>
+            <option value="5.5">IST (UTC+5:30) — India</option>
+            <option value="6">BST (UTC+6) — Bangladesh / Dhaka</option>
+            <option value="7">ICT (UTC+7) — Bangkok / Jakarta / Hanoi</option>
+            <option value="8">SGT (UTC+8) — Singapore / Hong Kong / Beijing / Taipei / Manila / Kuala Lumpur</option>
+            <option value="9" selected>JST (UTC+9) — Japan / Korea</option>
+            <option value="10">AEST (UTC+10) — Sydney / Melbourne</option>
+            <option value="12">NZST (UTC+12) — New Zealand</option>
           </select>
         </div>
 
@@ -298,8 +313,8 @@
             </div>
           </div>
           <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#777;">
-            <span><span style="display:inline-block;width:12px;height:12px;background:#c8e6c9;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Available</span>
-            <span><span style="display:inline-block;width:12px;height:12px;background:#e67e22;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Selected</span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#c8e6c9;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Available Schedule">Available Schedule</span></span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#e67e22;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Selected">Selected</span></span>
           </div>
         </div>
 
@@ -668,7 +683,7 @@
 
         <div id="availability" style="display:none;">
           <div class="card">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Available Time Slots</h4>
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;" data-lang="Available Schedule">Available Schedule</h4>
             ${availSlots}
             ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
           </div>
@@ -679,8 +694,8 @@
     }
 
     /* ========== Timezone Helpers ========== */
-    const tzOffsets = { 'EST': -5, 'CST': -6, 'MST': -7, 'PST': -8, 'GMT': 0, 'CET': 1, 'SGT': 8, 'JST': 9, 'AEST': 10 };
-    const tzLabels = { '-5':'EST','-6':'CST','-7':'MST','-8':'PST','0':'GMT','1':'CET','8':'SGT','9':'JST','10':'AEST' };
+    const tzOffsets = { 'HST':-10,'AKST':-9,'PST':-8,'MST':-7,'CST':-6,'EST':-5,'AST':-4,'BRT':-3,'GMT':0,'CET':1,'EET':2,'MSK':3,'GST':4,'PKT':5,'IST':5.5,'BST':6,'ICT':7,'SGT':8,'HKT':8,'CST_CN':8,'JST':9,'KST':9,'AEST':10,'NZST':12 };
+    const tzLabels = { '-10':'HST','-9':'AKST','-8':'PST','-7':'MST','-6':'CST','-5':'EST','-4':'AST','-3':'BRT','0':'GMT','1':'CET','2':'EET','3':'MSK','4':'GST','5':'PKT','5.5':'IST','6':'BST','7':'ICT','8':'SGT','9':'JST','10':'AEST','12':'NZST' };
 
     function getClientTzOffset() {
       const sel = document.getElementById('clientTimezone');
