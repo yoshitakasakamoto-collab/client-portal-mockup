@@ -37,37 +37,23 @@ a:hover { text-decoration: underline; }
   box-shadow: 2px 0 12px rgba(0,0,0,0.08);
 }
 .sidebar-logo {
-  padding: 12px;
+  padding: 10px 12px;
   border-bottom: 1px solid #e0e0e0;
   white-space: nowrap;
   overflow: hidden;
   height: 52px;
   display: flex;
   align-items: center;
+  border-top: 3px solid #e67e22;
 }
 .sidebar-logo .sidebar-logo-inner {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.sidebar-logo .sidebar-icon {
-  width: 28px;
-  height: 28px;
-  background: #e67e22;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.sidebar-logo .sidebar-texts {
   opacity: 0;
   transition: opacity 0.2s ease 0.1s;
 }
-.sidebar:hover .sidebar-logo .sidebar-texts {
+.sidebar:hover .sidebar-logo .sidebar-logo-inner {
   opacity: 1;
 }
 .sidebar-logo .company-name {
@@ -80,10 +66,6 @@ a:hover { text-decoration: underline; }
   font-size: 10px;
   color: #999;
   margin-top: 1px;
-}
-.sidebar-logo .powered-by img {
-  height: 16px;
-  vertical-align: middle;
 }
 .sidebar-nav { padding: 12px 0; flex: 1; }
 .sidebar-nav a {
@@ -482,8 +464,9 @@ tr:hover { background: #fafafa; }
   border-radius: 12px;
   width: 500px;
   max-width: 90vw;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 .modal-header {
@@ -501,7 +484,7 @@ tr:hover { background: #fafafa; }
   background: none;
   border: none;
 }
-.modal-body { padding: 20px; }
+.modal-body { padding: 20px; overflow-y: auto; flex: 1; min-height: 0; }
 .modal-footer {
   padding: 16px 20px;
   border-top: 1px solid #eee;

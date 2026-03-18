@@ -12,11 +12,8 @@
     <aside class="sidebar">
       <div class="sidebar-logo">
         <div class="sidebar-logo-inner">
-          <div class="sidebar-icon">A</div>
-          <div class="sidebar-texts">
-            <div class="company-name">BCG SEA</div>
-            <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span></div>
-          </div>
+          <div class="company-name">BCG SEA</div>
+          <div class="powered-by">Client Portal powered by <span style="color:#e67e22;font-weight:700;">Arches</span></div>
         </div>
       </div>
       <nav class="sidebar-nav">
@@ -230,7 +227,7 @@
 
   <!-- Book Modal (VisasQ-style Timeline) -->
   <div class="modal-overlay" id="bookModal">
-    <div class="modal" style="width:820px;max-width:95vw;">
+    <div class="modal" style="width:860px;max-width:95vw;">
       <div class="modal-header">
         <h3 data-lang="Book Interview">Book for Interview</h3>
         <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
@@ -238,7 +235,26 @@
       <div class="modal-body" style="padding:20px;">
         <p id="bookModalDesc" style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-1041870 - Luci Dao</strong>.</p>
 
-        <!-- Duration Selection (first, like VisasQ) -->
+        <!-- Your Timezone -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Your Timezone</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <select id="clientTimezone" class="form-control" style="flex:1;max-width:340px;" onchange="renderTimeline()">
+            <option value="-5">EST (UTC-5) — Eastern Standard Time</option>
+            <option value="-6">CST (UTC-6) — Central Standard Time</option>
+            <option value="-7">MST (UTC-7) — Mountain Standard Time</option>
+            <option value="-8">PST (UTC-8) — Pacific Standard Time</option>
+            <option value="0">GMT (UTC+0) — Greenwich Mean Time</option>
+            <option value="1">CET (UTC+1) — Central European Time</option>
+            <option value="8">SGT (UTC+8) — Singapore Time</option>
+            <option value="9" selected>JST (UTC+9) — Japan Standard Time</option>
+            <option value="10">AEST (UTC+10) — Australian Eastern Time</option>
+          </select>
+        </div>
+
+        <!-- Duration Selection -->
         <div class="form-group">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
             <label style="font-weight:600;font-size:13px;white-space:nowrap;">Interview Duration</label>
@@ -246,9 +262,11 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="30" style="accent-color:#e67e22;"> 30 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="45" style="accent-color:#e67e22;"> 45 min</label>
             <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="60" style="accent-color:#e67e22;" checked> 60 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="80" style="accent-color:#e67e22;"> 80 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="100" style="accent-color:#e67e22;"> 100 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="75" style="accent-color:#e67e22;"> 75 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="90" style="accent-color:#e67e22;"> 90 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="105" style="accent-color:#e67e22;"> 105 min</label>
             <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="120" style="accent-color:#e67e22;"> 120 min</label>
           </div>
         </div>
@@ -258,7 +276,7 @@
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
             <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;">Select your preferred date & time</span>
           </div>
-          <div style="font-size:11px;color:#999;margin-bottom:8px;">* Times shown in expert's local timezone</div>
+          <div id="tzInfoLabel" style="font-size:11px;color:#999;margin-bottom:8px;">* Times displayed in your timezone (JST). Expert's availability has been converted.</div>
 
           <!-- Timeline Nav -->
           <div style="display:flex;align-items:center;margin-bottom:0;">
@@ -271,7 +289,7 @@
               <div style="min-width:650px;">
                 <div id="timelineHeader" style="display:flex;border-bottom:1px solid #e0e0e0;background:#f5f5f5;"></div>
                 <!-- Timeline Grid (time rows) -->
-                <div id="timelineGrid" style="position:relative;"></div>
+                <div id="timelineGrid" style="position:relative;max-height:400px;overflow-y:auto;"></div>
               </div>
             </div>
             <div onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;">
@@ -292,15 +310,6 @@
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
           <input type="text" id="selectedTimeDisplay" class="form-control" placeholder="Click a green slot on the calendar above" readonly style="flex:1;background:#f9f9f9;cursor:default;">
-        </div>
-
-        <!-- Attendee -->
-        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
-          <div style="display:flex;align-items:center;gap:8px;">
-            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Your Name</label>
-            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
-          </div>
-          <input type="text" class="form-control" value="Emily Turner" style="flex:1;">
         </div>
 
         <!-- Number of attendees -->
@@ -669,6 +678,18 @@
       if (typeof applyLanguage === 'function') applyLanguage();
     }
 
+    /* ========== Timezone Helpers ========== */
+    const tzOffsets = { 'EST': -5, 'CST': -6, 'MST': -7, 'PST': -8, 'GMT': 0, 'CET': 1, 'SGT': 8, 'JST': 9, 'AEST': 10 };
+    const tzLabels = { '-5':'EST','-6':'CST','-7':'MST','-8':'PST','0':'GMT','1':'CET','8':'SGT','9':'JST','10':'AEST' };
+
+    function getClientTzOffset() {
+      const sel = document.getElementById('clientTimezone');
+      return sel ? parseInt(sel.value) : 9;
+    }
+    function getClientTzLabel() {
+      return tzLabels[String(getClientTzOffset())] || 'UTC' + (getClientTzOffset() >= 0 ? '+' : '') + getClientTzOffset();
+    }
+
     /* ========== 2-Week Timeline Booking (VisasQ-style) ========== */
     let weekOffset = 0;
     let selectedSlotKey = null;
@@ -678,11 +699,9 @@
       weekOffset = 0;
       selectedSlotKey = null;
 
-      // Update decline modal
       const declineP = document.querySelector('#declineModal .modal-body p');
       if (declineP) declineP.innerHTML = `You are about to decline <strong>${e.id} - ${e.name}</strong>. Please let us know why (optional).`;
 
-      // Update book modal description
       const bookP = document.getElementById('bookModalDesc');
       if (bookP) bookP.innerHTML = `Select a time slot to schedule an interview with <strong>${e.id} - ${e.name}</strong>.`;
 
@@ -695,20 +714,44 @@
       renderTimeline();
     }
 
+    /* Parse expert slot strings into 15-min blocks, converting to client timezone */
     function parseSlotToBlocks(slots) {
-      // Parse "Mar 18 (Tue), 10:00 AM - 12:00 PM EST" into { day, startHour, endHour }
       const blocks = [];
+      const clientOffset = getClientTzOffset();
       slots.forEach((s, i) => {
         const dayMatch = s.match(/Mar\s+(\d+)/);
         const timeMatch = s.match(/(\d{1,2}):(\d{2})\s*(AM|PM)\s*-\s*(\d{1,2}):(\d{2})\s*(AM|PM)/);
+        const tzMatch = s.match(/(EST|CST|MST|PST|GMT|CET|SGT|JST|AEST)\s*$/);
         if (dayMatch && timeMatch) {
           let sh = parseInt(timeMatch[1]);
+          const sm = parseInt(timeMatch[2]);
           if (timeMatch[3] === 'PM' && sh !== 12) sh += 12;
           if (timeMatch[3] === 'AM' && sh === 12) sh = 0;
           let eh = parseInt(timeMatch[4]);
+          const em = parseInt(timeMatch[5]);
           if (timeMatch[6] === 'PM' && eh !== 12) eh += 12;
           if (timeMatch[6] === 'AM' && eh === 12) eh = 0;
-          blocks.push({ day: parseInt(dayMatch[1]), startHour: sh, endHour: eh, text: s, idx: i });
+
+          const expertTz = tzMatch ? (tzOffsets[tzMatch[1]] || -5) : -5;
+          const diff = clientOffset - expertTz;
+
+          let startMin = (sh * 60 + sm) + diff * 60;
+          let endMin = (eh * 60 + em) + diff * 60;
+          const baseDay = parseInt(dayMatch[1]);
+
+          for (let m = startMin; m < endMin; m += 15) {
+            let adjDay = baseDay;
+            let adjMin = m;
+            while (adjMin < 0) { adjMin += 1440; adjDay -= 1; }
+            while (adjMin >= 1440) { adjMin -= 1440; adjDay += 1; }
+            blocks.push({
+              day: adjDay,
+              hour: Math.floor(adjMin / 60),
+              minute: adjMin % 60,
+              text: s,
+              idx: i
+            });
+          }
         }
       });
       return blocks;
@@ -719,9 +762,12 @@
       const blocks = parseSlotToBlocks(e.slots);
       const header = document.getElementById('timelineHeader');
       const grid = document.getElementById('timelineGrid');
+      const tzLabel = getClientTzLabel();
 
-      // Calculate 14-day range starting from today + weekOffset*14
-      const baseDate = new Date(2026, 2, 18); // March 18, 2026
+      const tzInfo = document.getElementById('tzInfoLabel');
+      if (tzInfo) tzInfo.textContent = `* Times displayed in your timezone (${tzLabel}). Expert's availability has been converted.`;
+
+      const baseDate = new Date(2026, 2, 18);
       const startDate = new Date(baseDate);
       startDate.setDate(startDate.getDate() + weekOffset * 14);
 
@@ -734,14 +780,29 @@
         days.push(d);
       }
 
-      // Find time range to display (show 8:00-22:00 or fit to slots)
-      const minHour = 8, maxHour = 22;
-      const hours = [];
-      for (let h = minHour; h <= maxHour; h++) hours.push(h);
+      // Determine visible hour range based on available slots (with padding)
+      let minHour = 8, maxHour = 20;
+      if (blocks.length > 0) {
+        const slotHours = blocks.map(b => b.hour);
+        minHour = Math.max(0, Math.min(...slotHours) - 1);
+        maxHour = Math.min(23, Math.max(...slotHours) + 1);
+        // Ensure at least a reasonable range
+        if (maxHour - minHour < 6) {
+          const mid = Math.floor((minHour + maxHour) / 2);
+          minHour = Math.max(0, mid - 3);
+          maxHour = Math.min(23, mid + 3);
+        }
+      }
+      const timeSlots = [];
+      for (let h = minHour; h <= maxHour; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          timeSlots.push({ hour: h, minute: m });
+        }
+      }
 
       // Header
       let prevMonth = '';
-      let headerHtml = '<div style="width:50px;flex-shrink:0;border-right:1px solid #e0e0e0;"></div>';
+      let headerHtml = '<div style="width:54px;flex-shrink:0;border-right:1px solid #e0e0e0;font-size:10px;color:#999;padding:4px;text-align:center;">' + tzLabel + '</div>';
       days.forEach(d => {
         const isToday = d.getDate() === 18 && d.getMonth() === 2 && d.getFullYear() === 2026;
         const mon = monthNames[d.getMonth()];
@@ -754,57 +815,64 @@
       });
       header.innerHTML = headerHtml;
 
-      // Grid rows
+      // Grid rows (15-min increments)
       let gridHtml = '';
-      hours.forEach(h => {
-        const label = h < 12 ? `${h}:00` : h === 12 ? '12:00' : `${h}:00`;
-        gridHtml += `<div style="display:flex;border-bottom:1px solid #f0f0f0;">`;
-        gridHtml += `<div style="width:50px;flex-shrink:0;border-right:1px solid #e0e0e0;padding:4px 6px;font-size:11px;color:#999;text-align:right;">${label}</div>`;
+      timeSlots.forEach(ts => {
+        const isFullHour = ts.minute === 0;
+        const label = isFullHour ? `${String(ts.hour).padStart(2,'0')}:00` : '';
+        const borderStyle = isFullHour ? 'border-bottom:1px solid #e0e0e0;' : 'border-bottom:1px solid #f8f8f8;';
+        gridHtml += `<div style="display:flex;${borderStyle}">`;
+        gridHtml += `<div style="width:54px;flex-shrink:0;border-right:1px solid #e0e0e0;padding:1px 6px;font-size:10px;color:#999;text-align:right;height:14px;line-height:14px;">${label}</div>`;
         days.forEach(d => {
           const dayOfMonth = d.getDate();
-          const month = d.getMonth(); // 2 = March
-          // Check if any slot covers this hour on this day
+          const month = d.getMonth();
           let isAvail = false;
           let slotInfo = null;
-          if (month === 2) { // March
+          if (month === 2) {
             blocks.forEach(b => {
-              if (b.day === dayOfMonth && h >= b.startHour && h < b.endHour) {
+              if (b.day === dayOfMonth && b.hour === ts.hour && b.minute === ts.minute) {
                 isAvail = true;
                 slotInfo = b;
               }
             });
           }
-          const cellKey = `${dayOfMonth}-${h}`;
+          const cellKey = `${dayOfMonth}-${ts.hour}-${ts.minute}`;
           const isSelected = selectedSlotKey === cellKey;
-          let cellStyle = 'flex:1;min-width:44px;height:28px;border-right:1px solid #f5f5f5;';
+          let cellStyle = 'flex:1;min-width:44px;height:14px;border-right:1px solid #f5f5f5;';
           if (isSelected) {
             cellStyle += 'background:#e67e22;cursor:pointer;';
           } else if (isAvail) {
             cellStyle += 'background:#c8e6c9;cursor:pointer;';
           }
-          const onclick = isAvail ? `onclick="selectTimelineSlot(${dayOfMonth},${h},'${slotInfo ? slotInfo.text.replace(/'/g,"\\'") : ''}')"` : '';
-          gridHtml += `<div style="${cellStyle}" ${onclick} id="tc_${cellKey}"></div>`;
+          const onclick = isAvail ? `onclick="selectTimelineSlot(${dayOfMonth},${ts.hour},${ts.minute},'${slotInfo ? slotInfo.text.replace(/'/g,"\\'") : ''}')"` : '';
+          gridHtml += `<div style="${cellStyle}" ${onclick}></div>`;
         });
         gridHtml += `</div>`;
       });
       grid.innerHTML = gridHtml;
     }
 
-    function selectTimelineSlot(day, hour, slotText) {
-      selectedSlotKey = `${day}-${hour}`;
+    function selectTimelineSlot(day, hour, minute, slotText) {
+      selectedSlotKey = `${day}-${hour}-${minute}`;
       const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       const d = new Date(2026, 2, day);
       const dow = dayNames[d.getDay()];
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      const h12 = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
       const dur = document.querySelector('input[name="bookDuration"]:checked');
       const durVal = dur ? parseInt(dur.value) : 60;
-      const endHour = hour + Math.ceil(durVal / 60);
-      const endAmpm = endHour >= 12 ? 'PM' : 'AM';
-      const endH12 = endHour > 12 ? endHour - 12 : endHour === 0 ? 12 : endHour;
+      const startTotal = hour * 60 + minute;
+      const endTotal = startTotal + durVal;
+      const endH = Math.floor(endTotal / 60);
+      const endM = endTotal % 60;
+      const tzLabel = getClientTzLabel();
 
-      document.getElementById('selectedTimeDisplay').value = `Mar ${day} (${dow}), ${h12}:00 ${ampm} - ${endH12}:00 ${endAmpm}`;
-      renderTimeline(); // re-render to update highlight
+      const fmt = (h, m) => {
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12 = h > 12 ? h - 12 : h === 0 ? 12 : h;
+        return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+      };
+
+      document.getElementById('selectedTimeDisplay').value = `Mar ${day} (${dow}), ${fmt(hour, minute)} - ${fmt(endH, endM)} ${tzLabel}`;
+      renderTimeline();
     }
 
     /* ========== UI Functions ========== */
