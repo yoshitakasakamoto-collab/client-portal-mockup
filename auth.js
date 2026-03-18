@@ -16,7 +16,7 @@
 
   overlay.innerHTML = `
     <div style="background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.12);padding:40px;max-width:380px;width:90%;text-align:center;">
-      <div style="font-size:28px;margin-bottom:8px;">&#9730;</div>
+      <img src="images/arches-icon.svg" alt="Arches" style="width:48px;height:48px;margin-bottom:8px;">
       <div style="font-size:20px;font-weight:700;color:#333;margin-bottom:4px;">Client Portal</div>
       <div style="font-size:13px;color:#999;margin-bottom:24px;">powered by <span style="color:#e67e22;font-weight:700;">Arches</span></div>
       <p style="font-size:13px;color:#666;margin-bottom:20px;">This site is for authorized users only.<br>Please enter the access password.</p>
