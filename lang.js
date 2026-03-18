@@ -206,14 +206,12 @@ function initLang() {
 
 function updateLangButton(btn) {
   if (currentLang === 'en') {
-    btn.innerHTML = '&#127482;&#127480;';
+    btn.innerHTML = '<svg width="24" height="16" viewBox="0 0 60 40" style="vertical-align:middle;border-radius:2px;border:1px solid #ddd;"><rect width="60" height="40" fill="#fff"/><rect width="60" height="3.08" y="0" fill="#B22234"/><rect width="60" height="3.08" y="6.15" fill="#B22234"/><rect width="60" height="3.08" y="12.31" fill="#B22234"/><rect width="60" height="3.08" y="18.46" fill="#B22234"/><rect width="60" height="3.08" y="24.62" fill="#B22234"/><rect width="60" height="3.08" y="30.77" fill="#B22234"/><rect width="60" height="3.08" y="36.92" fill="#B22234"/><rect width="24" height="21.54" fill="#3C3B6E"/></svg>';
     btn.title = 'Switch to Japanese';
   } else {
-    btn.innerHTML = '&#127471;&#127477;';
+    btn.innerHTML = '<svg width="24" height="16" viewBox="0 0 60 40" style="vertical-align:middle;border-radius:2px;border:1px solid #ddd;"><rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="10" fill="#BC002D"/></svg>';
     btn.title = 'Switch to English';
   }
-  btn.style.fontSize = '20px';
-  btn.style.lineHeight = '1';
 }
 
 function applyLang() {

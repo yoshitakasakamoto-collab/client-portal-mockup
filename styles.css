@@ -19,18 +19,28 @@ a:hover { text-decoration: underline; }
 /* Layout */
 .app { display: flex; min-height: 100vh; }
 
-/* Sidebar */
+/* Sidebar - collapsed by default, expand on hover */
 .sidebar {
-  width: 220px;
+  width: 52px;
   background: #fff;
   border-right: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  overflow: hidden;
+  transition: width 0.25s ease;
+  z-index: 100;
+  position: relative;
+}
+.sidebar:hover {
+  width: 220px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.08);
 }
 .sidebar-logo {
   padding: 16px 20px;
   border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+  min-width: 220px;
 }
 .sidebar-logo .company-name {
   font-weight: 700;
@@ -55,6 +65,8 @@ a:hover { text-decoration: underline; }
   color: #555;
   font-size: 14px;
   transition: background 0.15s;
+  white-space: nowrap;
+  min-width: 220px;
 }
 .sidebar-nav a:hover { background: #fef5ec; text-decoration: none; }
 .sidebar-nav a.active {
@@ -779,7 +791,7 @@ select.form-control { cursor: pointer; }
   display: none;
   position: fixed;
   bottom: 0;
-  left: 220px;
+  left: 52px;
   right: 0;
   background: #fff;
   border-top: 2px solid #e67e22;
