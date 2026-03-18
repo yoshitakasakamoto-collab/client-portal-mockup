@@ -4,6 +4,9 @@
 
 /* Reset & Base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  zoom: 0.8;
+}
 body {
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
