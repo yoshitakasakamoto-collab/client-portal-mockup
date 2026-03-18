@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIS Client Portal - Candidates (A110031)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="images/arches-icon.svg" alt="Arches" class="sidebar-logo-icon">
+        <div class="sidebar-logo-inner">
+          <img src="images/arches-logo.svg" alt="Arches" class="sidebar-logo-img">
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html"><span class="icon">&#128188;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
+        <div class="header-title">A110031 Arches Consulting JP HR Industry Research</div>
+        <div class="header-right">
+          <div class="notification-bell" onclick="toggleNotifications()">
+            &#128276;
+            <span class="badge">3</span>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header"><span data-lang="Notifications">Notifications</span><a href="#" style="font-size:12px;" data-lang="Mark all read">Mark all read</a></div>
+              <div class="notif-item unread">
+                <div class="notif-title" data-lang="New expert proposed">New expert proposed</div>
+                <div class="notif-desc">2 new experts proposed for this project</div>
+                <div class="notif-time" data-lang="10 minutes ago">10 minutes ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
+          <div class="user-avatar">ET</div>
+        </div>
+      </header>
+
+      <div class="content" style="padding:0;">
+        <div style="padding:16px 24px 0;">
+          <div class="tabs">
+            <div class="tab" onclick="window.location='project-general-a110031.html'"><span class="dot"></span> <span data-lang="General">General</span></div>
+            <div class="tab active"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+            <div class="tab" onclick="window.location='project-interview-a110031.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+            <div class="tab" onclick="window.location='project-billing-a110031.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+          </div>
+
+        </div>
+
+        <!-- Split View -->
+        <div class="split-view">
+          <!-- Left: Expert List -->
+          <div class="split-left">
+            <div class="segment-section">
+              <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+                <span>&#9660; 人材業界</span>
+                <span class="segment-meta">1/11 <span data-lang="experts">experts</span></span>
+              </div>
+              <div>
+                <div class="expert-item active" onclick="showExpert(1)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0228485</div>
+                      <div class="expert-role">Benesse corporation - Manager</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(2)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0255123</div>
+                      <div class="expert-role">JAC Recruitment - General Manager / Senior principal</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(3)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0255733</div>
+                      <div class="expert-role">井村屋グループ株式会社 - E Commerce and Digital marketing strategist</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(4)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0257897</div>
+                      <div class="expert-role">Myanmar Unity - アシスタントマネージャー</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(5)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0279944</div>
+                      <div class="expert-role">JACリクルートメント - プリンシパルコンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(6)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0292642</div>
+                      <div class="expert-role">JAC Group - Principal consultant</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$0/call</span>
+                        <span class="badge-status badge-approved" style="font-size:11px;padding:1px 6px;" data-lang="Approved">Approved</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(7)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0292884</div>
+                      <div class="expert-role">株式会社Flow Group - 執行役員兼Sales Manager</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(8)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1001816</div>
+                      <div class="expert-role">JAC Recruitment - Principal Consultant</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(9)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1011629</div>
+                      <div class="expert-role">JAC Recruitment - Principal Consultant</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(10)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1026492</div>
+                      <div class="expert-role">株式会社JAC Recruitment - 人材コンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(11)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1031119</div>
+                      <div class="expert-role">JERA Co., Inc. - Human Resources Business Partner</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-section">
+              <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+                <span>&#9660; 人材業界（パーソルキャリア）</span>
+                <span class="segment-meta">2/15 <span data-lang="experts">experts</span></span>
+              </div>
+              <div>
+                <div class="expert-item" onclick="showExpert(12)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0294513</div>
+                      <div class="expert-role">パーソルキャリア株式会社 BRS - コンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(13)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1011776</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - Product Manager</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(14)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1022857</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - シニアコンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(15)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1023126</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - ユニットリーダー</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-approved" style="font-size:11px;padding:1px 6px;" data-lang="Approved">Approved</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(16)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1023185</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - キャリアアドバイザー→法人営業</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(17)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1023215</div>
+                      <div class="expert-role">パーソルキャリア エグゼクティブエージェント - シニアコンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(18)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1023322</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - シニアコンサルタント(Assistant MGR)</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(19)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1027362</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - Product Manager</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(20)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1028077</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - 採用アドバイザー</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(21)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1028441</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - Career Advisor</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(22)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1029526</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - リクルーティングアドバイザー</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(23)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-1038393</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - セールスコンサルタント</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(24)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0265171</div>
+                      <div class="expert-role">PERSOL CAREER - Service Planning Lead Director</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(25)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0285585</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - キャリアアドバイザー</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="expert-item" onclick="showExpert(26)">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
+                    <div style="flex:1;">
+                      <div class="expert-name">EX-0238409</div>
+                      <div class="expert-role">パーソルキャリア株式会社 - Expert/経営企画統括部</div>
+                      <div class="expert-meta">
+                        <span class="expert-cost">$800/call</span>
+                        <span class="badge-status badge-approved" style="font-size:11px;padding:1px 6px;" data-lang="Approved">Approved</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Expert Detail (dynamically rendered) -->
+          <div class="split-right" id="expertDetail"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decline Modal -->
+  <div class="modal-overlay" id="declineModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 data-lang="Decline Reason">Decline Expert</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:#555;margin-bottom:16px;">You are about to decline <strong>EX-0228485</strong>. Please let us know why (optional).</p>
+        <div class="form-group">
+          <label>Reason for declining</label>
+          <select class="form-control">
+            <option>Select a reason...</option>
+            <option>Not relevant experience</option>
+            <option>Too expensive</option>
+            <option>Already have coverage in this area</option>
+            <option>Competitor/conflict of interest</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional comments (optional)</label>
+          <textarea class="form-control" placeholder="Any additional feedback..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
+        <button class="btn btn-danger" onclick="declineExpert()" data-lang="Submit & Decline">Confirm Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Modal (VisasQ-style Timeline) -->
+  <div class="modal-overlay" id="bookModal">
+    <div class="modal" style="width:860px;max-width:95vw;">
+      <div class="modal-header">
+        <h3 data-lang="Book Interview">Book for Interview</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <p id="bookModalDesc" style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-0228485</strong>.</p>
+
+        <!-- Your Timezone -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Your Timezone">Your Timezone</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <select id="clientTimezone" class="form-control" style="flex:1;max-width:380px;" onchange="renderTimeline()">
+            <option value="-8">PST (UTC-8) — US Pacific</option>
+            <option value="-7">MST (UTC-7) — US Mountain</option>
+            <option value="-6">CST (UTC-6) — US Central</option>
+            <option value="-5">EST (UTC-5) — US Eastern</option>
+            <option value="-3">BRT (UTC-3) — Brazil</option>
+            <option value="0">GMT (UTC+0) — London</option>
+            <option value="1">CET (UTC+1) — Central Europe</option>
+            <option value="2">EET (UTC+2) — Eastern Europe / Cairo</option>
+            <option value="3">MSK (UTC+3) — Moscow / Riyadh</option>
+            <option value="4">GST (UTC+4) — Dubai / Abu Dhabi</option>
+            <option value="5">PKT (UTC+5) — Pakistan / Karachi</option>
+            <option value="5.5">IST (UTC+5:30) — India</option>
+            <option value="6">BST (UTC+6) — Bangladesh / Dhaka</option>
+            <option value="7">ICT (UTC+7) — Bangkok / Jakarta / Hanoi</option>
+            <option value="8">SGT (UTC+8) — Singapore / Hong Kong / Beijing / Taipei / Manila / KL</option>
+            <option value="9" selected>JST (UTC+9) — Japan / Korea</option>
+            <option value="10">AEST (UTC+10) — Sydney / Melbourne</option>
+            <option value="12">NZST (UTC+12) — New Zealand</option>
+          </select>
+        </div>
+
+        <!-- Duration Selection -->
+        <div class="form-group">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Interview Duration">Interview Duration</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="30" style="accent-color:#e67e22;"> 30 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="45" style="accent-color:#e67e22;"> 45 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="60" style="accent-color:#e67e22;" checked> 60 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="75" style="accent-color:#e67e22;"> 75 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="90" style="accent-color:#e67e22;"> 90 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="105" style="accent-color:#e67e22;"> 105 min</label>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="120" style="accent-color:#e67e22;"> 120 min</label>
+          </div>
+        </div>
+
+        <!-- 2-week Timeline Calendar -->
+        <div class="form-group">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;" data-lang="Select preferred datetime">Select your preferred date & time</span>
+          </div>
+          <div id="tzInfoLabel" style="font-size:11px;color:#999;margin-bottom:8px;">* Times displayed in your timezone (JST). Expert's availability has been converted.</div>
+
+          <!-- Timeline Nav -->
+          <div style="display:flex;align-items:center;margin-bottom:0;">
+            <div id="prevWeekBtn" onclick="shiftWeek(-1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;display:none;">
+              <div style="font-size:16px;">&lsaquo;</div>
+              <div>Prev<br>Week</div>
+            </div>
+            <div style="flex:1;overflow-x:auto;" id="timelineWrapper">
+              <!-- Timeline Header (dates) -->
+              <div style="min-width:650px;">
+                <div id="timelineHeader" style="display:flex;border-bottom:1px solid #e0e0e0;background:#f5f5f5;"></div>
+                <!-- Timeline Grid (time rows) -->
+                <div id="timelineGrid" style="position:relative;max-height:400px;overflow-y:auto;"></div>
+              </div>
+            </div>
+            <div id="nextWeekBtn" onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;display:none;">
+              <div style="font-size:16px;">&rsaquo;</div>
+              <div>Next<br>Week</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#777;">
+            <span><span style="display:inline-block;width:12px;height:12px;background:#c8e6c9;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Available Schedule">Available Schedule</span></span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#e67e22;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Selected">Selected</span></span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#ffcdd2;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Booked IV">Booked IV</span></span>
+          </div>
+        </div>
+
+        <!-- Selected Time Display -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Preferred Date & Time">Preferred Date & Time</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <input type="text" id="selectedTimeDisplay" class="form-control" placeholder="Click a green slot on the calendar above" readonly style="flex:1;background:#f9f9f9;cursor:default;">
+        </div>
+
+        <!-- Number of attendees -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Number of Attendees">Number of Attendees</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
+          <input type="number" class="form-control" value="1" min="1" max="10" style="width:60px;">
+          <span style="font-size:12px;color:#999;">* If more than 1, please note in comments</span>
+        </div>
+
+        <!-- Interpretation option -->
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Options">Options</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+            <input type="checkbox" style="accent-color:#e67e22;"> <span data-lang="Request interpretation">Request interpretation service</span>
+          </label>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <label style="font-weight:600;font-size:13px;" data-lang="Additional Notes">Additional Notes</label>
+          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:8px;">Optional</span>
+          <textarea class="form-control" placeholder="Any specific topics or questions you'd like to cover..." style="margin-top:6px;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
+        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Confirm Booking">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    /* ========== Expert Data ========== */
+    const experts = {
+      1: {
+        id: 'EX-0228485', name: 'EX-0228485', company: 'Benesse corporation', role: 'Manager',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 19, 10:00 AM - 12:00 PM JST', 'Mar 24, 1:00 PM - 3:00 PM JST'],
+        slotsShort: ['Mar 19 AM', 'Mar 24 PM'],
+        experience: [
+          '10年以上にわたり人材紹介事業に携わっているエキスパート。JACリクルートメントではコンサルタントとして消費財メーカーとデジタルマーケターのマッチングを両面でサポートや、家具、インテリア、日用雑貨メーカー向け採用支援などを担当していた。'
+        ],
+        history: [
+          { company: 'Benesse corporation', position: 'Manager', from: '2021/01', to: 'Present' },
+          { company: 'JAC Recruitment', position: 'Recruitment consultant', from: '2017/12', to: '2020/12' },
+          { company: 'IDOM', position: 'Business planning/Marketing/Recruiter', from: '2014/04', to: '2017/11' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'JACリクルートメント在籍時から感じていたのは、消費財メーカー領域ではデジタルマーケティング人材の需要が急速に高まっている点です。特にEC化の加速により、従来の営業職採用からデジタル人材採用へのシフトが顕著で、企業側の求めるスキルセットも大きく変化しています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: '現在ベネッセではデジタルマーケティング戦略に携わっていますが、人材業界においてもAIマッチングの精度向上が大きなテーマです。JACでも求職者と求人のマッチングにデータを活用する取り組みが進んでいましたが、最終的には人間のコンサルタントの判断力が重要であると感じています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' },
+          { text: 'Screening answers pending', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: [
+          { author: 'Project Manager', org: 'Client', avatar: 'PM', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 2:30 PM',
+            text: 'JACリクルートメントでの経験が興味深いです。消費財メーカー向けの採用支援の詳細を確認したいです。',
+            reply: { time: 'Mar 16, 2026 - 4:15 PM', text: 'エキスパートに確認中です。詳細が分かり次第更新いたします。' }
+          }
+        ]
+      },
+      2: {
+        id: 'EX-0255123', name: 'EX-0255123', company: 'JAC Recruitment', role: 'General Manager / Senior principal',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 20, 2:00 PM - 4:00 PM JST', 'Mar 25, 10:00 AM - 12:00 PM JST', 'Mar 27, 3:00 PM - 5:00 PM JST'],
+        slotsShort: ['Mar 20 PM', 'Mar 25 AM', 'Mar 27 PM'],
+        experience: [
+          'JAC Recruitmentにてゼネラルマネージャーおよびシニアプリンシパルを務めるエキスパート。関西エリアでのコンサルティングファームやエンタメ領域のエグゼクティブ採用を担当してきた経験を有する。エンタメ業界でのIPビジネス領域についての支援経験を持つ。'
+        ],
+        history: [
+          { company: 'JAC Recruitment', position: 'General Manager / Senior principal', from: '2015/05', to: 'Present' },
+          { company: '豊島株式会社', position: 'Sales', from: '2013/04', to: '2015/03' }
+        ],
+        screening: [
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: 'JACの最大の強みは、両面型コンサルティングモデルにあります。一人のコンサルタントが企業と求職者の両方を担当することで、双方のニーズを深く理解し、質の高いマッチングが実現できます。特にエグゼクティブ層の採用では、この深い理解が競合他社との差別化要因となっています。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '関西エリアでは、東京に比べてエグゼクティブ人材の流動性が低く、長期的なリレーション構築が重要です。また、エンタメ・IP領域では専門性の高い人材の需要が増加しており、業界特化型のコンサルティングの価値が高まっています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'JACでもCRMシステムの高度化やAIを活用した候補者サーチの導入が進んでいます。しかし、エグゼクティブ採用においては人間関係の構築が不可欠であり、テクノロジーはあくまで補助的な役割にとどまると考えています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      3: {
+        id: 'EX-0255733', name: 'EX-0255733', company: '井村屋グループ株式会社', role: 'E Commerce and Digital marketing strategist',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'JACリクルートメントに4年ほど在籍。外資系消費財メーカーの採用支援・転職希望人材のキャリアコンサルティングや、クライアントのマーケティング戦略などを担っていた。'
+        ],
+        history: [
+          { company: '井村屋グループ株式会社', position: 'E Commerce and Digital marketing strategist', from: '2021/01', to: 'Present' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'JACリクルートメントでは外資系消費財メーカーを担当していましたが、日系企業と比べて採用プロセスのスピード感が全く異なりました。外資系企業はグローバル本社の承認プロセスがあるため、人材紹介会社としてはそのタイムラインを理解した上でのコンサルティングが求められます。' },
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: 'JACの強みは外資系・グローバル企業への圧倒的なネットワークです。特に消費財領域では、P&Gやユニリーバなどのトップティアクライアントとの長年の関係性が他社にない優位性となっていました。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      4: {
+        id: 'EX-0257897', name: 'EX-0257897', company: 'Myanmar Unity', role: 'アシスタントマネージャー',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 21, 9:00 AM - 11:00 AM JST'],
+        slotsShort: ['Mar 21 AM'],
+        experience: [
+          '2019年にJAC Recruitment Malaysiaに入社。Multilingual Divisionに所属し、日本語が話せるマレーシア人を担当するコンサルタントとして活躍。主に求職者と企業の両面コンサルタント業務を担当し、ジュニアからシニアまで幅広い層の紹介実績を積む。'
+        ],
+        history: [
+          { company: 'Myanmar Unity', position: 'アシスタントマネージャー', from: '2022/01', to: 'Present' },
+          { company: 'JAC Recruitment Malaysia', position: 'Consultant', from: '2019/01', to: '2021/12' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'マレーシアでの経験から、東南アジアにおける日系企業の採用ニーズは依然として高いと感じています。特に日本語と英語のバイリンガル人材は希少価値が高く、JACのような両面型エージェントの存在意義は大きいです。一方で、現地ローカルエージェントとの競争も激化しています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      5: {
+        id: 'EX-0279944', name: 'EX-0279944', company: 'JACリクルートメント', role: 'プリンシパルコンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '2004年にJACリクルートメントに参画。約21年間同社にて活躍中のエキスパートである。現在は、プリンシパルコンサルタント・エグゼクティブディビジョンとして従事している。人材紹介業界に関して、上級管理職やCXOといった立場で消費財、サービス、製造業、ITなど横断的に業界担当に関与してきた経験を有す。'
+        ],
+        history: [
+          { company: 'JACリクルートメント', position: 'プリンシパルコンサルタント', from: '2004/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: '21年間JACに在籍してきた立場から申しますと、当社の最大の競合優位性はエグゼクティブ層へのアクセスです。CXOクラスの転職支援においては、長年の信頼関係と業界横断的なネットワークが不可欠であり、これは一朝一夕には構築できません。リクルートやパーソルと比較して、ハイクラス領域での知名度とブランド力が圧倒的です。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'エグゼクティブ採用市場では、日本企業のガバナンス改革に伴い社外取締役や独立役員の需要が高まっています。また、DX推進の流れでCDOやCTOといったデジタル系CXOポジションの採用が急増しており、従来の製造業・消費財領域以外にもビジネスチャンスが広がっています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'エグゼクティブ領域では、AIによる候補者スクリーニングよりも、コンサルタントの人脈と目利き力が依然として重要です。ただし、市場データの分析や報酬ベンチマークの提供においてはデータ活用が進んでおり、クライアントへの提案力向上に貢献しています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: [
+          { author: 'Project Manager', org: 'Client', avatar: 'PM', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 11:00 AM',
+            text: '21年間JACに在籍されているベテランの方ですね。エグゼクティブ採用の最新トレンドについてお話を伺いたいです。',
+            reply: null }
+        ]
+      },
+      6: {
+        id: 'EX-0292642', name: 'EX-0292642', company: 'JAC Group', role: 'Principal consultant',
+        status: 'Approved', statusClass: 'badge-approved', updated: '2026/03/14', cost: '$0/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 19, 2:00 PM - 4:00 PM JST', 'Mar 23, 10:00 AM - 12:00 PM JST'],
+        slotsShort: ['Mar 19 PM', 'Mar 23 AM'],
+        experience: [
+          'JAC GroupではPrincipal consultantとして従事。またミャンマーの送り出し機関であるMyanmar Unity にてマネージャーを務めるエキスパート。マネージャーとして、日本への送り出し担当としてマーケティングや営業の統括を務める。4年間ミャンマー現地で駐在した経験から、補助金や規制についての知見も豊富に有する。'
+        ],
+        history: [
+          { company: 'JAC Group', position: 'Principal consultant', from: '2020/01', to: 'Present' },
+          { company: 'Myanmar Unity', position: 'Manager', from: '2018/01', to: '2020/01' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'JAC Groupとミャンマーでの経験から、海外人材の日本企業への紹介は今後も成長分野と考えています。特に技能実習制度の改正に伴い、特定技能ビザの拡充が進む中、送り出し機関と受入企業の橋渡し役としてのエージェントの重要性が増しています。' },
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: 'JACグループの強みは、アジア各国に拠点を持つグローバルネットワークです。特に東南アジア市場では、現地法人を通じた直接採用支援が可能であり、リクルートやパーソルにはない国際的なリーチが競合優位性となっています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 13, 2026 - 2:00 PM' },
+          { text: 'Approved by <strong>Client</strong>', time: 'Mar 14, 2026 - 9:00 AM' }
+        ],
+        comments: []
+      },
+      7: {
+        id: 'EX-0292884', name: 'EX-0292884', company: '株式会社Flow Group', role: '執行役員兼Sales Manager',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '船井総研にてコンサルタントとしてマーケティングコンサル及び採用コンサルに従事していたエキスパート。主に中小企業向けに採用コンサルティングを行ってきた経験をもつ。以降も、現在含め業務委託人材サービスに従事しており、都市部のスタートアップから地方中小企業などの採用課題に沿った人材提供に従事している。'
+        ],
+        history: [
+          { company: '株式会社Flow Group', position: '執行役員兼Sales Manager', from: '2022/01', to: 'Present' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '中小企業の採用支援を通じて感じるのは、大手人材紹介会社が手を出しにくい中小企業マーケットにこそ大きなニーズがあるということです。船井総研での採用コンサルティング経験から、地方中小企業では人材紹介よりもダイレクトリクルーティングや業務委託人材の活用が現実的な解決策になるケースが多いと感じています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: '業務委託人材のマッチングにおいては、スキルベースでのマッチングがAIとの親和性が高いと考えています。現在もフリーランスプラットフォームではAIマッチングが進んでおり、今後は正社員採用においても同様の流れが加速するでしょう。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      8: {
+        id: 'EX-1001816', name: 'EX-1001816', company: 'JAC Recruitment', role: 'Principal Consultant',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 24, 1:00 PM - 3:00 PM JST', 'Mar 26, 10:00 AM - 12:00 PM JST'],
+        slotsShort: ['Mar 24 PM', 'Mar 26 AM'],
+        experience: [
+          'JAC Recruitmentにて現在Principal Consultantとして従事するエキスパート。市場における部長以上のエグゼクティブクラスの採用を検討している企業の支援に従事。'
+        ],
+        history: [
+          { company: 'JAC Recruitment', position: 'Principal Consultant', from: '2020/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: 'エグゼクティブ採用に特化している点が最大の強みです。部長クラス以上の採用では、候補者のキャリアビジョンと企業の経営戦略を深く理解した上でのマッチングが求められ、JACの両面型モデルがこの領域で最も効果的に機能しています。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'エグゼクティブ市場では、特にDX関連のポジションで需要が供給を大きく上回っています。CDO、CIOなどのデジタルリーダーシップ人材の確保が多くの企業の課題となっており、当社でもこの分野への対応を強化しています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      9: {
+        id: 'EX-1011629', name: 'EX-1011629', company: 'JAC Recruitment', role: 'Principal Consultant',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '製薬業界において、製造プロセスに関する課題解決を目的とした営業・マーケティング・事業開発の経験を有する。上記ヘルスケア領域でのバックグラウンドをもとに、2025年よりJACリクルートメントにてヘルスケアチームとして活躍中。'
+        ],
+        history: [
+          { company: 'JAC Recruitment', position: 'Principal Consultant', from: '2025/01', to: 'Present' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'ヘルスケア領域では、製薬会社のR&D人材やメディカルアフェアーズの専門家に対する需要が非常に高まっています。製薬業界からJACに転職した経験から、業界特化型のコンサルタントの価値は今後さらに高まると考えています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      10: {
+        id: 'EX-1026492', name: 'EX-1026492', company: '株式会社JAC Recruitment', role: '人材コンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 20, 10:00 AM - 12:00 PM JST', 'Mar 25, 2:00 PM - 4:00 PM JST'],
+        slotsShort: ['Mar 20 AM', 'Mar 25 PM'],
+        experience: [
+          '2024年よりJACリクルートメントにて人材コンサルタントとして活躍している。主に、北関東エリアの中小企業様向けにエグゼクティブ・スペシャリスト人材の採用支援と自身の転職経験を原体験とした求職者への転職活動を担当。'
+        ],
+        history: [
+          { company: '株式会社JAC Recruitment', position: '人材コンサルタント', from: '2024/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'JACリクルートメントの競合優位性について、どのようにお考えですか？', a: '北関東エリアでは、JACの知名度はまだ成長途上ですが、エグゼクティブ・スペシャリスト人材に特化した点が中小企業オーナーからの信頼を得ています。地方の中小企業向けにもハイクラス人材を提供できる点は、他の大手エージェントにはない強みです。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'JACでは社内のCRMツールやマッチングシステムが充実しており、コンサルタントの業務効率化に貢献しています。ただし、北関東の中小企業ではデジタルリテラシーに差があるため、対面でのコミュニケーションが依然として重要な営業手法です。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      11: {
+        id: 'EX-1031119', name: 'EX-1031119', company: 'JERA Co., Inc.', role: 'Human Resources Business Partner',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'JERA Co., Inc.にてHuman Resources Business Partnerを務めるエキスパート。国内外の採用活動に従事し、特に外国人材の受け入れや人事制度の設計・運用を担当。企業内での外国人材の活用や受け入れに関するプロジェクトに関与した経験を有する。'
+        ],
+        history: [
+          { company: 'JERA Co., Inc.', position: 'Human Resources Business Partner', from: '2022/01', to: 'Present' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '採用企業側の立場として、人材紹介会社の提案品質にばらつきがあることが課題です。JACやパーソルなど大手エージェントは業界知見が豊富ですが、候補者のカルチャーフィットまで見極められるコンサルタントは限られています。特に外国人材の採用では、言語力だけでなく異文化適応力の見極めが重要です。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'JERAでは採用管理システム（ATS）を導入しており、エージェントからの推薦もシステム経由で一元管理しています。AI面接やスキルアセスメントツールの導入も検討中ですが、最終的な採用判断は人間が行うべきと考えています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      12: {
+        id: 'EX-0294513', name: 'EX-0294513', company: 'パーソルキャリア株式会社 BRS', role: 'コンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 21, 2:00 PM - 4:00 PM JST', 'Mar 26, 9:00 AM - 11:00 AM JST'],
+        slotsShort: ['Mar 21 PM', 'Mar 26 AM'],
+        experience: [
+          'パーソルキャリア株式会社BRSにてリクルーティングに従事し、ランスタッド株式会社では約4年半にわたり人材派遣営業を経験。人材派遣業界の営業実務や市場動向に精通し、現場目線での知見を有する。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社 BRS', position: 'コンサルタント', from: '2022/01', to: 'Present' },
+          { company: 'ランスタッド株式会社', position: '人材派遣営業', from: '2017/06', to: '2021/12' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'パーソルキャリアBRSの強みは、パーソルグループ全体の人材データベースを活用できる点です。派遣・紹介・RPOなど多角的なサービスを提供できるため、クライアント企業の採用課題に対して最適なソリューションを提案できます。ランスタッドとの比較では、国内市場でのブランド力と拠点網がパーソルの優位性です。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '人材派遣から人材紹介へキャリアチェンジした立場から言えば、派遣と紹介の境界が曖昧になりつつあります。紹介予定派遣の増加や、プロジェクトベースの業務委託ニーズの高まりにより、従来の分類にとらわれない柔軟なサービス提供が求められています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      13: {
+        id: 'EX-1011776', name: 'EX-1011776', company: 'パーソルキャリア株式会社', role: 'Product Manager',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'パーソルキャリア株式会社にてテクノロジー本部立ち上げと同時にデータ・AI関連プロダクトの内製開発にプロジェクトマネージャーとして従事。人材紹介事業向けプロダクト開発・運用やIT人材派遣事業に関わり、事業部主導とデジタル組織主導の双方の体制経験を保有。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'Product Manager', from: '2020/01', to: 'Present' }
+        ],
+        screening: [
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'パーソルキャリアではテクノロジー本部の立ち上げ時からAI活用に取り組んでおり、求職者と求人のマッチングアルゴリズムの開発や、コンサルタント向けのレコメンデーションシステムの構築を担当してきました。現在はLLMを活用した求人票の自動生成や、候補者スクリーニングの効率化にも取り組んでいます。' },
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'テクノロジー投資の規模がパーソルキャリアの大きな強みです。dodaの膨大なユーザーデータを活用したプロダクト開発は、リクルートに次ぐ規模で展開されています。一方で、JACのようなハイクラス特化型と比較すると、マス層向けのサービス設計が中心であり、棲み分けが明確です。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'プロダクト開発の観点では、人材紹介のDXはまだ初期段階です。多くの業務がコンサルタントの属人的なスキルに依存しており、テクノロジーによる標準化・効率化の余地が大きいと感じています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      14: {
+        id: 'EX-1022857', name: 'EX-1022857', company: 'パーソルキャリア株式会社', role: 'シニアコンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 19, 3:00 PM - 5:00 PM JST', 'Mar 24, 10:00 AM - 12:00 PM JST', 'Mar 27, 1:00 PM - 3:00 PM JST'],
+        slotsShort: ['Mar 19 PM', 'Mar 24 AM', 'Mar 27 PM'],
+        experience: [
+          '2023年までパーソルキャリア株式会社にて年収1000万円以上のビジネスパーソンに対する転職コンサルタントとして従事していた。IT企業、ベンチャー、政府系地域創生ファンド等を担当。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'シニアコンサルタント', from: '2020/01', to: '2023/12' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'ハイクラス層（年収1000万円以上）の転職支援においては、dodaXやiXなどのサービスを通じてパーソルキャリアも存在感を高めていますが、この領域ではJACリクルートメントやビズリーチが先行しています。パーソルの強みはむしろ、IT・ベンチャー領域での幅広いネットワークと、グループ全体のサービス連携にあります。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'ハイクラス人材の転職市場では、スカウト型サービスの台頭が著しいです。ビズリーチやLinkedInの浸透により、エージェントを介さない直接採用が増加しており、人材紹介会社としての付加価値の再定義が急務です。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      15: {
+        id: 'EX-1023126', name: 'EX-1023126', company: 'パーソルキャリア株式会社', role: 'ユニットリーダー',
+        status: 'Approved', statusClass: 'badge-approved', updated: '2026/03/14', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 25, 10:00 AM - 12:00 PM JST', 'Mar 28, 2:00 PM - 4:00 PM JST'],
+        slotsShort: ['Mar 25 AM', 'Mar 28 PM'],
+        experience: [
+          '2023年4月〜2025年7月、パーソルにてRAユニットリーダーを担当。準大手〜中小企業向けに新規開拓から成約・求人獲得まで一連のファネルを推進。架電100→商談5→成約1の実績感を持ち、効率的な営業運営を実現していた。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'ユニットリーダー', from: '2023/04', to: '2025/07' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'RAとして新規開拓を行っていた経験から、パーソルキャリアの最大の強みはdodaブランドの認知度と、圧倒的な求職者データベースです。架電から成約までのファネルにおいて、dodaの知名度があることで商談の獲得率が他社と比較して高い水準を維持できていました。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '準大手〜中小企業向けの営業では、人手不足を背景に採用ニーズは旺盛ですが、求職者の大手志向が強く、マッチングが困難なケースが増えています。また、Indeed等の求人プラットフォームとの競合により、従来の人材紹介モデルの見直しが必要になっていると感じます。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 13, 2026 - 2:00 PM' },
+          { text: 'Approved by <strong>Client</strong>', time: 'Mar 14, 2026 - 9:00 AM' }
+        ],
+        comments: []
+      },
+      16: {
+        id: 'EX-1023185', name: 'EX-1023185', company: 'パーソルキャリア株式会社', role: 'キャリアアドバイザー→法人営業',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'パーソルキャリア株式会社でキャリアアドバイザーとして3年間の経験を有するエキスパート。2020年から2023年まで、主に建設やメーカー技術者の採用支援に従事し、機械設計や電気設計の職種における具体的な能力評価に精通。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'キャリアアドバイザー→法人営業', from: '2020/01', to: '2023/12' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '建設・メーカー技術者の採用支援を通じて感じたのは、技術系人材の慢性的な不足です。特に機械設計や電気設計の経験者は引く手あまたで、人材紹介会社間での候補者の取り合いが激しくなっています。パーソルキャリアでは、dodaの求職者データベースの大きさが差別化要因でした。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      17: {
+        id: 'EX-1023215', name: 'EX-1023215', company: 'パーソルキャリア エグゼクティブエージェント', role: 'シニアコンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 20, 10:00 AM - 12:00 PM JST', 'Mar 23, 3:00 PM - 5:00 PM JST'],
+        slotsShort: ['Mar 20 AM', 'Mar 23 PM'],
+        experience: [
+          'パーソルキャリアのエグゼクティブエージェントとして従事した経験を有するエキスパート。IT/Netチームで年間トップの成果を獲得した経歴を持つ。'
+        ],
+        history: [
+          { company: 'パーソルキャリア エグゼクティブエージェント', position: 'シニアコンサルタント', from: '2020/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'エグゼクティブエージェントとしてIT/Net領域を担当してきましたが、パーソルのエグゼクティブサービスはJACと直接競合する領域です。パーソルの強みは、dodaやテンプスタッフなどグループ内の幅広いサービスラインナップを活用した総合的な人材ソリューションの提供にあります。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'IT/Net業界のエグゼクティブ採用では、LinkedInやGitHubなどのプラットフォームを活用したソーシング活動が標準的になっています。AIによる候補者スクリーニングも進んでいますが、エグゼクティブ層ではパーソナルなリレーションシップが成約の鍵を握っており、テクノロジーは補助的な位置づけです。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      18: {
+        id: 'EX-1023322', name: 'EX-1023322', company: 'パーソルキャリア株式会社', role: 'シニアコンサルタント(Assistant MGR)',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'パーソルキャリア株式会社にてシニアコンサルタント(Assistant MGR)として従事していたエキスパート。過去にはリクルートスタッフィングでも従事しておりSESの営業、マネージャーを務めた経験を有する。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'シニアコンサルタント(Assistant MGR)', from: '2020/01', to: 'Present' },
+          { company: 'リクルートスタッフィング', position: 'SES営業/マネージャー', from: '2015/01', to: '2019/12' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'リクルートスタッフィングとパーソルキャリアの両方を経験した立場から、パーソルの強みはSES・派遣・紹介の各サービスを横断的に提供できるグループ力です。リクルートグループも同様の構造を持っていますが、パーソルはテンプスタッフの派遣基盤が非常に強固であり、特にIT人材の派遣・紹介の連携がスムーズです。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'SES市場では、エンジニアの単価が年々上昇しており、クライアント企業にとってコスト負担が大きくなっています。人材紹介においても、IT人材の獲得競争は激化しており、候補者優位の市場が続いています。パーソルとしてはグループ内連携でワンストップのソリューションを提供することが差別化のポイントです。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      19: {
+        id: 'EX-1027362', name: 'EX-1027362', company: 'パーソルキャリア株式会社', role: 'Product Manager',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 21, 10:00 AM - 12:00 PM JST'],
+        slotsShort: ['Mar 21 AM'],
+        experience: [
+          'パーソルキャリア株式会社での経験を基に、dodaのプロダクト管理と顧客獲得施策を担当していた。人材派遣業界の主要プレーヤーとその事業戦略に関する知見を提供可能。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'Product Manager', from: '2020/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'dodaのプロダクト管理を担当していた立場から言えば、dodaは国内最大級の求人・求職者データベースを持つプラットフォームであり、これ自体がパーソルキャリアの最大の競合優位性です。リクナビNEXTとの競争においては、UIの使いやすさとマッチング精度で差別化を図っています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'dodaではAIを活用した求人レコメンデーションや、チャットボットによる求職者対応の自動化を推進しています。今後はパーソナライズされた転職体験の提供が競争力の源泉になると考えており、データドリブンなプロダクト開発が不可欠です。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      20: {
+        id: 'EX-1028077', name: 'EX-1028077', company: 'パーソルキャリア株式会社', role: '採用アドバイザー',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'パーソルキャリア株式会社に8年間在籍し、採用アドバイザーとして技術系職種の採用支援を担当した経験を有するエキスパート。特に機械設計や生産技術分野での採用支援の実績が豊富。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: '採用アドバイザー', from: '2016/01', to: '2024/01' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '8年間の採用アドバイザー経験を通じて、製造業における技術者採用の難易度は年々上昇しています。特に機械設計や生産技術のベテラン人材は退職が進む一方で、若手の理工系人材がIT業界に流れており、製造業の人材不足は深刻化しています。' },
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: '製造業向けの採用支援では、パーソルテクノロジーとの連携が大きな強みです。派遣エンジニアからの正社員転換など、グループ内のキャリアパスを活用した提案ができる点が、単独の人材紹介会社にはない優位性となっています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      21: {
+        id: 'EX-1028441', name: 'EX-1028441', company: 'パーソルキャリア株式会社', role: 'Career Advisor',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 24, 3:00 PM - 5:00 PM JST', 'Mar 26, 10:00 AM - 12:00 PM JST', 'Mar 28, 9:00 AM - 11:00 AM JST'],
+        slotsShort: ['Mar 24 PM', 'Mar 26 AM', 'Mar 28 AM'],
+        experience: [
+          '2025年7月までパーソルキャリア株式会社の転職支援統括部に所属していたエキスパート。全業界の企画職、コンサル職を担当するキャリアアドバイザーとして、生成AIを用いた生産性向上を図りながら年間粗利1億円超を達成した経験を有する。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'Career Advisor', from: '2020/01', to: '2025/07' }
+        ],
+        screening: [
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: '実際に生成AIを業務に活用して年間粗利1億円超を達成しました。具体的には、求職者との面談記録の自動要約、求人票とのマッチング分析、面接対策資料の自動生成などにChatGPTを活用していました。AIを使いこなせるコンサルタントとそうでないコンサルタントの生産性格差は今後さらに拡大すると考えています。' },
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'パーソルキャリアのキャリアアドバイザーとして感じた強みは、dodaプラットフォームを通じた求職者の集客力です。特に企画職やコンサル職では、dodaの知名度とブランド力により質の高い求職者を多数抱えています。ただし、JACリクルートメントと比較するとハイクラス層でのブランド力は劣ると感じます。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'コンサル職の転職市場は活況が続いていますが、候補者の質にばらつきが出ています。大手コンサルティングファームの大量採用の影響で転職市場に流入するコンサル経験者が増加しており、スクリーニングの重要性が高まっています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      22: {
+        id: 'EX-1029526', name: 'EX-1029526', company: 'パーソルキャリア株式会社', role: 'リクルーティングアドバイザー',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '2024年まで所属していたパーソルキャリア株式会社など、大手技術派遣会社、大手人材紹介のメーカーチームにて活躍してきたエキスパート。スタートアップから中小、大手メーカー企業まで、延べ100社以上を担当。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'リクルーティングアドバイザー', from: '2020/01', to: '2024/12' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '延べ100社以上のメーカー企業を担当してきた経験から、製造業の採用ニーズは多様化しています。従来の技術職に加え、DX推進やサステナビリティ関連のポジションが増加しており、人材紹介会社としても新しい領域への対応力が求められています。' },
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'メーカーチームでの経験上、パーソルキャリアの強みは法人営業（RA）とキャリアアドバイザー（CA）の分業体制による効率的なオペレーションです。JACの両面型と比較すると専門性は劣る面もありますが、大量の求人・求職者を効率的にマッチングできるスケールメリットがあります。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      23: {
+        id: 'EX-1038393', name: 'EX-1038393', company: 'パーソルキャリア株式会社', role: 'セールスコンサルタント',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '2023年までパーソルキャリア株式会社のHiProBizにてセールスコンサルタントを担当。企業の課題解決に向けた営業活動とコンサルティング業務に従事。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'セールスコンサルタント (HiProBiz)', from: '2020/01', to: '2023/12' }
+        ],
+        screening: [],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      24: {
+        id: 'EX-0265171', name: 'EX-0265171', company: 'PERSOL CAREER', role: 'Service Planning Lead Director',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 23, 10:00 AM - 12:00 PM JST', 'Mar 27, 9:00 AM - 11:00 AM JST'],
+        slotsShort: ['Mar 23 AM', 'Mar 27 AM'],
+        experience: [
+          '2018年にPERSOL CAREERに入社。2022年までLead Directorとして活躍したエキスパートである。チームを率いて新規事業開発を担当した。'
+        ],
+        history: [
+          { company: 'PERSOL CAREER', position: 'Service Planning Lead Director', from: '2018/01', to: '2022/12' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: 'サービス企画のリードディレクターとして新規事業開発を担当した立場から、パーソルキャリアの競合優位性は「事業の多角化」にあります。doda、テンプスタッフ、HiProBizなど、正社員・派遣・業務委託を横断するサービスポートフォリオは国内最大級であり、顧客企業のあらゆる人材ニーズに対応できます。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'パーソルキャリアでは新規事業として複数のデジタルサービスを立ち上げてきました。特にHRTechスタートアップとの協業や、データ分析基盤の構築に注力していました。今後は人材データの利活用がさらに進み、個人のキャリア形成をデータで支援するサービスが主流になると見ています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      25: {
+        id: 'EX-0285585', name: 'EX-0285585', company: 'パーソルキャリア株式会社', role: 'キャリアアドバイザー',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        country: 'Japan', availability: 'TBD',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          '大学卒業後、新卒でパーソルキャリアへ入社。2021年までキャリアアドバイザーとしてITクリエイティブ領域の方の転職支援を担当。キャリアカウンセリングから始まり、求人の提案、進捗管理、面接対策、法人営業も一部行なっていた。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'キャリアアドバイザー', from: '2018/04', to: '2021/12' }
+        ],
+        screening: [
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: 'ITクリエイティブ領域のキャリアアドバイザーとして感じていたのは、Webデザイナーやエンジニアの転職市場が非常に活発で、候補者の選択肢が豊富な状況でした。一方で、フリーランスへの転向も増えており、正社員としての人材紹介が難しくなる傾向がありました。' },
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: '新卒入社の立場から言えば、パーソルキャリアの研修制度やOJTは非常に充実しており、若手コンサルタントの育成に強みがあります。dodaブランドの知名度も求職者集客に大きく貢献しており、特にITクリエイティブ領域では若手求職者からの認知度が高かったです。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      26: {
+        id: 'EX-0238409', name: 'EX-0238409', company: 'パーソルキャリア株式会社', role: 'Expert/経営企画統括部',
+        status: 'Approved', statusClass: 'badge-approved', updated: '2026/03/14', cost: '$800/call',
+        country: 'Japan', availability: 'Available',
+        slots: ['Mar 19, 10:00 AM - 12:00 PM JST', 'Mar 25, 3:00 PM - 5:00 PM JST', 'Mar 28, 10:00 AM - 12:00 PM JST'],
+        slotsShort: ['Mar 19 AM', 'Mar 25 PM', 'Mar 28 AM'],
+        experience: [
+          'パーソルキャリア株式会社 経営戦略本部 経営企画統括部に所属。doda事業部の戦略企画部門と経営企画に従事。全社戦略の検討やdodaXの事業企画に携わり、デジタル関連プロダクトの推進を担当。求人広告のマッチング精度やAI活用について、現状認識と改善提案が可能。'
+        ],
+        history: [
+          { company: 'パーソルキャリア株式会社', position: 'Expert/経営企画統括部', from: '2020/01', to: 'Present' }
+        ],
+        screening: [
+          { q: 'パーソルキャリアの競合優位性について、どのようにお考えですか？', a: '経営企画統括部の立場から全社戦略を俯瞰してきましたが、パーソルキャリアの競合優位性は「データ基盤」にあります。dodaの膨大なユーザーデータと求人データを経営判断に活用できる体制が整っており、これは国内ではリクルートに次ぐ規模です。dodaXについては、ハイクラス市場でのシェア拡大を戦略的に推進しています。' },
+          { q: '人材紹介業界のデジタル化・AI活用の現状と将来展望についてお聞かせください。', a: 'dodaの求人広告マッチングにおいては、AIによるレコメンデーション精度の向上が経営上の最重要テーマの一つです。現在のマッチング精度には改善の余地があり、LLMを活用した自然言語理解によるスキルマッチングの高度化に取り組んでいます。将来的には、候補者の潜在的なキャリア志向まで汲み取ったマッチングが実現可能になると考えています。' },
+          { q: '人材紹介業界における現在のトレンドや課題について、ご自身の経験を踏まえてお聞かせください。', a: '経営企画の視点では、人材紹介業界全体の収益モデルが変化しつつあります。従来の成功報酬型に加え、サブスクリプション型やRPO（採用代行）など、新しい収益源の開拓が各社の課題です。パーソルグループとしても、HiProBizやdodaXなど新規サービスの拡大に注力しています。' }
+        ],
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 13, 2026 - 2:00 PM' },
+          { text: 'Approved by <strong>Client</strong>', time: 'Mar 14, 2026 - 9:00 AM' }
+        ],
+        comments: [
+          { author: 'Project Manager', org: 'Client', avatar: 'PM', avatarBg: '#e67e22', time: 'Mar 15, 2026 - 10:00 AM',
+            text: 'dodaの事業企画やAI活用についての知見は非常に有益です。ぜひインタビューしたいです。',
+            reply: { time: 'Mar 15, 2026 - 2:00 PM', text: 'ありがとうございます。エキスパートにスケジュール確認中です。空き時間が確定次第ご連絡いたします。' }
+          }
+        ]
+      }
+    };
+
+    let currentExpertId = 1;
+
+    // No booked interviews yet for this project
+    const bookedInterviews = [];
+
+    /* ========== Render Expert Detail ========== */
+    function renderExpert(id) {
+      currentExpertId = id;
+      const e = experts[id];
+      const panel = document.getElementById('expertDetail');
+      const hasSlots = e.slots.length > 0;
+      const isDeclined = e.status === 'Declined';
+      const isDone = e.status === 'Call Done';
+
+      // Action buttons - always show Book/Request + Not Interested
+      let actionBtns = '';
+      if (hasSlots) {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">${isDone ? 'Book for Follow-up' : 'Book for Interview'}</span></button>`;
+      } else {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="alert('Schedule request sent to Arches team.')">&#128197; <span data-lang="Request Availability">Request Availability</span></button>`;
+      }
+      if (!isDeclined) {
+        actionBtns += `
+          <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show');updateModalExpert()"><span data-lang="Not Interested">&#10005; Not Interested</span></button>`;
+      }
+
+      // Availability quick view
+      let availQuick = '';
+      if (hasSlots) {
+        availQuick = `
+          <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
+            <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;" data-lang="Availability">Availability (next slots)</div>
+            <div>${e.slotsShort.map(s => `<span class="avail-slot">${s}</span>`).join(' ')}</div>
+            <div style="margin-top:6px;">
+              <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy as text</span></button>
+            </div>
+          </div>`;
+      } else {
+        availQuick = `
+          <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
+            <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;">Availability</div>
+            <div style="font-size:13px;color:#999;">TBD - No availability slots registered</div>
+          </div>`;
+      }
+
+      // Experience paragraphs
+      const expHtml = e.experience.map(p => `<p style="margin-bottom:8px;">${p}</p>`).join('');
+
+      // Working history rows
+      const histRows = e.history.map(h => `<tr><td><strong>${h.company}</strong></td><td>${h.position}</td><td>${h.from}</td><td>${h.to}</td></tr>`).join('');
+
+      // Log items
+      const logItems = e.logs.map(l => `
+        <div class="activity-item">
+          <div class="activity-dot"></div>
+          <div>
+            <div class="activity-text">${l.text}</div>
+            <div class="activity-time">${l.time}</div>
+          </div>
+        </div>`).join('');
+
+      // Comments
+      let commentsHtml = '';
+      e.comments.forEach(c => {
+        let replyHtml = '';
+        if (c.reply) {
+          replyHtml = `
+            <div style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;margin-left:20px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#6b21a8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;">AR</div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <span style="font-weight:600;font-size:13px;">Arches Team</span>
+                  <span style="font-size:11px;color:#6b21a8;background:#f3e8ff;padding:1px 6px;border-radius:4px;">Arches Staff</span>
+                  <span style="font-size:11px;color:#bbb;">${c.reply.time}</span>
+                </div>
+                <div style="background:#faf5ff;border:1px solid #e0d4f5;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">${c.reply.text}</div>
+              </div>
+            </div>`;
+        }
+        commentsHtml += `
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:${c.avatarBg};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">${c.avatar}</div>
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span style="font-weight:600;font-size:13px;">${c.author}</span>
+                <span style="font-size:11px;color:#999;">${c.org}</span>
+                <span style="font-size:11px;color:#bbb;">${c.time}</span>
+              </div>
+              <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">${c.text}</div>
+              ${replyHtml}
+            </div>
+          </div>`;
+      });
+
+      const noComments = e.comments.length === 0 ? '<div style="text-align:center;color:#bbb;padding:20px;font-size:13px;">No comments yet</div>' : '';
+
+      // Screening section
+      let screeningHtml = '';
+      if (e.screening && e.screening.length > 0) {
+        screeningHtml = e.screening.map(sq => `
+          <div style="background:#f9f9f9;padding:12px;border-radius:8px;font-size:13px;line-height:1.7;color:#555;margin-bottom:8px;">
+            <p><strong>Q: ${sq.q}</strong></p>
+            <p>${sq.a}</p>
+          </div>`).join('');
+      } else {
+        screeningHtml = '<div style="font-size:13px;color:#999;">No screening answers available</div>';
+      }
+
+      // Availability tab slots
+      let availSlots = '';
+      if (hasSlots) {
+        availSlots = e.slots.map(s => `<div style="margin-bottom:8px;"><span class="avail-slot">${s}</span></div>`).join('');
+      } else {
+        availSlots = '<div style="font-size:13px;color:#999;">TBD - No availability slots registered</div>';
+      }
+
+      panel.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <h2 style="font-size:18px;font-weight:600;">${e.id}</h2>
+          <span class="badge-status ${e.statusClass}">${e.status}</span>
+        </div>
+        <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated ${e.updated}</div>
+        ${actionBtns ? `<div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">${actionBtns}</div>` : '<div style="margin-bottom:20px;"></div>'}
+        ${availQuick}
+        <div class="tabs" style="margin-bottom:16px;">
+          <div class="tab active" onclick="showSubTab('expertInfo')"><span data-lang="Expert info">Expert info</span></div>
+          <div class="tab" onclick="showSubTab('activities')"><span data-lang="Activities">Activities</span></div>
+          <div class="tab" onclick="showSubTab('availability')"><span data-lang="Availability">Availability</span></div>
+        </div>
+
+        <div id="expertInfo">
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;" data-lang="Experience">Experience</h4>
+            <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">${expHtml}</div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;">Working history</h4>
+            <table><thead><tr><th>Company</th><th>Position</th><th>From</th><th>To</th></tr></thead><tbody>${histRows}</tbody></table>
+          </div>
+          <div style="margin:16px 0;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Screening Answers</h4>
+            ${screeningHtml}
+          </div>
+        </div>
+
+        <div id="activities" style="display:none;">
+          <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
+            <div class="activity-subtab" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;" data-lang="Log system">Log system</div>
+            <div class="activity-subtab active" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;">Comments (${e.comments.length})</div>
+          </div>
+          <div id="logsystem" style="display:none;"><div class="card">${logItems}</div></div>
+          <div id="comments">
+            <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
+              <span style="font-size:16px;">&#9432;</span>
+              <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">${commentsHtml}${noComments}</div>
+            <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+                <div style="flex:1;display:flex;gap:8px;">
+                  <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
+                  <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="availability" style="display:none;">
+          <div class="card">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;" data-lang="Available Schedule">Available Schedule</h4>
+            ${availSlots}
+            ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
+          </div>
+        </div>`;
+
+      // Re-apply language if JP
+      if (typeof applyLanguage === 'function') applyLanguage();
+    }
+
+    /* ========== Timezone Helpers ========== */
+    const tzOffsets = { 'PST':-8,'MST':-7,'CST':-6,'EST':-5,'BRT':-3,'GMT':0,'CET':1,'EET':2,'MSK':3,'GST':4,'PKT':5,'IST':5.5,'BST':6,'ICT':7,'SGT':8,'HKT':8,'CST_CN':8,'JST':9,'KST':9,'AEST':10,'NZST':12 };
+    const tzLabels = { '-8':'PST','-7':'MST','-6':'CST','-5':'EST','-3':'BRT','0':'GMT','1':'CET','2':'EET','3':'MSK','4':'GST','5':'PKT','5.5':'IST','6':'BST','7':'ICT','8':'SGT','9':'JST','10':'AEST','12':'NZST' };
+
+    function getClientTzOffset() {
+      const sel = document.getElementById('clientTimezone');
+      return sel ? parseInt(sel.value) : 9;
+    }
+    function getClientTzLabel() {
+      return tzLabels[String(getClientTzOffset())] || 'UTC' + (getClientTzOffset() >= 0 ? '+' : '') + getClientTzOffset();
+    }
+
+    /* ========== 2-Week Timeline Booking (VisasQ-style) ========== */
+    let weekOffset = 0;
+    let selectedSlotKey = null;
+
+    function updateModalExpert() {
+      const e = experts[currentExpertId];
+      weekOffset = 0;
+      selectedSlotKey = null;
+
+      const declineP = document.querySelector('#declineModal .modal-body p');
+      if (declineP) declineP.innerHTML = `You are about to decline <strong>${e.id}</strong>. Please let us know why (optional).`;
+
+      const bookP = document.getElementById('bookModalDesc');
+      if (bookP) bookP.innerHTML = `Select a time slot to schedule an interview with <strong>${e.id}</strong>.`;
+
+      document.getElementById('selectedTimeDisplay').value = '';
+      renderTimeline();
+    }
+
+    function shiftWeek(dir) {
+      weekOffset += dir;
+      renderTimeline();
+    }
+
+    /* Parse expert slot strings into 15-min blocks, converting to client timezone */
+    function parseSlotToBlocks(slots) {
+      const blocks = [];
+      const clientOffset = getClientTzOffset();
+      slots.forEach((s, i) => {
+        const dayMatch = s.match(/Mar\s+(\d+)/);
+        const timeMatch = s.match(/(\d{1,2}):(\d{2})\s*(AM|PM)\s*-\s*(\d{1,2}):(\d{2})\s*(AM|PM)/);
+        const tzMatch = s.match(/(EST|CST|MST|PST|GMT|CET|SGT|JST|AEST)\s*$/);
+        if (dayMatch && timeMatch) {
+          let sh = parseInt(timeMatch[1]);
+          const sm = parseInt(timeMatch[2]);
+          if (timeMatch[3] === 'PM' && sh !== 12) sh += 12;
+          if (timeMatch[3] === 'AM' && sh === 12) sh = 0;
+          let eh = parseInt(timeMatch[4]);
+          const em = parseInt(timeMatch[5]);
+          if (timeMatch[6] === 'PM' && eh !== 12) eh += 12;
+          if (timeMatch[6] === 'AM' && eh === 12) eh = 0;
+
+          const expertTz = tzMatch ? (tzOffsets[tzMatch[1]] || -5) : -5;
+          const diff = clientOffset - expertTz;
+
+          let startMin = (sh * 60 + sm) + diff * 60;
+          let endMin = (eh * 60 + em) + diff * 60;
+          const baseDay = parseInt(dayMatch[1]);
+
+          for (let m = startMin; m < endMin; m += 15) {
+            let adjDay = baseDay;
+            let adjMin = m;
+            while (adjMin < 0) { adjMin += 1440; adjDay -= 1; }
+            while (adjMin >= 1440) { adjMin -= 1440; adjDay += 1; }
+            blocks.push({
+              day: adjDay,
+              hour: Math.floor(adjMin / 60),
+              minute: adjMin % 60,
+              text: s,
+              idx: i
+            });
+          }
+        }
+      });
+      return blocks;
+    }
+
+    /* Parse booked interviews into 15-min blocks in client timezone */
+    function parseBookedBlocks() {
+      const clientOffset = getClientTzOffset();
+      const blocks = [];
+      bookedInterviews.forEach(iv => {
+        const expertTz = tzOffsets[iv.tz] || -5;
+        const diff = clientOffset - expertTz;
+        const startMin = (iv.startHour * 60 + iv.startMin) + diff * 60;
+        const endMin = (iv.endHour * 60 + iv.endMin) + diff * 60;
+        for (let m = startMin; m < endMin; m += 15) {
+          let adjDay = iv.day;
+          let adjMin = m;
+          while (adjMin < 0) { adjMin += 1440; adjDay -= 1; }
+          while (adjMin >= 1440) { adjMin -= 1440; adjDay += 1; }
+          blocks.push({ day: adjDay, hour: Math.floor(adjMin / 60), minute: adjMin % 60, label: iv.label });
+        }
+      });
+      return blocks;
+    }
+
+    function renderTimeline() {
+      const e = experts[currentExpertId];
+      const blocks = parseSlotToBlocks(e.slots);
+      const ivBlocks = parseBookedBlocks();
+      const header = document.getElementById('timelineHeader');
+      const grid = document.getElementById('timelineGrid');
+      const tzLabel = getClientTzLabel();
+
+      const tzInfo = document.getElementById('tzInfoLabel');
+      if (tzInfo) tzInfo.textContent = `* Times displayed in your timezone (${tzLabel}). Expert's availability has been converted.`;
+
+      const baseDate = new Date(2026, 2, 18);
+      const startDate = new Date(baseDate);
+      startDate.setDate(startDate.getDate() + weekOffset * 14);
+
+      // Check if slots exist in next/prev 2-week windows
+      const prevStart = new Date(startDate);
+      prevStart.setDate(prevStart.getDate() - 14);
+      const nextStart = new Date(startDate);
+      nextStart.setDate(nextStart.getDate() + 14);
+      const nextEnd = new Date(nextStart);
+      nextEnd.setDate(nextEnd.getDate() + 14);
+
+      const hasPrevSlots = blocks.some(b => {
+        const bDate = new Date(2026, 2, b.day);
+        return bDate >= prevStart && bDate < startDate;
+      });
+      const hasNextSlots = blocks.some(b => {
+        const bDate = new Date(2026, 2, b.day);
+        return bDate >= nextStart && bDate < nextEnd;
+      });
+
+      const prevBtn = document.getElementById('prevWeekBtn');
+      const nextBtn = document.getElementById('nextWeekBtn');
+      if (prevBtn) {
+        prevBtn.style.display = (weekOffset > 0 || hasPrevSlots) ? 'block' : 'none';
+        prevBtn.style.opacity = hasPrevSlots || weekOffset > 0 ? '1' : '0.3';
+        prevBtn.style.pointerEvents = hasPrevSlots || weekOffset > 0 ? 'auto' : 'none';
+      }
+      if (nextBtn) {
+        nextBtn.style.display = hasNextSlots ? 'block' : 'none';
+        nextBtn.style.opacity = hasNextSlots ? '1' : '0.3';
+        nextBtn.style.pointerEvents = hasNextSlots ? 'auto' : 'none';
+      }
+
+      const days = [];
+      const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(startDate);
+        d.setDate(d.getDate() + i);
+        days.push(d);
+      }
+
+      // Determine visible hour range based on available slots + booked interviews
+      const allBlocks = [...blocks, ...ivBlocks];
+      let minHour = 8, maxHour = 20;
+      if (allBlocks.length > 0) {
+        const slotHours = allBlocks.map(b => b.hour);
+        minHour = Math.max(0, Math.min(...slotHours) - 1);
+        maxHour = Math.min(23, Math.max(...slotHours) + 1);
+        if (maxHour - minHour < 6) {
+          const mid = Math.floor((minHour + maxHour) / 2);
+          minHour = Math.max(0, mid - 3);
+          maxHour = Math.min(23, mid + 3);
+        }
+      }
+      const timeSlots = [];
+      for (let h = minHour; h <= maxHour; h++) {
+        for (let m = 0; m < 60; m += 15) {
+          timeSlots.push({ hour: h, minute: m });
+        }
+      }
+
+      // Header
+      let prevMonth = '';
+      let headerHtml = '<div style="width:54px;flex-shrink:0;border-right:1px solid #e0e0e0;font-size:10px;color:#999;padding:4px;text-align:center;">' + tzLabel + '</div>';
+      days.forEach(d => {
+        const isToday = d.getDate() === 18 && d.getMonth() === 2 && d.getFullYear() === 2026;
+        const mon = monthNames[d.getMonth()];
+        const showMonth = mon !== prevMonth;
+        prevMonth = mon;
+        headerHtml += `<div style="flex:1;min-width:44px;text-align:center;padding:6px 2px;border-right:1px solid #f0f0f0;${isToday ? 'background:#fef5ec;' : ''}">
+          <div style="font-size:10px;color:#999;">${dayNames[d.getDay()]}</div>
+          <div style="font-size:13px;font-weight:600;${isToday ? 'color:#e67e22;' : ''}">${showMonth ? mon + ' ' : ''}${d.getDate()}</div>
+        </div>`;
+      });
+      header.innerHTML = headerHtml;
+
+      // Grid rows (15-min increments)
+      let gridHtml = '';
+      timeSlots.forEach(ts => {
+        const isFullHour = ts.minute === 0;
+        const label = isFullHour ? `${String(ts.hour).padStart(2,'0')}:00` : '';
+        const borderStyle = isFullHour ? 'border-bottom:1px solid #e0e0e0;' : 'border-bottom:1px solid #f8f8f8;';
+        gridHtml += `<div style="display:flex;${borderStyle}">`;
+        gridHtml += `<div style="width:54px;flex-shrink:0;border-right:1px solid #e0e0e0;padding:1px 6px;font-size:10px;color:#999;text-align:right;height:14px;line-height:14px;">${label}</div>`;
+        days.forEach(d => {
+          const dayOfMonth = d.getDate();
+          const month = d.getMonth();
+          let isAvail = false;
+          let isBooked = false;
+          let bookedLabel = '';
+          let slotInfo = null;
+          if (month === 2) {
+            blocks.forEach(b => {
+              if (b.day === dayOfMonth && b.hour === ts.hour && b.minute === ts.minute) {
+                isAvail = true;
+                slotInfo = b;
+              }
+            });
+            ivBlocks.forEach(b => {
+              if (b.day === dayOfMonth && b.hour === ts.hour && b.minute === ts.minute) {
+                isBooked = true;
+                bookedLabel = b.label;
+              }
+            });
+          }
+          const cellKey = `${dayOfMonth}-${ts.hour}-${ts.minute}`;
+          const isSelected = selectedSlotKey === cellKey;
+          let cellStyle = 'flex:1;min-width:44px;height:14px;border-right:1px solid #f5f5f5;position:relative;';
+          let cellTitle = '';
+          if (isSelected) {
+            cellStyle += 'background:#e67e22;cursor:pointer;';
+          } else if (isBooked) {
+            cellStyle += 'background:#ffcdd2;';
+            cellTitle = `title="Booked: ${bookedLabel}"`;
+          } else if (isAvail) {
+            cellStyle += 'background:#c8e6c9;cursor:pointer;';
+          }
+          const onclick = isAvail ? `onclick="selectTimelineSlot(${dayOfMonth},${ts.hour},${ts.minute},'${slotInfo ? slotInfo.text.replace(/'/g,"\\'") : ''}')"` : '';
+          gridHtml += `<div style="${cellStyle}" ${onclick} ${cellTitle}></div>`;
+        });
+        gridHtml += `</div>`;
+      });
+      grid.innerHTML = gridHtml;
+    }
+
+    function selectTimelineSlot(day, hour, minute, slotText) {
+      selectedSlotKey = `${day}-${hour}-${minute}`;
+      const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const d = new Date(2026, 2, day);
+      const dow = dayNames[d.getDay()];
+      const dur = document.querySelector('input[name="bookDuration"]:checked');
+      const durVal = dur ? parseInt(dur.value) : 60;
+      const startTotal = hour * 60 + minute;
+      const endTotal = startTotal + durVal;
+      const endH = Math.floor(endTotal / 60);
+      const endM = endTotal % 60;
+      const tzLabel = getClientTzLabel();
+
+      const fmt = (h, m) => {
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12 = h > 12 ? h - 12 : h === 0 ? 12 : h;
+        return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+      };
+
+      document.getElementById('selectedTimeDisplay').value = `Mar ${day} (${dow}), ${fmt(hour, minute)} - ${fmt(endH, endM)} ${tzLabel}`;
+      renderTimeline();
+    }
+
+    /* ========== UI Functions ========== */
+    function toggleNotifications() {
+      document.getElementById('notifDropdown').classList.toggle('show');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notification-bell')) {
+        document.getElementById('notifDropdown').classList.remove('show');
+      }
+    });
+
+    function showSubTab(tab) {
+      document.getElementById('expertInfo').style.display = tab === 'expertInfo' ? 'block' : 'none';
+      document.getElementById('activities').style.display = tab === 'activities' ? 'block' : 'none';
+      document.getElementById('availability').style.display = tab === 'availability' ? 'block' : 'none';
+      const tabs = document.querySelectorAll('.split-right .tabs .tab');
+      tabs.forEach((t, i) => {
+        const names = ['expertInfo', 'activities', 'availability'];
+        t.classList.toggle('active', names[i] === tab);
+      });
+    }
+
+    function showActivitySubTab(tab) {
+      document.getElementById('logsystem').style.display = tab === 'logsystem' ? 'block' : 'none';
+      document.getElementById('comments').style.display = tab === 'comments' ? 'block' : 'none';
+      const subtabs = document.querySelectorAll('.activity-subtab');
+      subtabs.forEach(t => {
+        if ((tab === 'logsystem' && t.textContent.includes('Log')) || (tab === 'comments' && t.textContent.includes('Comment'))) {
+          t.style.borderBottomColor = '#e67e22';
+          t.style.color = '#e67e22';
+          t.style.fontWeight = '600';
+        } else {
+          t.style.borderBottomColor = 'transparent';
+          t.style.color = '#999';
+          t.style.fontWeight = '500';
+        }
+      });
+    }
+
+    function showExpert(id) {
+      document.querySelectorAll('.expert-item').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      renderExpert(id);
+    }
+
+    function declineExpert() {
+      document.getElementById('declineModal').classList.remove('show');
+      experts[currentExpertId].status = 'Declined';
+      // Gray out the left panel item
+      const items = document.querySelectorAll('.expert-item');
+      items.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.style.opacity = '0.5';
+          const badge = el.querySelector('.badge-status');
+          if (badge) {
+            badge.className = 'badge-status badge-declined';
+            badge.style.fontSize = '11px';
+            badge.style.padding = '1px 6px';
+            badge.textContent = 'Declined';
+          }
+        }
+      });
+      renderExpert(currentExpertId);
+    }
+
+    function updateBulkActions() {
+    }
+
+    function copyAvailability() {
+      const e = experts[currentExpertId];
+      const text = `${e.id} - ${e.company}\nAvailable slots:\n${e.slots.map(s => '- ' + s).join('\n')}`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Availability copied to clipboard!');
+      });
+    }
+
+    // Render expert on load (check URL param)
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const targetEx = params.get('expert');
+      let targetId = 1;
+      if (targetEx) {
+        for (const [key, val] of Object.entries(experts)) {
+          if (val.id === targetEx) { targetId = parseInt(key); break; }
+        }
+      }
+      renderExpert(targetId);
+      const items = document.querySelectorAll('.expert-item');
+      items.forEach(el => el.classList.remove('active'));
+      if (items[targetId - 1]) items[targetId - 1].classList.add('active');
+    });
+  </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIS Client Portal - General</title>
+  <title>AIS Client Portal - General (A110031)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,11 +28,11 @@
     <div class="main">
       <header class="header">
         <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
-        <div class="header-title">A109919 Arches Consulting US GFPs, Gas infra and power transmission</div>
+        <div class="header-title">A110031 Arches Consulting JP HR Industry Research</div>
         <div class="header-right">
           <div class="notification-bell" onclick="toggleNotifications()">
             &#128276;
-            <span class="badge">3</span>
+            <span class="badge">2</span>
             <div class="notification-dropdown" id="notifDropdown">
               <div class="notif-header">
                 <span data-lang="Notifications">Notifications</span>
@@ -40,65 +40,60 @@
               </div>
               <div class="notif-item unread">
                 <div class="notif-title" data-lang="New expert proposed">New expert proposed</div>
-                <div class="notif-desc">2 new experts proposed for this project</div>
+                <div class="notif-desc">15名の新しいエキスパートが提案されました</div>
                 <div class="notif-time" data-lang="10 minutes ago">10 minutes ago</div>
               </div>
               <div class="notif-item unread">
-                <div class="notif-title" data-lang="Interview scheduled">Interview scheduled</div>
-                <div class="notif-desc">Pretty Dewati (Cathy) - confirmed for Mar 17, 9:00 AM</div>
+                <div class="notif-title">エキスパート承認</div>
+                <div class="notif-desc">3名のエキスパートが承認されました</div>
                 <div class="notif-time" data-lang="1 hour ago">1 hour ago</div>
-              </div>
-              <div class="notif-item unread">
-                <div class="notif-title" data-lang="Transcript ready">Transcript ready</div>
-                <div class="notif-desc">Recording & transcript for Luci Dao interview available</div>
-                <div class="notif-time" data-lang="3 hours ago">3 hours ago</div>
               </div>
             </div>
           </div>
           <div class="lang-toggle" style="cursor:pointer;font-size:13px;user-select:none;">🇬🇧 EN</div>
-          <div class="user-avatar">ET</div>
+          <div class="user-avatar">YS</div>
         </div>
       </header>
 
       <div class="content">
         <div class="tabs">
           <div class="tab active"><span class="dot"></span> <span data-lang="General">General</span></div>
-          <div class="tab" onclick="window.location='project-candidates.html'"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
-          <div class="tab" onclick="window.location='project-interview.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
-          <div class="tab" onclick="window.location='project-billing.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
+          <div class="tab" onclick="window.location='project-candidates-a110031.html'"><span class="dot"></span> <span data-lang="Candidates">Candidates</span></div>
+          <div class="tab" onclick="window.location='project-interview-a110031.html'"><span class="dot"></span> <span data-lang="Interview">Interview</span></div>
+          <div class="tab" onclick="window.location='project-billing-a110031.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
         </div>
 
         <!-- Project Info Bar -->
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
-          <span style="font-size:16px;font-weight:600;">A109919 Arches Consulting US GFPs, Gas infra and power transmission</span>
+          <span style="font-size:16px;font-weight:600;">A110031 Arches Consulting JP HR Industry Research</span>
           <span class="badge-status badge-ongoing" data-lang="On going">On going</span>
-          <span style="font-size:13px;color:#999;">Start: 2026-03-10</span>
-          <span style="font-size:13px;color:#999;">Inquiry: 2026-03-10</span>
+          <span style="font-size:13px;color:#999;">Start: 2026-03-13</span>
+          <span style="font-size:13px;color:#999;">Inquiry: 2026-03-12</span>
         </div>
 
         <!-- Dashboard Stats (3 cards only) -->
         <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
           <div class="stat-card highlight">
             <div class="stat-label" data-lang="Experts Proposed">Experts Proposed</div>
-            <div class="stat-value">5</div>
+            <div class="stat-value">26</div>
             <div class="stat-sub">
-              <span style="color:#e67e22;">2 Pending</span> &middot;
-              <span style="color:#2e7d32;">2 <span data-lang="Approved">Approved</span></span> &middot;
-              <span style="color:#c62828;">1 Declined</span>
+              <span style="color:#e67e22;">23 Pending</span> &middot;
+              <span style="color:#2e7d32;">3 <span data-lang="Approved">Approved</span></span> &middot;
+              <span style="color:#c62828;">0 Declined</span>
             </div>
           </div>
           <div class="stat-card highlight">
             <div class="stat-label" data-lang="Interview">Interviews</div>
-            <div class="stat-value">4</div>
+            <div class="stat-value">7</div>
             <div class="stat-sub">
-              <span style="color:#2e7d32;">3 <span data-lang="Finished">Finished</span></span> &middot;
+              <span style="color:#2e7d32;">6 <span data-lang="Finished">Finished</span></span> &middot;
               <span style="color:#1565c0;">1 <span data-lang="Booked">Booked</span></span>
             </div>
           </div>
           <div class="stat-card highlight">
             <div class="stat-label">Total Duration</div>
-            <div class="stat-value">3.5h</div>
-            <div class="stat-sub">Avg. 52 <span data-lang="min">min</span> per call</div>
+            <div class="stat-value">5.0h</div>
+            <div class="stat-sub">Avg. 50 <span data-lang="min">min</span> per call</div>
           </div>
         </div>
 
@@ -119,16 +114,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="tag tag-orange">Gas-fired generation</span></td>
-                  <td>2</td><td>1</td><td>1</td>
+                  <td><span class="tag tag-orange">人材業界</span></td>
+                  <td>11</td><td>1</td><td>2</td>
                 </tr>
                 <tr>
-                  <td><span class="tag tag-orange">Gas pipelines</span></td>
-                  <td>2</td><td>1</td><td>1</td>
-                </tr>
-                <tr>
-                  <td><span class="tag tag-orange">Electric transmission</span></td>
-                  <td>1</td><td>0</td><td>1</td>
+                  <td><span class="tag tag-orange">人材業界（パーソルキャリア）</span></td>
+                  <td>15</td><td>2</td><td>4</td>
                 </tr>
               </tbody>
             </table>
@@ -140,38 +131,66 @@
             </div>
             <div style="margin-bottom:12px;font-size:12px;color:#999;">Actions by your team members on this project</div>
             <div class="activity-item">
-              <div class="activity-dot"></div>
+              <div class="activity-dot" style="background:#2e7d32;"></div>
               <div>
-                <div class="activity-text"><strong>Enrico Tranchina</strong> approved <strong>Pretty Dewati (Cathy)</strong></div>
-                <div class="activity-time">Mar 15, 2026 - 2:30 PM</div>
+                <div class="activity-text"><strong>坂本 義孝</strong> completed call with <strong>EX-0228485</strong> (50 min)</div>
+                <div class="activity-time">Mar 17, 2026 - 10:50 AM</div>
               </div>
             </div>
             <div class="activity-item">
-              <div class="activity-dot" style="background:#c62828;"></div>
+              <div class="activity-dot" style="background:#2e7d32;"></div>
               <div>
-                <div class="activity-text"><strong>Enrico Tranchina</strong> declined <strong>James Morton</strong></div>
+                <div class="activity-text"><strong>坂本 義孝</strong> completed call with <strong>EX-0255123</strong> (55 min)</div>
+                <div class="activity-time">Mar 17, 2026 - 2:55 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>坂本 義孝</strong> が <strong>EX-0292642</strong> を承認しました</div>
+                <div class="activity-time">Mar 17, 2026 - 3:00 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>坂本 義孝</strong> completed call with <strong>EX-1023185</strong> (45 min)</div>
+                <div class="activity-time">Mar 16, 2026 - 11:45 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>坂本 義孝</strong> completed call with <strong>EX-1023215</strong> (60 min)</div>
+                <div class="activity-time">Mar 16, 2026 - 4:00 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>坂本 義孝</strong> が <strong>EX-1023126</strong> を承認しました</div>
+                <div class="activity-time">Mar 17, 2026 - 2:45 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#2e7d32;"></div>
+              <div>
+                <div class="activity-text"><strong>坂本 義孝</strong> が <strong>EX-0238409</strong> を承認しました</div>
+                <div class="activity-time">Mar 16, 2026 - 10:00 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div class="activity-text"><strong>Yuki Tanaka</strong> が 15名のエキスパートを提案しました（パーソルキャリアセグメント）</div>
+                <div class="activity-time">Mar 15, 2026 - 5:30 PM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div class="activity-text"><strong>Yuki Tanaka</strong> が 11名のエキスパートを提案しました（人材業界セグメント）</div>
                 <div class="activity-time">Mar 14, 2026 - 11:00 AM</div>
-              </div>
-            </div>
-            <div class="activity-item">
-              <div class="activity-dot" style="background:#2e7d32;"></div>
-              <div>
-                <div class="activity-text"><strong>Enrico Tranchina</strong> completed call with <strong>Robert Chen</strong> (45 min)</div>
-                <div class="activity-time">Mar 13, 2026 - 3:00 PM</div>
-              </div>
-            </div>
-            <div class="activity-item">
-              <div class="activity-dot"></div>
-              <div>
-                <div class="activity-text"><strong>Sarah Kim</strong> approved <strong>Luci Dao</strong></div>
-                <div class="activity-time">Mar 12, 2026 - 10:15 AM</div>
-              </div>
-            </div>
-            <div class="activity-item">
-              <div class="activity-dot" style="background:#2e7d32;"></div>
-              <div>
-                <div class="activity-text"><strong>Sarah Kim</strong> completed call with <strong>Luci Dao</strong> (58 min)</div>
-                <div class="activity-time">Mar 11, 2026 - 9:00 AM</div>
               </div>
             </div>
           </div>
@@ -184,15 +203,15 @@
           </div>
           <div style="display:grid;grid-template-columns:150px 1fr;row-gap:12px;font-size:13px;">
             <div style="color:#999;font-weight:500;" data-lang="Your team:">Your team:</div>
-            <div>Enrico Tranchina, Sarah Kim</div>
+            <div>坂本 義孝</div>
             <div style="color:#999;font-weight:500;" data-lang="Arches team:">Arches team:</div>
-            <div>Zoe Thao, Luci Dao</div>
+            <div>Yuki Tanaka</div>
             <div style="color:#999;font-weight:500;" data-lang="Geography:">Geography:</div>
-            <div>United States</div>
+            <div>Japan</div>
             <div style="color:#999;font-weight:500;" data-lang="Project/Expert tags:">Project/Expert tags:</div>
-            <div><span class="tag tag-orange">gas</span> <span class="tag tag-orange">power</span></div>
+            <div><span class="tag tag-orange">HR</span> <span class="tag tag-orange">人材</span> <span class="tag tag-orange">採用</span></div>
             <div style="color:#999;font-weight:500;" data-lang="Billing code:">Billing code:</div>
-            <div>10030869.1.2</div>
+            <div>10045221.1.1</div>
           </div>
         </div>
 
@@ -202,20 +221,20 @@
             <div class="card-title" data-lang="Briefing">Project Briefing</div>
           </div>
           <div style="font-size:13px;line-height:1.7;color:#555;">
-            <p><strong>Email content 1:</strong></p>
-            <p>Hi Team,</p>
-            <p>Hoping you can support with the request below -</p>
-            <p><strong>Context:</strong><br>
-            We are supporting an Independent Power Producer (IPP) in assessing the US market for<br>
-            - gas fired power plants,<br>
-            - gas pipeline infrastructure<br>
-            - power transmission infrastructure.</p>
-            <p>We are seeking experts with direct experience of either investing in or operating in the above 3 areas that will have likely worked for power providers (utilities, IPPs, or developers), midstream pipeline or transmission line operators or power/gas infrastructure investors, specifically in the US market.</p>
-            <p>We would like to start doing calls tomorrow (Tues 11th Mar).</p>
-            <p><strong>Screening Questions:</strong></p>
+            <p><strong>依頼内容：</strong></p>
+            <p>日本の人材業界に関するリサーチを実施しています。特に以下の領域について、業界経験者からの知見を求めています。</p>
+            <p><strong>対象領域：</strong></p>
             <ul style="margin-left:20px;">
-              <li>Can you describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets, including your role (investment, development, operations) and the regions you have worked in?</li>
-              <li>How are revenues typically generated in the US for gas-fired power plants, gas pipelines, and/or transmission assets, including the mix between merchant exposure and contracted revenues (e.g., PPAs, capacity payments)?</li>
+              <li>人材紹介（中途採用）市場の動向と競争環境</li>
+              <li>人材派遣市場の構造変化とデジタル化の影響</li>
+              <li>RPO（採用代行）・BPO市場の成長性</li>
+              <li>HR Techの導入状況と今後の展望</li>
+            </ul>
+            <p><strong>スクリーニング質問：</strong></p>
+            <ul style="margin-left:20px;">
+              <li>日本の人材業界における現在の主要なトレンドや課題について、ご自身の経験を踏まえてお聞かせください。</li>
+              <li>人材紹介・人材派遣ビジネスにおけるデジタル化・AI活用の現状と今後の見通しについて、具体的な事例を交えてお話しいただけますか？</li>
+              <li>貴社（または業界全体）における採用手法の変化や、新しいビジネスモデルへの取り組みについて教えてください。</li>
             </ul>
           </div>
         </div>

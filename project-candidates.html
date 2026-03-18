@@ -14,13 +14,13 @@
   <div class="app">
     <aside class="sidebar">
       <div class="sidebar-logo">
+        <img src="images/arches-icon.svg" alt="Arches" class="sidebar-logo-icon">
         <div class="sidebar-logo-inner">
           <img src="images/arches-logo.svg" alt="Arches" class="sidebar-logo-img">
-          <div class="sidebar-logo-sub">BCG SEA Client Portal</div>
         </div>
       </div>
       <nav class="sidebar-nav">
-        <a href="index.html"><span class="icon">&#128193;</span> <span data-lang="Project management">Project management</span></a>
+        <a href="index.html"><span class="icon">&#128188;</span> <span data-lang="Project management">Project management</span></a>
         <a href="#"><span class="icon">&#128100;</span> <span data-lang="User management">User management</span></a>
       </nav>
     </aside>
@@ -28,7 +28,7 @@
     <div class="main">
       <header class="header">
         <div><a href="index.html" style="color:#999;font-size:13px;">&larr; <span data-lang="Back to Projects">Back to Projects</span></a></div>
-        <div class="header-title">A109919 BCG US GFPs, Gas infra and power transmission</div>
+        <div class="header-title">A109919 Arches Consulting US GFPs, Gas infra and power transmission</div>
         <div class="header-right">
           <div class="notification-bell" onclick="toggleNotifications()">
             &#128276;
@@ -56,40 +56,6 @@
             <div class="tab" onclick="window.location='project-billing.html'"><span class="dot"></span> <span data-lang="Billing">Billing</span></div>
           </div>
 
-          <!-- Toolbar -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <button class="btn btn-outline btn-sm">&#128196; <span data-lang="Export List">Export (Excel)</span></button>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <button class="btn btn-primary btn-sm" id="bulkApproveBtn" style="display:none;">Approve selected</button>
-              <button class="btn btn-danger btn-sm" id="bulkDeclineBtn" style="display:none;">Decline selected</button>
-            </div>
-          </div>
-
-          <!-- Filters -->
-          <div class="filter-bar">
-            <select class="form-control" style="width:130px;">
-              <option>All Status</option>
-              <option>Proposed</option>
-              <option>Approved</option>
-              <option>Declined</option>
-              <option>Call Done</option>
-            </select>
-            <select class="form-control" style="width:130px;">
-              <option>All Segments</option>
-              <option>Gas-fired generation</option>
-              <option>Gas pipelines</option>
-              <option>Electric transmission</option>
-            </select>
-            <select class="form-control" style="width:130px;">
-              <option>Sort by: Date</option>
-              <option>Sort by: Name</option>
-              <option>Sort by: Cost</option>
-              <option>Sort by: Status</option>
-            </select>
-            <input type="text" class="search-input" placeholder="Search experts..." style="max-width:200px;">
-          </div>
         </div>
 
         <!-- Split View -->
@@ -150,7 +116,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="expert-item" onclick="showExpert(4)">
+                <div class="expert-item" onclick="showExpert(4)" style="opacity:0.5;">
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
@@ -223,7 +189,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
-        <button class="btn btn-danger" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Submit & Decline">Confirm Decline</button>
+        <button class="btn btn-danger" onclick="declineExpert()" data-lang="Submit & Decline">Confirm Decline</button>
       </div>
     </div>
   </div>
@@ -292,6 +258,10 @@
 
           <!-- Timeline Nav -->
           <div style="display:flex;align-items:center;margin-bottom:0;">
+            <div id="prevWeekBtn" onclick="shiftWeek(-1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;display:none;">
+              <div style="font-size:16px;">&lsaquo;</div>
+              <div>Prev<br>Week</div>
+            </div>
             <div style="flex:1;overflow-x:auto;" id="timelineWrapper">
               <!-- Timeline Header (dates) -->
               <div style="min-width:650px;">
@@ -302,7 +272,7 @@
             </div>
             <div id="nextWeekBtn" onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;display:none;">
               <div style="font-size:16px;">&rsaquo;</div>
-              <div>Next<br>2 weeks</div>
+              <div>Next<br>Week</div>
             </div>
           </div>
           <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#777;">
@@ -382,11 +352,11 @@
           { text: 'Availability slots added (3 slots)', time: 'Mar 15, 2026 - 10:30 AM' }
         ],
         comments: [
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 2:30 PM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 2:30 PM',
             text: 'Could you check if this expert has direct experience with LNG regasification terminals? Our client is particularly interested in that area as well.',
             reply: { time: 'Mar 16, 2026 - 4:15 PM', text: 'We confirmed with the expert \u2014 she has 2 years of indirect experience with LNG regasification through her work at Shell Energy, where she handled congestion analysis for assets near Sabine Pass. We\'ve updated the screening answers to reflect this. Let us know if you need more detail!' }
           },
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 5:00 PM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 5:00 PM',
             text: 'Great, thank you! That\'s helpful. We\'ll proceed with booking an interview.', reply: null }
         ]
       },
@@ -417,7 +387,7 @@
           { text: 'Recording & transcript uploaded', time: 'Mar 12, 2026 - 2:00 PM' }
         ],
         comments: [
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 12, 2026 - 3:00 PM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 12, 2026 - 3:00 PM',
             text: 'Excellent interview. Very knowledgeable on CCGT operations. Would like to schedule a follow-up call focused on maintenance cost benchmarking.',
             reply: { time: 'Mar 12, 2026 - 4:30 PM', text: 'Thank you for the feedback! We\'ll coordinate a 2nd call with Robert. We\'ll share available slots shortly.' }
           }
@@ -449,7 +419,7 @@
           { text: 'Availability slots added (3 slots)', time: 'Mar 14, 2026 - 10:00 AM' }
         ],
         comments: [
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 14, 2026 - 9:15 AM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 14, 2026 - 9:15 AM',
             text: 'This profile looks very strong for the pipeline segment. Can we prioritize scheduling this one?',
             reply: { time: 'Mar 14, 2026 - 10:30 AM', text: 'Absolutely! We\'ve just received her availability and added the slots. Please book at your convenience or let us know your preferred time.' }
           }
@@ -507,11 +477,11 @@
           { text: 'AI Summary generated', time: 'Mar 12, 2026 - 9:00 AM' }
         ],
         comments: [
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 9, 2026 - 9:35 AM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 9, 2026 - 9:35 AM',
             text: 'Interesting profile \u2014 the cooperative utility angle is unique. Could you ask about his familiarity with MISO transmission as well?',
             reply: { time: 'Mar 9, 2026 - 11:00 AM', text: 'Good question! We checked with Thomas and he confirmed he has some exposure to MISO through ETEC\'s interconnections. He\'s happy to discuss during the call.' }
           },
-          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 11, 2026 - 3:30 PM',
+          { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 11, 2026 - 3:30 PM',
             text: 'Great call. Very clear explanations on transmission planning. The AI summary looks accurate too. No follow-up needed for now.',
             reply: null }
         ]
@@ -535,21 +505,18 @@
       const isDeclined = e.status === 'Declined';
       const isDone = e.status === 'Call Done';
 
-      // Action buttons based on status
+      // Action buttons - always show Book/Request + Not Interested
       let actionBtns = '';
-      if (!isDeclined && !isDone) {
-        if (hasSlots) {
-          actionBtns = `
-            <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>`;
-        } else {
-          actionBtns = `
-            <button class="btn btn-primary" onclick="alert('Schedule request sent to Arches team.')">&#128197; <span data-lang="Request Schedule">Request Schedule</span></button>`;
-        }
+      if (hasSlots) {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">${isDone ? 'Book for Follow-up' : 'Book for Interview'}</span></button>`;
+      } else {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="alert('Schedule request sent to Arches team.')">&#128197; <span data-lang="Request Availability">Request Availability</span></button>`;
+      }
+      if (!isDeclined) {
         actionBtns += `
           <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show');updateModalExpert()"><span data-lang="Not Interested">&#10005; Not Interested</span></button>`;
-      } else if (isDone) {
-        actionBtns = `
-          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Follow-up</span></button>`;
       }
 
       // Availability quick view
@@ -664,11 +631,11 @@
 
         <div id="activities" style="display:none;">
           <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
-            <div class="activity-subtab active" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;" data-lang="Log system">Log system</div>
-            <div class="activity-subtab" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;">Comments (${e.comments.length})</div>
+            <div class="activity-subtab" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;" data-lang="Log system">Log system</div>
+            <div class="activity-subtab active" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;">Comments (${e.comments.length})</div>
           </div>
-          <div id="logsystem"><div class="card">${logItems}</div></div>
-          <div id="comments" style="display:none;">
+          <div id="logsystem" style="display:none;"><div class="card">${logItems}</div></div>
+          <div id="comments">
             <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
               <span style="font-size:16px;">&#9432;</span>
               <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
@@ -808,13 +775,39 @@
       const tzInfo = document.getElementById('tzInfoLabel');
       if (tzInfo) tzInfo.textContent = `* Times displayed in your timezone (${tzLabel}). Expert's availability has been converted.`;
 
-      // Show/hide Next button based on whether slots exist
-      const nextBtn = document.getElementById('nextWeekBtn');
-      if (nextBtn) nextBtn.style.display = blocks.length > 0 ? 'block' : 'none';
-
       const baseDate = new Date(2026, 2, 18);
       const startDate = new Date(baseDate);
       startDate.setDate(startDate.getDate() + weekOffset * 14);
+
+      // Check if slots exist in next/prev 2-week windows
+      const prevStart = new Date(startDate);
+      prevStart.setDate(prevStart.getDate() - 14);
+      const nextStart = new Date(startDate);
+      nextStart.setDate(nextStart.getDate() + 14);
+      const nextEnd = new Date(nextStart);
+      nextEnd.setDate(nextEnd.getDate() + 14);
+
+      const hasPrevSlots = blocks.some(b => {
+        const bDate = new Date(2026, 2, b.day);
+        return bDate >= prevStart && bDate < startDate;
+      });
+      const hasNextSlots = blocks.some(b => {
+        const bDate = new Date(2026, 2, b.day);
+        return bDate >= nextStart && bDate < nextEnd;
+      });
+
+      const prevBtn = document.getElementById('prevWeekBtn');
+      const nextBtn = document.getElementById('nextWeekBtn');
+      if (prevBtn) {
+        prevBtn.style.display = (weekOffset > 0 || hasPrevSlots) ? 'block' : 'none';
+        prevBtn.style.opacity = hasPrevSlots || weekOffset > 0 ? '1' : '0.3';
+        prevBtn.style.pointerEvents = hasPrevSlots || weekOffset > 0 ? 'auto' : 'none';
+      }
+      if (nextBtn) {
+        nextBtn.style.display = hasNextSlots ? 'block' : 'none';
+        nextBtn.style.opacity = hasNextSlots ? '1' : '0.3';
+        nextBtn.style.pointerEvents = hasNextSlots ? 'auto' : 'none';
+      }
 
       const days = [];
       const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -976,10 +969,27 @@
       renderExpert(id);
     }
 
+    function declineExpert() {
+      document.getElementById('declineModal').classList.remove('show');
+      experts[currentExpertId].status = 'Declined';
+      // Gray out the left panel item
+      const items = document.querySelectorAll('.expert-item');
+      items.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.style.opacity = '0.5';
+          const badge = el.querySelector('.badge-status');
+          if (badge) {
+            badge.className = 'badge-status badge-declined';
+            badge.style.fontSize = '11px';
+            badge.style.padding = '1px 6px';
+            badge.textContent = 'Declined';
+          }
+        }
+      });
+      renderExpert(currentExpertId);
+    }
+
     function updateBulkActions() {
-      const checked = document.querySelectorAll('.expert-item input[type="checkbox"]:checked');
-      document.getElementById('bulkApproveBtn').style.display = checked.length > 0 ? 'inline-flex' : 'none';
-      document.getElementById('bulkDeclineBtn').style.display = checked.length > 0 ? 'inline-flex' : 'none';
     }
 
     function copyAvailability() {
@@ -990,9 +1000,20 @@
       });
     }
 
-    // Render first expert on load
+    // Render expert on load (check URL param)
     document.addEventListener('DOMContentLoaded', function() {
-      renderExpert(1);
+      const params = new URLSearchParams(window.location.search);
+      const targetEx = params.get('expert');
+      let targetId = 1;
+      if (targetEx) {
+        for (const [key, val] of Object.entries(experts)) {
+          if (val.id === targetEx) { targetId = parseInt(key); break; }
+        }
+      }
+      renderExpert(targetId);
+      const items = document.querySelectorAll('.expert-item');
+      items.forEach(el => el.classList.remove('active'));
+      if (items[targetId - 1]) items[targetId - 1].classList.add('active');
     });
   </script>
 </body>
