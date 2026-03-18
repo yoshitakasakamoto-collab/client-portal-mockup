@@ -46,6 +46,8 @@ const translations = {
   'Accept': '受諾',
   'Finished': '完了',
 
+  'Back to Projects': 'プロジェクト一覧に戻る',
+
   // Project detail tabs
   'General': '概要',
   'Candidates': '候補者',
@@ -93,9 +95,19 @@ const translations = {
   'Availability': '対応可能日程',
   'Experience': '経歴',
   'Working history': '職歴',
-  'Decline': '辞退',
-  'Approve': '承認',
+  'Not Interested': '興味なし',
   'Book Interview': 'インタビュー予約',
+  'Request Schedule': '日程リクエスト',
+  'Booked IV': '予約済みIV',
+  'Your Timezone': 'タイムゾーン',
+  'Interview Duration': 'インタビュー時間',
+  'Select preferred datetime': 'ご希望の日時を選択してください',
+  'Preferred Date & Time': 'ご希望の日時',
+  'Number of Attendees': '参加人数',
+  'Options': 'オプション',
+  'Request interpretation': '通訳サービスをリクエスト',
+  'Additional Notes': '備考',
+  'Confirm Booking': '予約を確定',
   'Hourly Rate:': '時間単価：',
   'Location:': '所在地：',
   'Languages:': '言語：',
@@ -208,10 +220,10 @@ function initLang() {
 
 function updateLangButton(btn) {
   if (currentLang === 'en') {
-    btn.innerHTML = '<svg width="24" height="16" viewBox="0 0 60 40" style="vertical-align:middle;border-radius:2px;border:1px solid #ddd;"><rect width="60" height="40" fill="#fff"/><rect width="60" height="3.08" y="0" fill="#B22234"/><rect width="60" height="3.08" y="6.15" fill="#B22234"/><rect width="60" height="3.08" y="12.31" fill="#B22234"/><rect width="60" height="3.08" y="18.46" fill="#B22234"/><rect width="60" height="3.08" y="24.62" fill="#B22234"/><rect width="60" height="3.08" y="30.77" fill="#B22234"/><rect width="60" height="3.08" y="36.92" fill="#B22234"/><rect width="24" height="21.54" fill="#3C3B6E"/></svg>';
+    btn.innerHTML = '<span style="font-weight:600;color:#e67e22;">EN</span> <span style="color:#999;">/ JP</span>';
     btn.title = 'Switch to Japanese';
   } else {
-    btn.innerHTML = '<svg width="24" height="16" viewBox="0 0 60 40" style="vertical-align:middle;border-radius:2px;border:1px solid #ddd;"><rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="10" fill="#BC002D"/></svg>';
+    btn.innerHTML = '<span style="color:#999;">EN /</span> <span style="font-weight:600;color:#e67e22;">JP</span>';
     btn.title = 'Switch to English';
   }
 }

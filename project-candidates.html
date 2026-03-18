@@ -241,19 +241,16 @@
         <!-- Your Timezone -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
           <div style="display:flex;align-items:center;gap:8px;">
-            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Your Timezone</label>
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Your Timezone">Your Timezone</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
           <select id="clientTimezone" class="form-control" style="flex:1;max-width:380px;" onchange="renderTimeline()">
-            <option value="-10">HST (UTC-10) — Hawaii</option>
-            <option value="-9">AKST (UTC-9) — Alaska</option>
             <option value="-8">PST (UTC-8) — US Pacific</option>
             <option value="-7">MST (UTC-7) — US Mountain</option>
             <option value="-6">CST (UTC-6) — US Central</option>
             <option value="-5">EST (UTC-5) — US Eastern</option>
-            <option value="-4">AST (UTC-4) — Atlantic</option>
             <option value="-3">BRT (UTC-3) — Brazil</option>
-            <option value="0">GMT (UTC+0) — Greenwich / London</option>
+            <option value="0">GMT (UTC+0) — London</option>
             <option value="1">CET (UTC+1) — Central Europe</option>
             <option value="2">EET (UTC+2) — Eastern Europe / Cairo</option>
             <option value="3">MSK (UTC+3) — Moscow / Riyadh</option>
@@ -262,7 +259,7 @@
             <option value="5.5">IST (UTC+5:30) — India</option>
             <option value="6">BST (UTC+6) — Bangladesh / Dhaka</option>
             <option value="7">ICT (UTC+7) — Bangkok / Jakarta / Hanoi</option>
-            <option value="8">SGT (UTC+8) — Singapore / Hong Kong / Beijing / Taipei / Manila / Kuala Lumpur</option>
+            <option value="8">SGT (UTC+8) — Singapore / Hong Kong / Beijing / Taipei / Manila / KL</option>
             <option value="9" selected>JST (UTC+9) — Japan / Korea</option>
             <option value="10">AEST (UTC+10) — Sydney / Melbourne</option>
             <option value="12">NZST (UTC+12) — New Zealand</option>
@@ -272,7 +269,7 @@
         <!-- Duration Selection -->
         <div class="form-group">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
-            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Interview Duration</label>
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Interview Duration">Interview Duration</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -289,16 +286,12 @@
         <!-- 2-week Timeline Calendar -->
         <div class="form-group">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;">Select your preferred date & time</span>
+            <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;" data-lang="Select preferred datetime">Select your preferred date & time</span>
           </div>
           <div id="tzInfoLabel" style="font-size:11px;color:#999;margin-bottom:8px;">* Times displayed in your timezone (JST). Expert's availability has been converted.</div>
 
           <!-- Timeline Nav -->
           <div style="display:flex;align-items:center;margin-bottom:0;">
-            <div onclick="shiftWeek(-1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;">
-              <div style="font-size:16px;">&lsaquo;</div>
-              <div>Prev<br>2 weeks</div>
-            </div>
             <div style="flex:1;overflow-x:auto;" id="timelineWrapper">
               <!-- Timeline Header (dates) -->
               <div style="min-width:650px;">
@@ -307,7 +300,7 @@
                 <div id="timelineGrid" style="position:relative;max-height:400px;overflow-y:auto;"></div>
               </div>
             </div>
-            <div onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;">
+            <div id="nextWeekBtn" onclick="shiftWeek(1)" style="cursor:pointer;color:#e67e22;font-size:12px;padding:8px 12px;text-align:center;flex-shrink:0;user-select:none;display:none;">
               <div style="font-size:16px;">&rsaquo;</div>
               <div>Next<br>2 weeks</div>
             </div>
@@ -315,13 +308,14 @@
           <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#777;">
             <span><span style="display:inline-block;width:12px;height:12px;background:#c8e6c9;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Available Schedule">Available Schedule</span></span>
             <span><span style="display:inline-block;width:12px;height:12px;background:#e67e22;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Selected">Selected</span></span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:#ffcdd2;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> <span data-lang="Booked IV">Booked IV</span></span>
           </div>
         </div>
 
         <!-- Selected Time Display -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;">
           <div style="display:flex;align-items:center;gap:8px;">
-            <label style="font-weight:600;font-size:13px;white-space:nowrap;">Preferred Date & Time</label>
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Preferred Date & Time">Preferred Date & Time</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
           <input type="text" id="selectedTimeDisplay" class="form-control" placeholder="Click a green slot on the calendar above" readonly style="flex:1;background:#f9f9f9;cursor:default;">
@@ -329,7 +323,7 @@
 
         <!-- Number of attendees -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;">
-          <label style="font-weight:600;font-size:13px;white-space:nowrap;">Number of Attendees</label>
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Number of Attendees">Number of Attendees</label>
           <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
           <input type="number" class="form-control" value="1" min="1" max="10" style="width:60px;">
           <span style="font-size:12px;color:#999;">* If more than 1, please note in comments</span>
@@ -337,23 +331,23 @@
 
         <!-- Interpretation option -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;">
-          <label style="font-weight:600;font-size:13px;white-space:nowrap;">Options</label>
+          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Options">Options</label>
           <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
           <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
-            <input type="checkbox" style="accent-color:#e67e22;"> Request interpretation service
+            <input type="checkbox" style="accent-color:#e67e22;"> <span data-lang="Request interpretation">Request interpretation service</span>
           </label>
         </div>
 
         <!-- Notes -->
         <div class="form-group">
-          <label style="font-weight:600;font-size:13px;">Additional Notes</label>
+          <label style="font-weight:600;font-size:13px;" data-lang="Additional Notes">Additional Notes</label>
           <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:8px;">Optional</span>
           <textarea class="form-control" placeholder="Any specific topics or questions you'd like to cover..." style="margin-top:6px;"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
-        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="this.closest('.modal-overlay').classList.remove('show')">Confirm Booking</button>
+        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Confirm Booking">Confirm Booking</button>
       </div>
     </div>
   </div>
@@ -526,6 +520,12 @@
 
     let currentExpertId = 1;
 
+    // Existing booked interviews (shown on timeline as reference)
+    const bookedInterviews = [
+      { label: 'Robert Chen', day: 12, startHour: 10, startMin: 0, endHour: 10, endMin: 45, tz: 'EST' },
+      { label: 'Thomas Wright', day: 11, startHour: 14, startMin: 0, endHour: 15, endMin: 0, tz: 'CST' }
+    ];
+
     /* ========== Render Expert Detail ========== */
     function renderExpert(id) {
       currentExpertId = id;
@@ -538,10 +538,15 @@
       // Action buttons based on status
       let actionBtns = '';
       if (!isDeclined && !isDone) {
-        actionBtns = `
-          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>
-          <button class="btn btn-success"><span data-lang="Approve">&#10003; Approve</span></button>
-          <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show');updateModalExpert()"><span data-lang="Decline">&#10005; Decline</span></button>`;
+        if (hasSlots) {
+          actionBtns = `
+            <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>`;
+        } else {
+          actionBtns = `
+            <button class="btn btn-primary" onclick="alert('Schedule request sent to Arches team.')">&#128197; <span data-lang="Request Schedule">Request Schedule</span></button>`;
+        }
+        actionBtns += `
+          <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show');updateModalExpert()"><span data-lang="Not Interested">&#10005; Not Interested</span></button>`;
       } else if (isDone) {
         actionBtns = `
           <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Follow-up</span></button>`;
@@ -694,8 +699,8 @@
     }
 
     /* ========== Timezone Helpers ========== */
-    const tzOffsets = { 'HST':-10,'AKST':-9,'PST':-8,'MST':-7,'CST':-6,'EST':-5,'AST':-4,'BRT':-3,'GMT':0,'CET':1,'EET':2,'MSK':3,'GST':4,'PKT':5,'IST':5.5,'BST':6,'ICT':7,'SGT':8,'HKT':8,'CST_CN':8,'JST':9,'KST':9,'AEST':10,'NZST':12 };
-    const tzLabels = { '-10':'HST','-9':'AKST','-8':'PST','-7':'MST','-6':'CST','-5':'EST','-4':'AST','-3':'BRT','0':'GMT','1':'CET','2':'EET','3':'MSK','4':'GST','5':'PKT','5.5':'IST','6':'BST','7':'ICT','8':'SGT','9':'JST','10':'AEST','12':'NZST' };
+    const tzOffsets = { 'PST':-8,'MST':-7,'CST':-6,'EST':-5,'BRT':-3,'GMT':0,'CET':1,'EET':2,'MSK':3,'GST':4,'PKT':5,'IST':5.5,'BST':6,'ICT':7,'SGT':8,'HKT':8,'CST_CN':8,'JST':9,'KST':9,'AEST':10,'NZST':12 };
+    const tzLabels = { '-8':'PST','-7':'MST','-6':'CST','-5':'EST','-3':'BRT','0':'GMT','1':'CET','2':'EET','3':'MSK','4':'GST','5':'PKT','5.5':'IST','6':'BST','7':'ICT','8':'SGT','9':'JST','10':'AEST','12':'NZST' };
 
     function getClientTzOffset() {
       const sel = document.getElementById('clientTimezone');
@@ -772,15 +777,40 @@
       return blocks;
     }
 
+    /* Parse booked interviews into 15-min blocks in client timezone */
+    function parseBookedBlocks() {
+      const clientOffset = getClientTzOffset();
+      const blocks = [];
+      bookedInterviews.forEach(iv => {
+        const expertTz = tzOffsets[iv.tz] || -5;
+        const diff = clientOffset - expertTz;
+        const startMin = (iv.startHour * 60 + iv.startMin) + diff * 60;
+        const endMin = (iv.endHour * 60 + iv.endMin) + diff * 60;
+        for (let m = startMin; m < endMin; m += 15) {
+          let adjDay = iv.day;
+          let adjMin = m;
+          while (adjMin < 0) { adjMin += 1440; adjDay -= 1; }
+          while (adjMin >= 1440) { adjMin -= 1440; adjDay += 1; }
+          blocks.push({ day: adjDay, hour: Math.floor(adjMin / 60), minute: adjMin % 60, label: iv.label });
+        }
+      });
+      return blocks;
+    }
+
     function renderTimeline() {
       const e = experts[currentExpertId];
       const blocks = parseSlotToBlocks(e.slots);
+      const ivBlocks = parseBookedBlocks();
       const header = document.getElementById('timelineHeader');
       const grid = document.getElementById('timelineGrid');
       const tzLabel = getClientTzLabel();
 
       const tzInfo = document.getElementById('tzInfoLabel');
       if (tzInfo) tzInfo.textContent = `* Times displayed in your timezone (${tzLabel}). Expert's availability has been converted.`;
+
+      // Show/hide Next button based on whether slots exist
+      const nextBtn = document.getElementById('nextWeekBtn');
+      if (nextBtn) nextBtn.style.display = blocks.length > 0 ? 'block' : 'none';
 
       const baseDate = new Date(2026, 2, 18);
       const startDate = new Date(baseDate);
@@ -795,13 +825,13 @@
         days.push(d);
       }
 
-      // Determine visible hour range based on available slots (with padding)
+      // Determine visible hour range based on available slots + booked interviews
+      const allBlocks = [...blocks, ...ivBlocks];
       let minHour = 8, maxHour = 20;
-      if (blocks.length > 0) {
-        const slotHours = blocks.map(b => b.hour);
+      if (allBlocks.length > 0) {
+        const slotHours = allBlocks.map(b => b.hour);
         minHour = Math.max(0, Math.min(...slotHours) - 1);
         maxHour = Math.min(23, Math.max(...slotHours) + 1);
-        // Ensure at least a reasonable range
         if (maxHour - minHour < 6) {
           const mid = Math.floor((minHour + maxHour) / 2);
           minHour = Math.max(0, mid - 3);
@@ -842,6 +872,8 @@
           const dayOfMonth = d.getDate();
           const month = d.getMonth();
           let isAvail = false;
+          let isBooked = false;
+          let bookedLabel = '';
           let slotInfo = null;
           if (month === 2) {
             blocks.forEach(b => {
@@ -850,17 +882,27 @@
                 slotInfo = b;
               }
             });
+            ivBlocks.forEach(b => {
+              if (b.day === dayOfMonth && b.hour === ts.hour && b.minute === ts.minute) {
+                isBooked = true;
+                bookedLabel = b.label;
+              }
+            });
           }
           const cellKey = `${dayOfMonth}-${ts.hour}-${ts.minute}`;
           const isSelected = selectedSlotKey === cellKey;
-          let cellStyle = 'flex:1;min-width:44px;height:14px;border-right:1px solid #f5f5f5;';
+          let cellStyle = 'flex:1;min-width:44px;height:14px;border-right:1px solid #f5f5f5;position:relative;';
+          let cellTitle = '';
           if (isSelected) {
             cellStyle += 'background:#e67e22;cursor:pointer;';
+          } else if (isBooked) {
+            cellStyle += 'background:#ffcdd2;';
+            cellTitle = `title="Booked: ${bookedLabel}"`;
           } else if (isAvail) {
             cellStyle += 'background:#c8e6c9;cursor:pointer;';
           }
           const onclick = isAvail ? `onclick="selectTimelineSlot(${dayOfMonth},${ts.hour},${ts.minute},'${slotInfo ? slotInfo.text.replace(/'/g,"\\'") : ''}')"` : '';
-          gridHtml += `<div style="${cellStyle}" ${onclick}></div>`;
+          gridHtml += `<div style="${cellStyle}" ${onclick} ${cellTitle}></div>`;
         });
         gridHtml += `</div>`;
       });
