@@ -184,228 +184,8 @@
             </div>
           </div>
 
-          <!-- Right: Expert Detail (matching screenshot format) -->
-          <div class="split-right" id="expertDetail">
-            <!-- Expert Header: ID - Name + Status inline -->
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <h2 style="font-size:18px;font-weight:600;">EX-1041870 - Luci Dao</h2>
-              <span class="badge-status badge-candidates" data-lang="Proposed">Proposed</span>
-            </div>
-            <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated 2026/03/15</div>
-
-            <!-- Action Buttons -->
-            <div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">
-              <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show')">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>
-              <button class="btn btn-success"><span data-lang="Approve">&#10003; Approve</span></button>
-              <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show')"><span data-lang="Decline">&#10005; Decline</span></button>
-            </div>
-
-            <!-- Availability Quick View -->
-            <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
-              <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;" data-lang="Availability">Availability (next slots)</div>
-              <div>
-                <span class="avail-slot">Mar 18, 10:00-12:00 EST</span>
-                <span class="avail-slot">Mar 19, 14:00-16:00 EST</span>
-                <span class="avail-slot">Mar 20, 09:00-11:00 EST</span>
-              </div>
-              <div style="margin-top:6px;">
-                <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy as text</span></button>
-              </div>
-            </div>
-
-            <!-- Subtabs -->
-            <div class="tabs" style="margin-bottom:16px;">
-              <div class="tab active" onclick="showSubTab('expertInfo')"><span data-lang="Expert info">Expert info</span></div>
-              <div class="tab" onclick="showSubTab('activities')"><span data-lang="Activities">Activities</span></div>
-              <div class="tab" onclick="showSubTab('availability')"><span data-lang="Availability">Availability</span></div>
-            </div>
-
-            <!-- Expert Info (matching screenshot format) -->
-            <div id="expertInfo">
-              <!-- Experience section - bullet point format -->
-              <div style="margin-bottom:20px;">
-                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;" data-lang="Experience">Experience</h4>
-                <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">
-                  <p style="margin-bottom:8px;">This expert currently serves as <strong>Engineering Senior Advisor - Transmission and Interconnection</strong> at <strong>ENGIE North America</strong>, leading congestion analysis and siting for BESS, wind, and solar assets.</p>
-                  <p style="margin-bottom:8px;">Previously served as <strong>Nodal Trader</strong> at <strong>EDF Trading</strong> and <strong>Congestion Trader</strong> at <strong>Shell Energy</strong>, trading CRRs/FTRs and day-ahead markets.</p>
-                  <p style="margin-bottom:8px;">Possesses deep understanding of the <strong><u>U.S. power and energy infrastructure market</u></strong>, including battery revenue generation and profitability in the Electric Reliability Council of Texas market.</p>
-                  <p style="margin-bottom:8px;">Experienced in analyzing <strong><u>transmission modeling, congestion analysis, and power market fundamentals</u></strong>, including building production cost models (Uplan/PowerWorld).</p>
-                  <p style="margin-bottom:8px;">Knowledgeable about <strong><u>optimal interconnection points and evaluating future transmission impacts</u></strong> on project economics, directly informing where BESS projects capture the most value in wholesale markets.</p>
-                  <p>Provides insights on <strong><u>LMP formation, congestion, and asset-backed trading strategies</u></strong>, giving hands-on understanding of day-ahead market dynamics.</p>
-                </div>
-              </div>
-
-              <!-- Working History table -->
-              <div style="margin-bottom:20px;">
-                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;">Working history</h4>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Company</th>
-                      <th>Position</th>
-                      <th>From</th>
-                      <th>To</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><strong>ENGIE North America</strong></td>
-                      <td>Engineering Senior Advisor - Transmission and Interconnection</td>
-                      <td>2021/01</td>
-                      <td>2025/12</td>
-                    </tr>
-                    <tr>
-                      <td><strong>EDF Trading</strong></td>
-                      <td>Nodal Trader</td>
-                      <td>2018/03</td>
-                      <td>2021/01</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Shell Energy</strong></td>
-                      <td>Congestion Trader</td>
-                      <td>2015/06</td>
-                      <td>2018/03</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Screening Answers -->
-              <div style="margin:16px 0;">
-                <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Screening Answers</h4>
-                <div style="background:#f9f9f9;padding:12px;border-radius:8px;font-size:13px;line-height:1.7;color:#555;">
-                  <p><strong>Q: Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.</strong></p>
-                  <p>20+ years working on transmission modeling, congestion analysis, and power market fundamentals,
-                  including building production cost models (Uplan/PowerWorld) used to forecast prices and optimize asset placement.
-                  Extensive experience identifying optimal interconnection points and evaluating future transmission impacts on project economics.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Activities -->
-            <div id="activities" style="display:none;">
-              <!-- Activities Sub-tabs -->
-              <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
-                <div class="activity-subtab active" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;" data-lang="Log system">Log system</div>
-                <div class="activity-subtab" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;">Comments (2)</div>
-              </div>
-
-              <!-- Log System Sub-tab -->
-              <div id="logsystem">
-                <div class="card">
-                  <div class="activity-item">
-                    <div class="activity-dot"></div>
-                    <div>
-                      <div class="activity-text">Profile proposed by <strong>Arches Team</strong></div>
-                      <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
-                    </div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="activity-dot"></div>
-                    <div>
-                      <div class="activity-text">Screening answers updated</div>
-                      <div class="activity-time">Mar 15, 2026 - 10:00 AM</div>
-                    </div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="activity-dot"></div>
-                    <div>
-                      <div class="activity-text">Availability slots added (3 slots)</div>
-                      <div class="activity-time">Mar 15, 2026 - 10:30 AM</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Comments Sub-tab -->
-              <div id="comments" style="display:none;">
-                <!-- Info banner -->
-                <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
-                  <span style="font-size:16px;">&#9432;</span>
-                  <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
-                </div>
-
-                <!-- Comment Thread -->
-                <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">
-                  <!-- Client comment -->
-                  <div style="display:flex;gap:10px;align-items:flex-start;">
-                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
-                    <div style="flex:1;">
-                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-                        <span style="font-weight:600;font-size:13px;">Emily Turner</span>
-                        <span style="font-size:11px;color:#999;">BCG SEA</span>
-                        <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 2:30 PM</span>
-                      </div>
-                      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
-                        Could you check if this expert has direct experience with LNG regasification terminals? Our client is particularly interested in that area as well.
-                      </div>
-                      <!-- Arches reply -->
-                      <div style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;margin-left:20px;">
-                        <div style="width:28px;height:28px;border-radius:50%;background:#6b21a8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;">AR</div>
-                        <div style="flex:1;">
-                          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-                            <span style="font-weight:600;font-size:13px;">Arches Team</span>
-                            <span style="font-size:11px;color:#6b21a8;background:#f3e8ff;padding:1px 6px;border-radius:4px;">Arches Staff</span>
-                            <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 4:15 PM</span>
-                          </div>
-                          <div style="background:#faf5ff;border:1px solid #e0d4f5;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
-                            We confirmed with the expert — she has 2 years of indirect experience with LNG regasification through her work at Shell Energy, where she handled congestion analysis for assets near Sabine Pass. We've updated the screening answers to reflect this. Let us know if you need more detail!
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Another client comment -->
-                  <div style="display:flex;gap:10px;align-items:flex-start;">
-                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
-                    <div style="flex:1;">
-                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-                        <span style="font-weight:600;font-size:13px;">Emily Turner</span>
-                        <span style="font-size:11px;color:#999;">BCG SEA</span>
-                        <span style="font-size:11px;color:#bbb;">Mar 16, 2026 - 5:00 PM</span>
-                      </div>
-                      <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">
-                        Great, thank you! That's helpful. We'll proceed with booking an interview.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Comment Input -->
-                <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
-                  <div style="display:flex;gap:10px;align-items:flex-start;">
-                    <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
-                    <div style="flex:1;display:flex;gap:8px;">
-                      <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
-                      <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Availability -->
-            <div id="availability" style="display:none;">
-              <div class="card">
-                <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Available Time Slots</h4>
-                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 18 (Tue), 10:00 AM - 12:00 PM EST</span></div>
-                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 19 (Wed), 2:00 PM - 4:00 PM EST</span></div>
-                <div style="margin-bottom:8px;"><span class="avail-slot">Mar 20 (Thu), 9:00 AM - 11:00 AM EST</span></div>
-                <div style="margin-top:12px;">
-                  <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button>
-                </div>
-                <div style="margin-top:12px;padding:12px;background:#f9f9f9;border-radius:6px;display:none;" id="availTextBox">
-                  <div style="font-size:12px;color:#999;margin-bottom:4px;">Plain text (copied to clipboard):</div>
-                  <pre style="font-size:12px;white-space:pre-wrap;">EX-1041870 - Luci Dao - ENGIE North America
-Available slots:
-- Mar 18 (Tue), 10:00 AM - 12:00 PM EST
-- Mar 19 (Wed), 2:00 PM - 4:00 PM EST
-- Mar 20 (Thu), 9:00 AM - 11:00 AM EST</pre>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Right: Expert Detail (dynamically rendered) -->
+          <div class="split-right" id="expertDetail"></div>
         </div>
       </div>
     </div>
@@ -483,6 +263,361 @@ Available slots:
 
   <script src="lang.js"></script>
   <script>
+    /* ========== Expert Data ========== */
+    const experts = {
+      1: {
+        id: 'EX-1041870', name: 'Luci Dao', company: 'ENGIE North America Inc.', role: 'Engineering Senior Advisor',
+        status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
+        slots: ['Mar 18 (Tue), 10:00 AM - 12:00 PM EST','Mar 19 (Wed), 2:00 PM - 4:00 PM EST','Mar 20 (Thu), 9:00 AM - 11:00 AM EST'],
+        slotsShort: ['Mar 18, 10:00-12:00 EST','Mar 19, 14:00-16:00 EST','Mar 20, 09:00-11:00 EST'],
+        experience: [
+          'This expert currently serves as <strong>Engineering Senior Advisor - Transmission and Interconnection</strong> at <strong>ENGIE North America</strong>, leading congestion analysis and siting for BESS, wind, and solar assets.',
+          'Previously served as <strong>Nodal Trader</strong> at <strong>EDF Trading</strong> and <strong>Congestion Trader</strong> at <strong>Shell Energy</strong>, trading CRRs/FTRs and day-ahead markets.',
+          'Possesses deep understanding of the <strong><u>U.S. power and energy infrastructure market</u></strong>, including battery revenue generation and profitability in the Electric Reliability Council of Texas market.',
+          'Experienced in analyzing <strong><u>transmission modeling, congestion analysis, and power market fundamentals</u></strong>, including building production cost models (Uplan/PowerWorld).',
+          'Knowledgeable about <strong><u>optimal interconnection points and evaluating future transmission impacts</u></strong> on project economics.',
+          'Provides insights on <strong><u>LMP formation, congestion, and asset-backed trading strategies</u></strong>, giving hands-on understanding of day-ahead market dynamics.'
+        ],
+        history: [
+          { company: 'ENGIE North America', position: 'Engineering Senior Advisor - Transmission and Interconnection', from: '2021/01', to: '2025/12' },
+          { company: 'EDF Trading', position: 'Nodal Trader', from: '2018/03', to: '2021/01' },
+          { company: 'Shell Energy', position: 'Congestion Trader', from: '2015/06', to: '2018/03' }
+        ],
+        screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA: '20+ years working on transmission modeling, congestion analysis, and power market fundamentals, including building production cost models (Uplan/PowerWorld) used to forecast prices and optimize asset placement. Extensive experience identifying optimal interconnection points and evaluating future transmission impacts on project economics.',
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 15, 2026 - 10:00 AM' },
+          { text: 'Screening answers updated', time: 'Mar 15, 2026 - 10:00 AM' },
+          { text: 'Availability slots added (3 slots)', time: 'Mar 15, 2026 - 10:30 AM' }
+        ],
+        comments: [
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 2:30 PM',
+            text: 'Could you check if this expert has direct experience with LNG regasification terminals? Our client is particularly interested in that area as well.',
+            reply: { time: 'Mar 16, 2026 - 4:15 PM', text: 'We confirmed with the expert \u2014 she has 2 years of indirect experience with LNG regasification through her work at Shell Energy, where she handled congestion analysis for assets near Sabine Pass. We\'ve updated the screening answers to reflect this. Let us know if you need more detail!' }
+          },
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 5:00 PM',
+            text: 'Great, thank you! That\'s helpful. We\'ll proceed with booking an interview.', reply: null }
+        ]
+      },
+      2: {
+        id: 'EX-1041955', name: 'Robert Chen', company: 'Calpine Corp', role: 'VP, Plant Operations',
+        status: 'Call Done', statusClass: 'badge-conducted', updated: '2026/03/12', cost: '$1,000/call',
+        slots: ['Mar 21 (Fri), 9:00 AM - 11:00 AM CST','Mar 24 (Mon), 1:00 PM - 3:00 PM CST'],
+        slotsShort: ['Mar 21, 09:00-11:00 CST','Mar 24, 13:00-15:00 CST'],
+        experience: [
+          'This expert currently serves as <strong>VP of Plant Operations</strong> at <strong>Calpine Corporation</strong>, overseeing a fleet of 6 combined-cycle gas turbine (CCGT) plants across Texas and Louisiana.',
+          'Previously held the role of <strong>Director of Engineering</strong> at <strong>NRG Energy</strong>, where he led turbine upgrade programs and heat rate improvement initiatives.',
+          'Has extensive knowledge of <strong><u>gas-fired power generation economics</u></strong>, including spark spread analysis, capacity factor optimization, and maintenance cost benchmarking.',
+          'Expert in <strong><u>plant-level operational efficiency</u></strong>, having implemented digital twin monitoring systems that reduced unplanned outages by 30%.',
+          'Experienced in <strong><u>regulatory compliance and environmental permitting</u></strong> for gas-fired assets, including EPA MATS and regional air quality standards.'
+        ],
+        history: [
+          { company: 'Calpine Corporation', position: 'VP, Plant Operations', from: '2020/06', to: 'Present' },
+          { company: 'NRG Energy', position: 'Director of Engineering', from: '2016/02', to: '2020/05' },
+          { company: 'GE Power', position: 'Field Service Engineer', from: '2011/09', to: '2016/01' }
+        ],
+        screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA: '15+ years in gas-fired power generation, from hands-on turbine engineering at GE to fleet-level operational leadership at Calpine. Deep understanding of CCGT economics, O&M optimization, and the evolving role of gas plants in grids with high renewable penetration. Currently managing a 4.2 GW portfolio.',
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 10, 2026 - 9:00 AM' },
+          { text: 'Approved by <strong>Emily Turner</strong>', time: 'Mar 10, 2026 - 3:00 PM' },
+          { text: 'Interview booked - Mar 12 10:00 AM', time: 'Mar 11, 2026 - 11:00 AM' },
+          { text: 'Interview completed (45 min)', time: 'Mar 12, 2026 - 10:50 AM' },
+          { text: 'Recording & transcript uploaded', time: 'Mar 12, 2026 - 2:00 PM' }
+        ],
+        comments: [
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 12, 2026 - 3:00 PM',
+            text: 'Excellent interview. Very knowledgeable on CCGT operations. Would like to schedule a follow-up call focused on maintenance cost benchmarking.',
+            reply: { time: 'Mar 12, 2026 - 4:30 PM', text: 'Thank you for the feedback! We\'ll coordinate a 2nd call with Robert. We\'ll share available slots shortly.' }
+          }
+        ]
+      },
+      3: {
+        id: 'EX-1041837', name: 'Pretty Dewati (Cathy)', company: 'Third Coast', role: 'Vice President, Corporate Development',
+        status: 'Approved', statusClass: 'badge-approved', updated: '2026/03/14', cost: '$700/call',
+        slots: ['Mar 19 (Wed), 10:00 AM - 12:00 PM CST','Mar 20 (Thu), 3:00 PM - 5:00 PM CST','Mar 22 (Sat), 9:00 AM - 11:00 AM CST'],
+        slotsShort: ['Mar 19, 10:00-12:00 CST','Mar 20, 15:00-17:00 CST','Mar 22, 09:00-11:00 CST'],
+        experience: [
+          'This expert currently serves as <strong>Vice President of Corporate Development</strong> at <strong>Third Coast Midstream</strong>, leading M&A activity and strategic partnerships for gas gathering and processing assets.',
+          'Previously worked as <strong>Investment Banking Associate</strong> at <strong>Goldman Sachs</strong> in the Natural Resources group, advising on $5B+ of midstream transactions.',
+          'Deep expertise in <strong><u>gas pipeline valuation and deal structuring</u></strong>, including dropdown transactions, IDR restructurings, and joint venture formations.',
+          'Knowledgeable about <strong><u>midstream contract structures</u></strong>, including minimum volume commitments (MVCs), acreage dedications, and fee-based vs. percent-of-proceeds arrangements.',
+          'Experienced in <strong><u>Permian Basin and Eagle Ford gas infrastructure</u></strong>, with direct involvement in greenfield pipeline projects from FID through commissioning.'
+        ],
+        history: [
+          { company: 'Third Coast Midstream', position: 'VP, Corporate Development', from: '2022/03', to: 'Present' },
+          { company: 'Goldman Sachs', position: 'Investment Banking Associate - Natural Resources', from: '2018/07', to: '2022/02' },
+          { company: 'Deloitte', position: 'Consultant - Energy & Resources', from: '2015/09', to: '2018/06' }
+        ],
+        screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA: '10+ years in midstream oil & gas, spanning consulting, investment banking, and corporate development. Directly involved in evaluating and executing pipeline acquisitions, building financial models for gathering systems, and negotiating long-term shipper contracts. Strong understanding of regulatory and commercial dynamics in the Permian and Eagle Ford basins.',
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 13, 2026 - 2:00 PM' },
+          { text: 'Screening answers updated', time: 'Mar 13, 2026 - 2:30 PM' },
+          { text: 'Approved by <strong>Emily Turner</strong>', time: 'Mar 14, 2026 - 9:00 AM' },
+          { text: 'Availability slots added (3 slots)', time: 'Mar 14, 2026 - 10:00 AM' }
+        ],
+        comments: [
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 14, 2026 - 9:15 AM',
+            text: 'This profile looks very strong for the pipeline segment. Can we prioritize scheduling this one?',
+            reply: { time: 'Mar 14, 2026 - 10:30 AM', text: 'Absolutely! We\'ve just received her availability and added the slots. Please book at your convenience or let us know your preferred time.' }
+          }
+        ]
+      },
+      4: {
+        id: 'EX-1042100', name: 'James Morton', company: 'Williams Companies', role: 'Director, Pipeline Engineering',
+        status: 'Declined', statusClass: 'badge-declined', updated: '2026/03/11', cost: '$600/call',
+        slots: [],
+        slotsShort: [],
+        experience: [
+          'This expert currently serves as <strong>Director of Pipeline Engineering</strong> at <strong>Williams Companies</strong>, managing design and integrity programs for 30,000+ miles of natural gas pipelines.',
+          'Previously held the role of <strong>Senior Engineer</strong> at <strong>Kinder Morgan</strong>, focused on pipeline integrity management and inline inspection programs.',
+          'Has deep technical knowledge of <strong><u>pipeline design, construction, and integrity management</u></strong>, including ASME B31.8, API 1160, and PHMSA regulatory compliance.',
+          'Expert in <strong><u>pipeline capacity expansion projects</u></strong>, including looping, compression additions, and conversion of oil pipelines to gas service.'
+        ],
+        history: [
+          { company: 'Williams Companies', position: 'Director, Pipeline Engineering', from: '2019/08', to: 'Present' },
+          { company: 'Kinder Morgan', position: 'Senior Pipeline Engineer', from: '2014/03', to: '2019/07' },
+          { company: 'Enterprise Products', position: 'Pipeline Engineer', from: '2010/06', to: '2014/02' }
+        ],
+        screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA: '15+ years in natural gas pipeline engineering across three major midstream operators. Expertise spans pipeline design, construction oversight, integrity management, and capacity expansion. Currently responsible for capital project prioritization and execution across Williams\' Transco and Northwest Pipeline systems.',
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 10, 2026 - 11:00 AM' },
+          { text: 'Declined by <strong>Emily Turner</strong> - Already have coverage in this area', time: 'Mar 11, 2026 - 10:00 AM' }
+        ],
+        comments: []
+      },
+      5: {
+        id: 'EX-1042019', name: 'Thomas Wright', company: 'East Texas Electric Cooperative', role: 'VP, Power Supply',
+        status: 'Call Done', statusClass: 'badge-conducted', updated: '2026/03/13', cost: '$500/call',
+        slots: ['Mar 24 (Mon), 10:00 AM - 12:00 PM CST'],
+        slotsShort: ['Mar 24, 10:00-12:00 CST'],
+        experience: [
+          'This expert currently serves as <strong>VP of Power Supply</strong> at <strong>East Texas Electric Cooperative</strong>, managing wholesale power procurement and transmission planning for a 16-county service territory.',
+          'Previously worked as <strong>Transmission Planning Manager</strong> at <strong>Oncor Electric Delivery</strong>, responsible for 345kV and 138kV expansion studies.',
+          'Has direct experience with <strong><u>ERCOT transmission planning processes</u></strong>, including Regional Planning Group participation and CREZ line project evaluation.',
+          'Knowledgeable about <strong><u>cooperative utility economics</u></strong>, including wholesale rate structures, demand response programs, and distributed generation impacts on transmission usage.',
+          'Experienced in <strong><u>power purchase agreement (PPA) negotiation</u></strong> for both gas-fired and renewable resources, including tolling agreements and capacity contracts.'
+        ],
+        history: [
+          { company: 'East Texas Electric Cooperative', position: 'VP, Power Supply', from: '2021/04', to: 'Present' },
+          { company: 'Oncor Electric Delivery', position: 'Transmission Planning Manager', from: '2016/01', to: '2021/03' },
+          { company: 'Burns & McDonnell', position: 'Power Systems Engineer', from: '2012/08', to: '2015/12' }
+        ],
+        screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA: '13+ years in electric power systems spanning engineering consulting, T&D planning, and wholesale power procurement. Direct involvement in ERCOT transmission planning, PPA negotiations for gas and renewable resources, and cooperative utility resource planning. Provides a unique perspective combining technical transmission knowledge with commercial power supply decision-making.',
+        logs: [
+          { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 8, 2026 - 3:00 PM' },
+          { text: 'Approved by <strong>Emily Turner</strong>', time: 'Mar 9, 2026 - 9:30 AM' },
+          { text: 'Interview booked - Mar 11 2:00 PM', time: 'Mar 9, 2026 - 2:00 PM' },
+          { text: 'Interview completed (60 min)', time: 'Mar 11, 2026 - 3:05 PM' },
+          { text: 'Recording & transcript uploaded', time: 'Mar 11, 2026 - 5:00 PM' },
+          { text: 'AI Summary generated', time: 'Mar 12, 2026 - 9:00 AM' }
+        ],
+        comments: [
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 9, 2026 - 9:35 AM',
+            text: 'Interesting profile \u2014 the cooperative utility angle is unique. Could you ask about his familiarity with MISO transmission as well?',
+            reply: { time: 'Mar 9, 2026 - 11:00 AM', text: 'Good question! We checked with Thomas and he confirmed he has some exposure to MISO through ETEC\'s interconnections. He\'s happy to discuss during the call.' }
+          },
+          { author: 'Emily Turner', org: 'BCG SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 11, 2026 - 3:30 PM',
+            text: 'Great call. Very clear explanations on transmission planning. The AI summary looks accurate too. No follow-up needed for now.',
+            reply: null }
+        ]
+      }
+    };
+
+    let currentExpertId = 1;
+
+    /* ========== Render Expert Detail ========== */
+    function renderExpert(id) {
+      currentExpertId = id;
+      const e = experts[id];
+      const panel = document.getElementById('expertDetail');
+      const hasSlots = e.slots.length > 0;
+      const isDeclined = e.status === 'Declined';
+      const isDone = e.status === 'Call Done';
+
+      // Action buttons based on status
+      let actionBtns = '';
+      if (!isDeclined && !isDone) {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Interview</span></button>
+          <button class="btn btn-success"><span data-lang="Approve">&#10003; Approve</span></button>
+          <button class="btn btn-danger" onclick="document.getElementById('declineModal').classList.add('show');updateModalExpert()"><span data-lang="Decline">&#10005; Decline</span></button>`;
+      } else if (isDone) {
+        actionBtns = `
+          <button class="btn btn-primary" onclick="document.getElementById('bookModal').classList.add('show');updateModalExpert()">&#128197; <span data-lang="Book Interview">Book for Follow-up</span></button>`;
+      }
+
+      // Availability quick view
+      let availQuick = '';
+      if (hasSlots) {
+        availQuick = `
+          <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
+            <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;" data-lang="Availability">Availability (next slots)</div>
+            <div>${e.slotsShort.map(s => `<span class="avail-slot">${s}</span>`).join(' ')}</div>
+            <div style="margin-top:6px;">
+              <button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy as text</span></button>
+            </div>
+          </div>`;
+      } else {
+        availQuick = `
+          <div style="background:#f9f9f9;padding:12px;border-radius:8px;margin-bottom:20px;">
+            <div style="font-size:11px;color:#999;text-transform:uppercase;margin-bottom:6px;">Availability</div>
+            <div style="font-size:13px;color:#999;">No availability slots registered</div>
+          </div>`;
+      }
+
+      // Experience paragraphs
+      const expHtml = e.experience.map(p => `<p style="margin-bottom:8px;">${p}</p>`).join('');
+
+      // Working history rows
+      const histRows = e.history.map(h => `<tr><td><strong>${h.company}</strong></td><td>${h.position}</td><td>${h.from}</td><td>${h.to}</td></tr>`).join('');
+
+      // Log items
+      const logItems = e.logs.map(l => `
+        <div class="activity-item">
+          <div class="activity-dot"></div>
+          <div>
+            <div class="activity-text">${l.text}</div>
+            <div class="activity-time">${l.time}</div>
+          </div>
+        </div>`).join('');
+
+      // Comments
+      let commentsHtml = '';
+      e.comments.forEach(c => {
+        let replyHtml = '';
+        if (c.reply) {
+          replyHtml = `
+            <div style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;margin-left:20px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#6b21a8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;">AR</div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <span style="font-weight:600;font-size:13px;">Arches Team</span>
+                  <span style="font-size:11px;color:#6b21a8;background:#f3e8ff;padding:1px 6px;border-radius:4px;">Arches Staff</span>
+                  <span style="font-size:11px;color:#bbb;">${c.reply.time}</span>
+                </div>
+                <div style="background:#faf5ff;border:1px solid #e0d4f5;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">${c.reply.text}</div>
+              </div>
+            </div>`;
+        }
+        commentsHtml += `
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:${c.avatarBg};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">${c.avatar}</div>
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span style="font-weight:600;font-size:13px;">${c.author}</span>
+                <span style="font-size:11px;color:#999;">${c.org}</span>
+                <span style="font-size:11px;color:#bbb;">${c.time}</span>
+              </div>
+              <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 14px;font-size:13px;color:#333;line-height:1.6;">${c.text}</div>
+              ${replyHtml}
+            </div>
+          </div>`;
+      });
+
+      const noComments = e.comments.length === 0 ? '<div style="text-align:center;color:#bbb;padding:20px;font-size:13px;">No comments yet</div>' : '';
+
+      // Availability tab slots
+      let availSlots = '';
+      if (hasSlots) {
+        availSlots = e.slots.map(s => `<div style="margin-bottom:8px;"><span class="avail-slot">${s}</span></div>`).join('');
+      } else {
+        availSlots = '<div style="font-size:13px;color:#999;">No availability slots registered</div>';
+      }
+
+      panel.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <h2 style="font-size:18px;font-weight:600;">${e.id} - ${e.name}</h2>
+          <span class="badge-status ${e.statusClass}">${e.status}</span>
+        </div>
+        <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated ${e.updated}</div>
+        ${actionBtns ? `<div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">${actionBtns}</div>` : '<div style="margin-bottom:20px;"></div>'}
+        ${availQuick}
+        <div class="tabs" style="margin-bottom:16px;">
+          <div class="tab active" onclick="showSubTab('expertInfo')"><span data-lang="Expert info">Expert info</span></div>
+          <div class="tab" onclick="showSubTab('activities')"><span data-lang="Activities">Activities</span></div>
+          <div class="tab" onclick="showSubTab('availability')"><span data-lang="Availability">Availability</span></div>
+        </div>
+
+        <div id="expertInfo">
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;" data-lang="Experience">Experience</h4>
+            <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">${expHtml}</div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;">Working history</h4>
+            <table><thead><tr><th>Company</th><th>Position</th><th>From</th><th>To</th></tr></thead><tbody>${histRows}</tbody></table>
+          </div>
+          <div style="margin:16px 0;">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Screening Answers</h4>
+            <div style="background:#f9f9f9;padding:12px;border-radius:8px;font-size:13px;line-height:1.7;color:#555;">
+              <p><strong>Q: ${e.screeningQ}</strong></p>
+              <p>${e.screeningA}</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="activities" style="display:none;">
+          <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
+            <div class="activity-subtab active" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;" data-lang="Log system">Log system</div>
+            <div class="activity-subtab" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;">Comments (${e.comments.length})</div>
+          </div>
+          <div id="logsystem"><div class="card">${logItems}</div></div>
+          <div id="comments" style="display:none;">
+            <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
+              <span style="font-size:16px;">&#9432;</span>
+              <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">${commentsHtml}${noComments}</div>
+            <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+                <div style="flex:1;display:flex;gap:8px;">
+                  <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
+                  <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="availability" style="display:none;">
+          <div class="card">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Available Time Slots</h4>
+            ${availSlots}
+            ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
+          </div>
+        </div>`;
+
+      // Re-apply language if JP
+      if (typeof applyLanguage === 'function') applyLanguage();
+    }
+
+    function updateModalExpert() {
+      const e = experts[currentExpertId];
+      // Update decline modal
+      const declineP = document.querySelector('#declineModal .modal-body p');
+      if (declineP) declineP.innerHTML = `You are about to decline <strong>${e.id} - ${e.name}</strong>. Please let us know why (optional).`;
+      // Update book modal
+      const bookP = document.querySelector('#bookModal .modal-body p');
+      if (bookP) bookP.innerHTML = `Select a time slot to schedule an interview with <strong>${e.id} - ${e.name}</strong>.`;
+      const slotContainer = document.querySelector('#bookModal .modal-body div[style*="flex-direction:column"]');
+      if (slotContainer) {
+        if (e.slots.length > 0) {
+          slotContainer.innerHTML = e.slots.map((s, i) => `
+            <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ddd;border-radius:6px;cursor:pointer;">
+              <input type="radio" name="slot" value="${i+1}" style="accent-color:#e67e22;"> ${s}
+            </label>`).join('');
+        } else {
+          slotContainer.innerHTML = '<div style="color:#999;font-size:13px;">No slots available. Please contact Arches team.</div>';
+        }
+      }
+    }
+
+    /* ========== UI Functions ========== */
     function toggleNotifications() {
       document.getElementById('notifDropdown').classList.toggle('show');
     }
@@ -523,6 +658,7 @@ Available slots:
     function showExpert(id) {
       document.querySelectorAll('.expert-item').forEach(el => el.classList.remove('active'));
       event.currentTarget.classList.add('active');
+      renderExpert(id);
     }
 
     function updateBulkActions() {
@@ -532,13 +668,17 @@ Available slots:
     }
 
     function copyAvailability() {
-      const text = `EX-1041870 - Luci Dao - ENGIE North America\nAvailable slots:\n- Mar 18 (Tue), 10:00 AM - 12:00 PM EST\n- Mar 19 (Wed), 2:00 PM - 4:00 PM EST\n- Mar 20 (Thu), 9:00 AM - 11:00 AM EST`;
+      const e = experts[currentExpertId];
+      const text = `${e.id} - ${e.name} - ${e.company}\nAvailable slots:\n${e.slots.map(s => '- ' + s).join('\n')}`;
       navigator.clipboard.writeText(text).then(() => {
-        const box = document.getElementById('availTextBox');
-        if (box) { box.style.display = 'block'; }
         alert('Availability copied to clipboard!');
       });
     }
+
+    // Render first expert on load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderExpert(1);
+    });
   </script>
 </body>
 </html>
