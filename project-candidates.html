@@ -211,42 +211,42 @@
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
           <select id="clientTimezone" class="form-control" style="flex:1;max-width:380px;" onchange="renderTimeline()">
-            <option value="-8">PST (UTC-8) — US Pacific</option>
-            <option value="-7">MST (UTC-7) — US Mountain</option>
-            <option value="-6">CST (UTC-6) — US Central</option>
-            <option value="-5">EST (UTC-5) — US Eastern</option>
-            <option value="-3">BRT (UTC-3) — Brazil</option>
-            <option value="0">GMT (UTC+0) — London</option>
-            <option value="1">CET (UTC+1) — Central Europe</option>
-            <option value="2">EET (UTC+2) — Eastern Europe / Cairo</option>
-            <option value="3">MSK (UTC+3) — Moscow / Riyadh</option>
-            <option value="4">GST (UTC+4) — Dubai / Abu Dhabi</option>
-            <option value="5">PKT (UTC+5) — Pakistan / Karachi</option>
-            <option value="5.5">IST (UTC+5:30) — India</option>
-            <option value="6">BST (UTC+6) — Bangladesh / Dhaka</option>
-            <option value="7">ICT (UTC+7) — Bangkok / Jakarta / Hanoi</option>
-            <option value="8">SGT (UTC+8) — Singapore / Hong Kong / Beijing / Taipei / Manila / KL</option>
-            <option value="9" selected>JST (UTC+9) — Japan / Korea</option>
-            <option value="10">AEST (UTC+10) — Sydney / Melbourne</option>
-            <option value="12">NZST (UTC+12) — New Zealand</option>
+            <option value="-8">(UTC-08:00) Los Angeles, Vancouver</option>
+            <option value="-7">(UTC-07:00) Denver, Phoenix</option>
+            <option value="-6">(UTC-06:00) Chicago, Mexico City</option>
+            <option value="-5">(UTC-05:00) New York, Toronto</option>
+            <option value="-3">(UTC-03:00) S&atilde;o Paulo, Buenos Aires</option>
+            <option value="0">(UTC+00:00) London, Dublin, Lisbon</option>
+            <option value="1">(UTC+01:00) Paris, Berlin, Amsterdam</option>
+            <option value="2">(UTC+02:00) Cairo, Helsinki, Bucharest</option>
+            <option value="3">(UTC+03:00) Moscow, Istanbul, Riyadh</option>
+            <option value="4">(UTC+04:00) Dubai, Baku</option>
+            <option value="5">(UTC+05:00) Karachi, Tashkent</option>
+            <option value="5.5">(UTC+05:30) Mumbai, New Delhi, Colombo</option>
+            <option value="6">(UTC+06:00) Dhaka, Almaty</option>
+            <option value="7">(UTC+07:00) Bangkok, Jakarta, Hanoi</option>
+            <option value="8">(UTC+08:00) Singapore, Hong Kong, Taipei, Perth</option>
+            <option value="9" selected>(UTC+09:00) Tokyo, Seoul</option>
+            <option value="10">(UTC+10:00) Sydney, Melbourne</option>
+            <option value="12">(UTC+12:00) Auckland, Wellington</option>
           </select>
         </div>
 
         <!-- Duration Selection -->
-        <div class="form-group">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:8px;">
             <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Interview Duration">Interview Duration</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="30" style="accent-color:#e67e22;"> 30 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="45" style="accent-color:#e67e22;"> 45 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="60" style="accent-color:#e67e22;" checked> 60 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="75" style="accent-color:#e67e22;"> 75 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="90" style="accent-color:#e67e22;"> 90 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="105" style="accent-color:#e67e22;"> 105 min</label>
-            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:13px;"><input type="radio" name="bookDuration" value="120" style="accent-color:#e67e22;"> 120 min</label>
-          </div>
+          <select id="bookDuration" class="form-control" style="width:160px;">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="75">75 min</option>
+            <option value="90">90 min</option>
+            <option value="105">105 min</option>
+            <option value="120">120 min</option>
+          </select>
         </div>
 
         <!-- 2-week Timeline Calendar -->
@@ -254,7 +254,7 @@
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
             <span style="border-left:3px solid #e67e22;padding-left:8px;font-weight:600;font-size:14px;color:#e67e22;" data-lang="Select preferred datetime">Select your preferred date & time</span>
           </div>
-          <div id="tzInfoLabel" style="font-size:11px;color:#999;margin-bottom:8px;">* Times displayed in your timezone (JST). Expert's availability has been converted.</div>
+          <div id="tzInfoLabel" style="font-size:11px;color:#999;margin-bottom:8px;">* Times displayed in your timezone (UTC+09:00). Expert's availability has been converted.</div>
 
           <!-- Timeline Nav -->
           <div style="display:flex;align-items:center;margin-bottom:0;">
@@ -291,12 +291,18 @@
           <input type="text" id="selectedTimeDisplay" class="form-control" placeholder="Click a green slot on the calendar above" readonly style="flex:1;background:#f9f9f9;cursor:default;">
         </div>
 
-        <!-- Number of attendees -->
-        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
-          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Number of Attendees">Number of Attendees</label>
-          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
-          <input type="number" class="form-control" value="1" min="1" max="10" style="width:60px;">
-          <span style="font-size:12px;color:#999;">* If more than 1, please note in comments</span>
+        <!-- Attendees -->
+        <div class="form-group" id="attendeesSection">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Attendees">Attendees</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <div id="attendeeList">
+            <div class="attendee-row" style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <input type="email" class="form-control" value="enrico.tranchina@archesconsulting.com" style="flex:1;font-size:13px;" readonly>
+            </div>
+          </div>
+          <button type="button" onclick="addAttendeeRow()" style="background:none;border:1px dashed #ccc;color:#e67e22;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:4px;" data-lang="Add attendee">＋ Add attendee</button>
         </div>
 
         <!-- Interpretation option -->
@@ -317,7 +323,32 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Cancel">Cancel</button>
-        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Confirm Booking">Confirm Booking</button>
+        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="showBookingConfirmation()" data-lang="Confirm Booking">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Confirmation Modal -->
+  <div class="modal-overlay" id="bookConfirmModal">
+    <div class="modal" style="width:560px;max-width:90vw;">
+      <div class="modal-header">
+        <h3 data-lang="Booking Confirmation">Booking Confirmation</h3>
+        <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <div id="confirmSummary" style="font-size:13px;line-height:1.8;"></div>
+        <div style="margin-top:16px;padding:14px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;">
+          <div style="display:flex;align-items:flex-start;gap:8px;">
+            <span style="font-size:18px;">&#9888;&#65039;</span>
+            <p style="margin:0;font-size:12px;color:#6d4c00;line-height:1.6;" id="confirmNotice" data-lang="booking_notice">
+              This is not a final confirmation. A scheduling request will be sent to the expert for the date/time shown above. Once the expert accepts, a calendar invitation will be issued.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="this.closest('.modal-overlay').classList.remove('show')" data-lang="Back">Back</button>
+        <button class="btn btn-primary" style="padding:10px 32px;font-size:14px;" onclick="submitBookingRequest()" data-lang="Send Request">Send Request</button>
       </div>
     </div>
   </div>
@@ -667,14 +698,18 @@
 
     /* ========== Timezone Helpers ========== */
     const tzOffsets = { 'PST':-8,'MST':-7,'CST':-6,'EST':-5,'BRT':-3,'GMT':0,'CET':1,'EET':2,'MSK':3,'GST':4,'PKT':5,'IST':5.5,'BST':6,'ICT':7,'SGT':8,'HKT':8,'CST_CN':8,'JST':9,'KST':9,'AEST':10,'NZST':12 };
-    const tzLabels = { '-8':'PST','-7':'MST','-6':'CST','-5':'EST','-3':'BRT','0':'GMT','1':'CET','2':'EET','3':'MSK','4':'GST','5':'PKT','5.5':'IST','6':'BST','7':'ICT','8':'SGT','9':'JST','10':'AEST','12':'NZST' };
 
     function getClientTzOffset() {
       const sel = document.getElementById('clientTimezone');
-      return sel ? parseInt(sel.value) : 9;
+      return sel ? parseFloat(sel.value) : 9;
     }
     function getClientTzLabel() {
-      return tzLabels[String(getClientTzOffset())] || 'UTC' + (getClientTzOffset() >= 0 ? '+' : '') + getClientTzOffset();
+      const off = getClientTzOffset();
+      const sign = off >= 0 ? '+' : '-';
+      const abs = Math.abs(off);
+      const h = Math.floor(abs);
+      const m = (abs - h) * 60;
+      return 'UTC' + sign + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
     }
 
     /* ========== 2-Week Timeline Booking (VisasQ-style) ========== */
@@ -907,7 +942,7 @@
       const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       const d = new Date(2026, 2, day);
       const dow = dayNames[d.getDay()];
-      const dur = document.querySelector('input[name="bookDuration"]:checked');
+      const dur = document.getElementById('bookDuration');
       const durVal = dur ? parseInt(dur.value) : 60;
       const startTotal = hour * 60 + minute;
       const endTotal = startTotal + durVal;
@@ -923,6 +958,53 @@
 
       document.getElementById('selectedTimeDisplay').value = `Mar ${day} (${dow}), ${fmt(hour, minute)} - ${fmt(endH, endM)} ${tzLabel}`;
       renderTimeline();
+    }
+
+    /* ========== Booking Confirmation ========== */
+    function showBookingConfirmation() {
+      const timeDisplay = document.getElementById('selectedTimeDisplay').value;
+      if (!timeDisplay) { alert('Please select a time slot first.'); return; }
+
+      const e = experts[currentExpertId];
+      const dur = document.getElementById('bookDuration');
+      const durVal = dur ? dur.value : '60';
+      const emails = getAttendeeEmails();
+
+      let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+      html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Expert">Expert</td><td style="padding:6px 0;">${e.id} - ${e.name}</td></tr>`;
+      html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Preferred Date & Time">Date & Time</td><td style="padding:6px 0;">${timeDisplay}</td></tr>`;
+      html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Interview Duration">Duration</td><td style="padding:6px 0;">${durVal} min</td></tr>`;
+      html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Attendees">Attendees</td><td style="padding:6px 0;">${emails.map(em => `<div>${em}</div>`).join('')}</td></tr>`;
+      html += '</table>';
+
+      document.getElementById('confirmSummary').innerHTML = html;
+      document.getElementById('bookConfirmModal').classList.add('show');
+      if (typeof applyLanguage === 'function') applyLanguage();
+    }
+
+    function submitBookingRequest() {
+      document.getElementById('bookConfirmModal').classList.remove('show');
+      document.getElementById('bookModal').classList.remove('show');
+      // In a real app, this would send an API request
+      alert('Scheduling request has been sent successfully.');
+    }
+
+    /* ========== Attendee Functions ========== */
+    function addAttendeeRow() {
+      const list = document.getElementById('attendeeList');
+      const row = document.createElement('div');
+      row.className = 'attendee-row';
+      row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:6px;';
+      row.innerHTML = `<input type="email" class="form-control" placeholder="email@example.com" style="flex:1;font-size:13px;">
+        <button type="button" onclick="removeAttendeeRow(this)" style="background:none;border:none;color:#e74c3c;cursor:pointer;font-size:18px;padding:0 4px;line-height:1;" title="Remove">&times;</button>`;
+      list.appendChild(row);
+    }
+    function removeAttendeeRow(btn) {
+      btn.closest('.attendee-row').remove();
+    }
+    function getAttendeeEmails() {
+      const rows = document.querySelectorAll('#attendeeList .attendee-row input[type="email"]');
+      return Array.from(rows).map(i => i.value.trim()).filter(v => v);
     }
 
     /* ========== UI Functions ========== */
