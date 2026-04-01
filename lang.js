@@ -245,10 +245,15 @@ function applyLang() {
   const elements = document.querySelectorAll('[data-lang]');
   elements.forEach(el => {
     const key = el.getAttribute('data-lang');
+    // Store original EN text on first run
+    if (!el.hasAttribute('data-lang-en')) {
+      el.setAttribute('data-lang-en', el.textContent);
+    }
     if (currentLang === 'jp' && translations[key]) {
       el.textContent = translations[key];
     } else if (currentLang === 'en') {
-      el.textContent = key;
+      // Restore original EN text (not the key name)
+      el.textContent = el.getAttribute('data-lang-en') || key;
     }
   });
 }
