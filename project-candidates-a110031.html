@@ -579,27 +579,18 @@
         </div>
 
         <!-- Meeting Method -->
-        <div class="form-group">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="form-group" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:8px;">
             <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Meeting Method">Meeting Method</label>
             <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
-              <input type="radio" name="meetingMethod" value="arches_zoom" style="accent-color:#e67e22;" checked>
-              <span><strong data-lang="Arches Zoom">Arches-issued Zoom</strong><br><span style="font-size:11px;color:#999;" data-lang="arches_zoom_desc">A Zoom meeting link will be provided by Arches</span></span>
-            </label>
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
-              <input type="radio" name="meetingMethod" value="client_link" style="accent-color:#e67e22;" onchange="toggleClientLink()">
-              <span><strong data-lang="Client Link">Provide your own meeting link</strong><br><span style="font-size:11px;color:#999;" data-lang="client_link_desc">Paste your Zoom, Teams, or Google Meet link below</span></span>
-            </label>
-            <div id="clientLinkInput" style="display:none;margin-left:28px;">
-              <input type="url" id="clientMeetingLink" class="form-control" placeholder="https://zoom.us/j/... or https://teams.microsoft.com/..." style="font-size:13px;">
-            </div>
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
-              <input type="radio" name="meetingMethod" value="call_in" style="accent-color:#e67e22;" onchange="toggleClientLink()">
-              <span><strong data-lang="Call-in">Phone call-in</strong><br><span style="font-size:11px;color:#999;" data-lang="call_in_desc">Dial-in details will be provided separately</span></span>
-            </label>
+          <select id="meetingMethodSelect" class="form-control" style="flex:1;max-width:320px;" onchange="toggleClientLink()">
+            <option value="arches_zoom">Arches Zoom Link</option>
+            <option value="arches_callin">Arches Zoom (Call-in)</option>
+            <option value="client_link">Custom Meeting Link</option>
+          </select>
+          <div id="clientLinkInput" style="display:none;width:100%;margin-top:4px;">
+            <input type="url" id="clientMeetingLink" class="form-control" placeholder="https://zoom.us/j/... or https://teams.microsoft.com/..." style="font-size:13px;">
           </div>
         </div>
 
@@ -1426,6 +1417,7 @@
     /* ========== 2-Week Timeline Booking (VisasQ-style) ========== */
     let weekOffset = 0;
     let selectedSlotKey = null;
+    let currentAvailBlocks = []; // Stores parsed availability blocks for validation
 
     function updateModalExpert() {
       const e = experts[currentExpertId];
@@ -1513,6 +1505,7 @@
     function renderTimeline() {
       const e = experts[currentExpertId];
       const blocks = parseSlotToBlocks(e.slots);
+      currentAvailBlocks = blocks; // Store for validation
       const ivBlocks = parseBookedBlocks();
       const header = document.getElementById('timelineHeader');
       const grid = document.getElementById('timelineGrid');
@@ -1673,29 +1666,61 @@
 
     /* ========== Meeting Method Toggle ========== */
     function toggleClientLink() {
-      const method = document.querySelector('input[name="meetingMethod"]:checked');
+      const sel = document.getElementById('meetingMethodSelect');
       const linkInput = document.getElementById('clientLinkInput');
-      if (linkInput) linkInput.style.display = method && method.value === 'client_link' ? 'block' : 'none';
+      if (linkInput && sel) linkInput.style.display = sel.value === 'client_link' ? 'block' : 'none';
     }
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('input[name="meetingMethod"]').forEach(r => r.addEventListener('change', toggleClientLink));
-    });
 
     function getMeetingMethodLabel() {
-      const method = document.querySelector('input[name="meetingMethod"]:checked');
-      if (!method) return 'Arches-issued Zoom';
-      if (method.value === 'arches_zoom') return 'Arches-issued Zoom';
-      if (method.value === 'client_link') {
+      const sel = document.getElementById('meetingMethodSelect');
+      if (!sel) return 'Arches Zoom Link';
+      if (sel.value === 'arches_zoom') return 'Arches Zoom Link';
+      if (sel.value === 'arches_callin') return 'Arches Zoom (Call-in)';
+      if (sel.value === 'client_link') {
         const link = document.getElementById('clientMeetingLink');
-        return 'Client link: ' + (link && link.value ? link.value : '(not provided)');
+        return 'Custom Link: ' + (link && link.value ? link.value : '(not provided)');
       }
-      return 'Phone call-in';
+      return sel.options[sel.selectedIndex].text;
+    }
+
+    /* ========== Availability Validation ========== */
+    function checkAvailabilityCoverage() {
+      if (!selectedSlotKey) return true;
+      const parts = selectedSlotKey.split('-');
+      const day = parseInt(parts[0]);
+      const hour = parseInt(parts[1]);
+      const minute = parseInt(parts[2]);
+      const dur = document.getElementById('bookDuration');
+      const durVal = dur ? parseInt(dur.value) : 60;
+      const startTotal = hour * 60 + minute;
+      const endTotal = startTotal + durVal;
+
+      for (let m = startTotal; m < endTotal; m += 15) {
+        let checkDay = day;
+        let checkMin = m;
+        while (checkMin >= 1440) { checkMin -= 1440; checkDay += 1; }
+        const checkHour = Math.floor(checkMin / 60);
+        const checkMinute = checkMin % 60;
+        const found = currentAvailBlocks.some(b => b.day === checkDay && b.hour === checkHour && b.minute === checkMinute);
+        if (!found) return false;
+      }
+      return true;
     }
 
     /* ========== Booking Confirmation ========== */
     function showBookingConfirmation() {
       const timeDisplay = document.getElementById('selectedTimeDisplay').value;
       if (!timeDisplay) { alert('Please select a time slot first.'); return; }
+
+      if (!checkAvailabilityCoverage()) {
+        const dur = document.getElementById('bookDuration');
+        const durVal = dur ? dur.value : '60';
+        const msg = document.documentElement.lang === 'ja'
+          ? `⚠️ 選択された開始時間から${durVal}分間のインタビューは、エキスパートのAvailability枠を超えています。\n\n開始時間を早めるか、インタビュー時間を短くしてください。`
+          : `⚠️ The selected ${durVal}-minute interview extends beyond the expert's available time window.\n\nPlease select an earlier start time or reduce the interview duration.`;
+        alert(msg);
+        return;
+      }
 
       const e = experts[currentExpertId];
       const dur = document.getElementById('bookDuration');
