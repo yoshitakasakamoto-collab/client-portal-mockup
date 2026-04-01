@@ -62,6 +62,15 @@
         <div class="split-view">
           <!-- Left: Expert List -->
           <div class="split-left">
+            <!-- Bulk action bar (hidden until checkboxes selected) -->
+            <div id="bulkActionBar" style="display:none;padding:8px 12px;background:#fff8e1;border-bottom:1px solid #ffe082;display:none;align-items:center;justify-content:space-between;">
+              <span id="bulkCount" style="font-size:12px;font-weight:600;color:#6d4c00;">0 <span data-lang="selected">selected</span></span>
+              <button class="btn btn-outline btn-sm" onclick="exportSelectedExperts()" style="font-size:11px;">&#128229; <span data-lang="Export Selected">Export Selected</span></button>
+            </div>
+            <!-- Export All button -->
+            <div style="padding:8px 12px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:flex-end;">
+              <button class="btn btn-outline btn-sm" onclick="exportAllExperts()" style="font-size:11px;">&#128229; <span data-lang="Export List">Export List</span></button>
+            </div>
             <div class="segment-section">
               <div class="segment-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
                 <span>&#9660; 人材業界</span>
@@ -569,6 +578,31 @@
           <button type="button" onclick="addAttendeeRow()" style="background:none;border:1px dashed #ccc;color:#e67e22;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:4px;" data-lang="Add attendee">＋ Add attendee</button>
         </div>
 
+        <!-- Meeting Method -->
+        <div class="form-group">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Meeting Method">Meeting Method</label>
+            <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Required</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
+              <input type="radio" name="meetingMethod" value="arches_zoom" style="accent-color:#e67e22;" checked>
+              <span><strong data-lang="Arches Zoom">Arches-issued Zoom</strong><br><span style="font-size:11px;color:#999;" data-lang="arches_zoom_desc">A Zoom meeting link will be provided by Arches</span></span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
+              <input type="radio" name="meetingMethod" value="client_link" style="accent-color:#e67e22;" onchange="toggleClientLink()">
+              <span><strong data-lang="Client Link">Provide your own meeting link</strong><br><span style="font-size:11px;color:#999;" data-lang="client_link_desc">Paste your Zoom, Teams, or Google Meet link below</span></span>
+            </label>
+            <div id="clientLinkInput" style="display:none;margin-left:28px;">
+              <input type="url" id="clientMeetingLink" class="form-control" placeholder="https://zoom.us/j/... or https://teams.microsoft.com/..." style="font-size:13px;">
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;padding:8px 12px;border:1px solid #e0e0e0;border-radius:6px;">
+              <input type="radio" name="meetingMethod" value="call_in" style="accent-color:#e67e22;" onchange="toggleClientLink()">
+              <span><strong data-lang="Call-in">Phone call-in</strong><br><span style="font-size:11px;color:#999;" data-lang="call_in_desc">Dial-in details will be provided separately</span></span>
+            </label>
+          </div>
+        </div>
+
         <!-- Interpretation option -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;">
           <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Options">Options</label>
@@ -617,6 +651,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="lang.js"></script>
   <script>
     /* ========== Expert Data ========== */
@@ -1318,57 +1353,53 @@
         </div>
         <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated ${e.updated}</div>
         ${actionBtns ? `<div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">${actionBtns}</div>` : '<div style="margin-bottom:20px;"></div>'}
-        ${availQuick}
-        <div class="tabs" style="margin-bottom:16px;">
-          <div class="tab active" onclick="showSubTab('expertInfo')"><span data-lang="Expert info">Expert info</span></div>
-          <div class="tab" onclick="showSubTab('activities')"><span data-lang="Activities">Activities</span></div>
-          <div class="tab" onclick="showSubTab('availability')"><span data-lang="Availability">Availability</span></div>
+
+        <!-- 1. Working History -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Working History">Working History</h4>
+          <table><thead><tr><th>Company</th><th>Position</th><th>From</th><th>To</th></tr></thead><tbody>${histRows}</tbody></table>
         </div>
 
-        <div id="expertInfo">
-          <div style="margin-bottom:20px;">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;" data-lang="Experience">Experience</h4>
-            <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">${expHtml}</div>
-          </div>
-          <div style="margin-bottom:20px;">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;">Working history</h4>
-            <table><thead><tr><th>Company</th><th>Position</th><th>From</th><th>To</th></tr></thead><tbody>${histRows}</tbody></table>
-          </div>
-          <div style="margin:16px 0;">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Screening Answers</h4>
-            ${screeningHtml}
-          </div>
+        <!-- 2. Experience -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Experience">Experience</h4>
+          <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">${expHtml}</div>
         </div>
 
-        <div id="activities" style="display:none;">
-          <div style="display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:16px;">
-            <div class="activity-subtab" onclick="showActivitySubTab('logsystem')" style="padding:8px 16px;font-size:13px;font-weight:500;cursor:pointer;color:#999;border-bottom:2px solid transparent;margin-bottom:-2px;" data-lang="Log system">Log system</div>
-            <div class="activity-subtab active" onclick="showActivitySubTab('comments')" style="padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #e67e22;margin-bottom:-2px;color:#e67e22;">Comments (${e.comments.length})</div>
+        <!-- 3. Screening Answers -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;">Screening Answers</h4>
+          ${screeningHtml}
+        </div>
+
+        <!-- 4. Availability -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Available Schedule">Available Schedule</h4>
+          ${availSlots}
+          ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
+        </div>
+
+        <!-- 5. Comments & Activity -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;">&#128172; Comments (${e.comments.length})</h4>
+          <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
+            <span style="font-size:16px;">&#9432;</span>
+            <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
           </div>
-          <div id="logsystem" style="display:none;"><div class="card">${logItems}</div></div>
-          <div id="comments">
-            <div style="background:#f3e8ff;border:1px solid #d4b5ff;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6b21a8;display:flex;align-items:flex-start;gap:8px;">
-              <span style="font-size:16px;">&#9432;</span>
-              <span data-lang="comment_info_banner">Please put a comment in this section if you have any questions about this expert. You can ask Arches staff to update further information about this expert.</span>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">${commentsHtml}${noComments}</div>
-            <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
-                <div style="flex:1;display:flex;gap:8px;">
-                  <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
-                  <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
-                </div>
+          <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">${commentsHtml}${noComments}</div>
+          <div style="border-top:1px solid #e0e0e0;padding-top:16px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:32px;height:32px;border-radius:50%;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;">ET</div>
+              <div style="flex:1;display:flex;gap:8px;">
+                <textarea class="form-control" placeholder="Add a comment..." style="flex:1;min-height:40px;resize:vertical;font-size:13px;"></textarea>
+                <button class="btn btn-primary btn-sm" style="align-self:flex-end;" data-lang="Send">Send</button>
               </div>
             </div>
           </div>
-        </div>
-
-        <div id="availability" style="display:none;">
-          <div class="card">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;" data-lang="Available Schedule">Available Schedule</h4>
-            ${availSlots}
-            ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
+          <details style="margin-top:20px;">
+            <summary style="cursor:pointer;font-size:13px;font-weight:600;color:#777;padding:8px 0;" data-lang="Activity Log">Activity Log</summary>
+            <div class="card" style="margin-top:8px;">${logItems}</div>
+          </details>
           </div>
         </div>`;
 
@@ -1640,6 +1671,27 @@
       renderTimeline();
     }
 
+    /* ========== Meeting Method Toggle ========== */
+    function toggleClientLink() {
+      const method = document.querySelector('input[name="meetingMethod"]:checked');
+      const linkInput = document.getElementById('clientLinkInput');
+      if (linkInput) linkInput.style.display = method && method.value === 'client_link' ? 'block' : 'none';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('input[name="meetingMethod"]').forEach(r => r.addEventListener('change', toggleClientLink));
+    });
+
+    function getMeetingMethodLabel() {
+      const method = document.querySelector('input[name="meetingMethod"]:checked');
+      if (!method) return 'Arches-issued Zoom';
+      if (method.value === 'arches_zoom') return 'Arches-issued Zoom';
+      if (method.value === 'client_link') {
+        const link = document.getElementById('clientMeetingLink');
+        return 'Client link: ' + (link && link.value ? link.value : '(not provided)');
+      }
+      return 'Phone call-in';
+    }
+
     /* ========== Booking Confirmation ========== */
     function showBookingConfirmation() {
       const timeDisplay = document.getElementById('selectedTimeDisplay').value;
@@ -1650,10 +1702,12 @@
       const durVal = dur ? dur.value : '60';
       const emails = getAttendeeEmails();
 
+      const meetingLabel = getMeetingMethodLabel();
       let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
       html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Expert">Expert</td><td style="padding:6px 0;">${e.id} - ${e.name}</td></tr>`;
       html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Preferred Date & Time">Date & Time</td><td style="padding:6px 0;">${timeDisplay}</td></tr>`;
       html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Interview Duration">Duration</td><td style="padding:6px 0;">${durVal} min</td></tr>`;
+      html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Meeting Method">Meeting</td><td style="padding:6px 0;">${meetingLabel}</td></tr>`;
       html += `<tr><td style="padding:6px 12px 6px 0;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;" data-lang="Attendees">Attendees</td><td style="padding:6px 0;">${emails.map(em => `<div>${em}</div>`).join('')}</td></tr>`;
       html += '</table>';
 
@@ -1697,33 +1751,9 @@
       }
     });
 
-    function showSubTab(tab) {
-      document.getElementById('expertInfo').style.display = tab === 'expertInfo' ? 'block' : 'none';
-      document.getElementById('activities').style.display = tab === 'activities' ? 'block' : 'none';
-      document.getElementById('availability').style.display = tab === 'availability' ? 'block' : 'none';
-      const tabs = document.querySelectorAll('.split-right .tabs .tab');
-      tabs.forEach((t, i) => {
-        const names = ['expertInfo', 'activities', 'availability'];
-        t.classList.toggle('active', names[i] === tab);
-      });
-    }
-
-    function showActivitySubTab(tab) {
-      document.getElementById('logsystem').style.display = tab === 'logsystem' ? 'block' : 'none';
-      document.getElementById('comments').style.display = tab === 'comments' ? 'block' : 'none';
-      const subtabs = document.querySelectorAll('.activity-subtab');
-      subtabs.forEach(t => {
-        if ((tab === 'logsystem' && t.textContent.includes('Log')) || (tab === 'comments' && t.textContent.includes('Comment'))) {
-          t.style.borderBottomColor = '#e67e22';
-          t.style.color = '#e67e22';
-          t.style.fontWeight = '600';
-        } else {
-          t.style.borderBottomColor = 'transparent';
-          t.style.color = '#999';
-          t.style.fontWeight = '500';
-        }
-      });
-    }
+    // Tab functions kept as no-ops for backward compatibility
+    function showSubTab(tab) {}
+    function showActivitySubTab(tab) {}
 
     function showExpert(id) {
       document.querySelectorAll('.expert-item').forEach(el => el.classList.remove('active'));
@@ -1752,6 +1782,59 @@
     }
 
     function updateBulkActions() {
+      const checked = document.querySelectorAll('.split-left .checkbox-wrapper input[type="checkbox"]:checked');
+      const bar = document.getElementById('bulkActionBar');
+      const countEl = document.getElementById('bulkCount');
+      if (checked.length > 0) {
+        bar.style.display = 'flex';
+        countEl.innerHTML = `${checked.length} <span data-lang="selected">selected</span>`;
+      } else {
+        bar.style.display = 'none';
+      }
+      if (typeof applyLanguage === 'function') applyLanguage();
+    }
+
+    function getExpertRows(expertIds) {
+      return expertIds.map(id => {
+        const e = experts[id];
+        return {
+          'ID': e.id,
+          'Name': e.name || '',
+          'Company': e.company || '',
+          'Position': e.role || '',
+          'Status': e.status,
+          'Cost': e.cost || '',
+          'Availability': e.slots.join('; ')
+        };
+      });
+    }
+
+    function exportAllExperts() {
+      const ids = Object.keys(experts).map(Number);
+      const rows = getExpertRows(ids);
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Experts');
+      XLSX.writeFile(wb, 'expert_list.xlsx');
+    }
+
+    function exportSelectedExperts() {
+      const checkboxes = document.querySelectorAll('.split-left .checkbox-wrapper input[type="checkbox"]:checked');
+      const ids = [];
+      checkboxes.forEach(cb => {
+        const item = cb.closest('.expert-item');
+        if (item) {
+          const onclick = item.getAttribute('onclick');
+          const match = onclick && onclick.match(/showExpert\((\d+)\)/);
+          if (match) ids.push(parseInt(match[1]));
+        }
+      });
+      if (ids.length === 0) { alert('No experts selected.'); return; }
+      const rows = getExpertRows(ids);
+      const ws = XLSX.utils.json_to_sheet(rows);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Experts');
+      XLSX.writeFile(wb, 'expert_list_selected.xlsx');
     }
 
     function copyAvailability() {
@@ -1764,6 +1847,28 @@
 
     // Render expert on load (check URL param)
     document.addEventListener('DOMContentLoaded', function() {
+      // Auto-detect user timezone (DST-aware)
+      try {
+        const now = new Date();
+        const offsetMin = -now.getTimezoneOffset();
+        const offsetHours = offsetMin / 60;
+        const sel = document.getElementById('clientTimezone');
+        if (sel) {
+          let found = false;
+          sel.querySelectorAll('option').forEach(opt => {
+            if (parseFloat(opt.value) === offsetHours) { opt.selected = true; found = true; }
+          });
+          if (!found) {
+            let closest = null, minDiff = Infinity;
+            sel.querySelectorAll('option').forEach(opt => {
+              const diff = Math.abs(parseFloat(opt.value) - offsetHours);
+              if (diff < minDiff) { minDiff = diff; closest = opt; }
+            });
+            if (closest) closest.selected = true;
+          }
+        }
+      } catch(e) {}
+
       const params = new URLSearchParams(window.location.search);
       const targetEx = params.get('expert');
       let targetId = 1;
