@@ -662,32 +662,32 @@
         <div style="font-size:13px;color:#777;margin-bottom:4px;">Updated ${e.updated}</div>
         ${actionBtns ? `<div style="display:flex;gap:8px;margin-bottom:20px;margin-top:12px;">${actionBtns}</div>` : '<div style="margin-bottom:20px;"></div>'}
 
-        <!-- 1. Working History -->
+        <!-- 1. Availability -->
+        <div style="margin-bottom:24px;">
+          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Available Schedule">Available Schedule</h4>
+          ${availSlots}
+          ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
+        </div>
+
+        <!-- 2. Working History -->
         <div style="margin-bottom:24px;">
           <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Working History">Working History</h4>
           <table><thead><tr><th>Company</th><th>Position</th><th>From</th><th>To</th></tr></thead><tbody>${histRows}</tbody></table>
         </div>
 
-        <!-- 2. Experience -->
+        <!-- 3. Experience -->
         <div style="margin-bottom:24px;">
           <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Experience">Experience</h4>
           <div style="font-size:13px;line-height:1.8;color:#555;padding-left:16px;">${expHtml}</div>
         </div>
 
-        <!-- 3. Screening Answers -->
+        <!-- 4. Screening Answers -->
         <div style="margin-bottom:24px;">
           <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;">Screening Answers</h4>
           <div style="background:#f9f9f9;padding:12px;border-radius:8px;font-size:13px;line-height:1.7;color:#555;">
             <p><strong>Q: ${e.screeningQ}</strong></p>
             <p>${e.screeningA}</p>
           </div>
-        </div>
-
-        <!-- 4. Availability -->
-        <div style="margin-bottom:24px;">
-          <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e67e22;" data-lang="Available Schedule">Available Schedule</h4>
-          ${availSlots}
-          ${hasSlots ? `<div style="margin-top:12px;"><button class="btn btn-outline btn-sm" onclick="copyAvailability()">&#128203; <span data-lang="Copy availability as text">Copy availability as text</span></button></div>` : ''}
         </div>
 
         <!-- 5. Comments & Activity -->
