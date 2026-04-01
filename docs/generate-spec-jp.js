@@ -1,7 +1,7 @@
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
-        Header, Footer, AlignmentType, LevelFormat,
+        Header, Footer, AlignmentType,
         HeadingLevel, BorderStyle, WidthType, ShadingType,
-        PageNumber, PageBreak, TableOfContents } = require('docx');
+        PageNumber, PageBreak } = require('docx');
 const fs = require('fs');
 
 const border = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
@@ -9,413 +9,370 @@ const borders = { top: border, bottom: border, left: border, right: border };
 const cellMargins = { top: 60, bottom: 60, left: 100, right: 100 };
 const headerShading = { fill: "2C3E50", type: ShadingType.CLEAR };
 const altShading = { fill: "F8F9FA", type: ShadingType.CLEAR };
+const noteShading = { fill: "FFF8E1", type: ShadingType.CLEAR };
 
 function hCell(text, width) {
   return new TableCell({
     borders, width: { size: width, type: WidthType.DXA },
     shading: headerShading, margins: cellMargins,
-    children: [new Paragraph({ children: [new TextRun({ text, bold: true, color: "FFFFFF", font: "Arial", size: 20 })] })]
+    children: [new Paragraph({ children: [new TextRun({ text, bold: true, color: "FFFFFF", font: "Meiryo", size: 20 })] })]
   });
 }
 function cell(text, width, shading) {
   return new TableCell({
     borders, width: { size: width, type: WidthType.DXA },
     shading: shading || undefined, margins: cellMargins,
-    children: [new Paragraph({ children: [new TextRun({ text, font: "Arial", size: 20 })] })]
+    children: [new Paragraph({ children: [new TextRun({ text, font: "Meiryo", size: 20 })] })]
   });
 }
+
 function heading1(text) {
   return new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 360, after: 200 },
-    children: [new TextRun({ text, bold: true, font: "Arial", size: 32 })] });
+    children: [new TextRun({ text, bold: true, font: "Meiryo", size: 32 })] });
 }
 function heading2(text) {
   return new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 280, after: 160 },
-    children: [new TextRun({ text, bold: true, font: "Arial", size: 26 })] });
+    children: [new TextRun({ text, bold: true, font: "Meiryo", size: 26 })] });
 }
 function heading3(text) {
   return new Paragraph({ heading: HeadingLevel.HEADING_3, spacing: { before: 200, after: 120 },
-    children: [new TextRun({ text, bold: true, font: "Arial", size: 22 })] });
+    children: [new TextRun({ text, bold: true, font: "Meiryo", size: 22 })] });
 }
-function para(text, opts = {}) {
-  return new Paragraph({ spacing: { after: 120 }, ...opts,
-    children: [new TextRun({ text, font: "Arial", size: 20, ...opts.run })] });
+function para(text) {
+  return new Paragraph({ spacing: { after: 120 },
+    children: [new TextRun({ text, font: "Meiryo", size: 20 })] });
 }
 function boldPara(label, text) {
   return new Paragraph({ spacing: { after: 100 },
     children: [
-      new TextRun({ text: label, bold: true, font: "Arial", size: 20 }),
-      new TextRun({ text, font: "Arial", size: 20 })
+      new TextRun({ text: label, bold: true, font: "Meiryo", size: 20 }),
+      new TextRun({ text, font: "Meiryo", size: 20 })
     ]
   });
 }
-function bulletItem(text, ref) {
-  return new Paragraph({ numbering: { reference: ref, level: 0 }, spacing: { after: 60 },
-    children: [new TextRun({ text, font: "Arial", size: 20 })] });
+function bullet(text) {
+  return new Paragraph({ spacing: { after: 80 },
+    bullet: { level: 0 },
+    children: [new TextRun({ text, font: "Meiryo", size: 20 })] });
 }
-function numberItem(text, ref) {
-  return new Paragraph({ numbering: { reference: ref, level: 0 }, spacing: { after: 60 },
-    children: [new TextRun({ text, font: "Arial", size: 20 })] });
+function notePara(text) {
+  return new Paragraph({ spacing: { after: 120 },
+    shading: noteShading,
+    children: [new TextRun({ text: "NOTE: " + text, italics: true, font: "Meiryo", size: 20 })] });
 }
+
+function makeTable(headers, rows) {
+  const widths = headers.map(() => Math.floor(9000 / headers.length));
+  return new Table({
+    rows: [
+      new TableRow({ children: headers.map((h, i) => hCell(h, widths[i])) }),
+      ...rows.map((row, ri) => new TableRow({
+        children: row.map((c, i) => cell(c, widths[i], ri % 2 === 1 ? altShading : undefined))
+      }))
+    ]
+  });
+}
+
+const children = [];
+
+// COVER
+children.push(
+  new Paragraph({ spacing: { before: 3000 }, alignment: AlignmentType.CENTER,
+    children: [new TextRun({ text: "AIS \u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u30dd\u30fc\u30bf\u30eb", bold: true, font: "Meiryo", size: 52 })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 },
+    children: [new TextRun({ text: "\u958b\u767a\u4ed5\u69d8\u66f8", font: "Meiryo", size: 36, color: "666666" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 400 },
+    children: [new TextRun({ text: "IT\u958b\u767a\u30c1\u30fc\u30e0\u5411\u3051", font: "Meiryo", size: 28, color: "999999" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER,
+    children: [new TextRun({ text: "\u30d0\u30fc\u30b8\u30e7\u30f3 2.0 \u2014 2026\u5e744\u6708", font: "Meiryo", size: 22, color: "999999" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 },
+    children: [new TextRun({ text: "\u4f5c\u6210\u8005: Arches Consulting", font: "Meiryo", size: 22, color: "999999" })] }),
+  new Paragraph({ children: [new PageBreak()] })
+);
+
+// ========== 1. \u6982\u8981 ==========
+children.push(
+  heading1("1. \u6982\u8981"),
+  para("\u672c\u66f8\u306fAIS\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u30dd\u30fc\u30bf\u30eb\u306e\u6539\u4fee\u306b\u95a2\u3059\u308b\u6a5f\u80fd\u4ed5\u69d8\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002HTML/CSS\u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u3068\u5408\u308f\u305b\u3066\u53c2\u7167\u3057\u3001\u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u3060\u3051\u3067\u306f\u8868\u73fe\u3067\u304d\u306a\u3044\u30d0\u30c3\u30af\u30a8\u30f3\u30c9\u306e\u52d5\u4f5c\u3001\u30d3\u30b8\u30cd\u30b9\u30eb\u30fc\u30eb\u3001API\u8981\u4ef6\u3001\u30c7\u30fc\u30bf\u30e2\u30c7\u30eb\u3092\u8a18\u8ff0\u3057\u307e\u3059\u3002"),
+  para("\u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u30ea\u30dd\u30b8\u30c8\u30ea: github.com/yoshitakasakamoto-collab/client-portal-mockup"),
+
+  heading2("1.1 \u73fe\u884cAIS\u304b\u3089\u306e\u5909\u66f4\u70b9\u4e00\u89a7"),
+  para("[NEW] \u306f\u65b0\u898f\u6a5f\u80fd\u3001[CHANGED] \u306f\u65e2\u5b58\u6a5f\u80fd\u306e\u5909\u66f4\u3092\u793a\u3057\u307e\u3059\u3002"),
+  makeTable(
+    ["\u5bfe\u8c61", "\u5909\u66f4\u5185\u5bb9", "\u7a2e\u5225"],
+    [
+      ["\u5019\u88dc\u8005\u30da\u30fc\u30b8 \u30ec\u30a4\u30a2\u30a6\u30c8", "\u30bf\u30d6\uff08Expert Info / Activities / Availability\uff09\u3092\u5ec3\u6b62\u30021\u30da\u30fc\u30b8\u7e26\u4e26\u3073\u8868\u793a\u306b\u5909\u66f4: \u8077\u52d9\u7d4c\u6b74 \u2192 \u7d4c\u9a13 \u2192 \u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\u56de\u7b54 \u2192 \u5bfe\u5fdc\u53ef\u80fd\u65e5\u7a0b \u2192 \u30b3\u30e1\u30f3\u30c8\uff06\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3\u30ed\u30b0", "CHANGED"],
+      ["\u5019\u88dc\u8005\u30da\u30fc\u30b8 \u30b3\u30e1\u30f3\u30c8", "Activities\u30bf\u30d6\u5185\u306b\u96a0\u308c\u3066\u3044\u305f\u30b3\u30e1\u30f3\u30c8\u6b04\u3092\u30e1\u30a4\u30f3\u30da\u30fc\u30b8\u306b\u76f4\u63a5\u8868\u793a\u3002\u5e38\u306b\u8996\u8a8d\u53ef\u80fd\u306b\u3002\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3\u30ed\u30b0\u306f\u6298\u308a\u305f\u305f\u307f\u5f0f\u306b\u3002", "CHANGED"],
+      ["\u5019\u88dc\u8005\u30da\u30fc\u30b8 Excel\u51fa\u529b", "\u5de6\u30b5\u30a4\u30c9\u30d0\u30fc\u4e0a\u90e8\u306b\u300cExport List\u300d\u30dc\u30bf\u30f3\uff08\u5168\u4ef6\u51fa\u529b\uff09\u3002\u30c1\u30a7\u30c3\u30af\u30dc\u30c3\u30af\u30b9\u9078\u629e\u6642\u306b\u30d0\u30eb\u30af\u30a2\u30af\u30b7\u30e7\u30f3\u30d0\u30fc\uff0b\u300cExport Selected\u300d\u30dc\u30bf\u30f3\u8868\u793a\u3002", "NEW"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb \u30bf\u30a4\u30e0\u30be\u30fc\u30f3", "\u90fd\u5e02\u540d\u30d9\u30fc\u30b9\u306e\u4e2d\u7acb\u7684\u306a\u8868\u8a18\u306b\u5909\u66f4\uff08\u4f8b: 'UTC-05:00 New York, Toronto'\uff09\u3002\u30d6\u30e9\u30a6\u30b6\u3067\u30e6\u30fc\u30b6\u30fc\u306eTZ\u3092\u81ea\u52d5\u691c\u51fa\uff08DST\u5bfe\u5fdc\uff09\u3002", "CHANGED"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb \u5b9f\u65bd\u6642\u9593", "\u30c6\u30ad\u30b9\u30c8\u5165\u529b\u304b\u3089\u30c9\u30ed\u30c3\u30d7\u30c0\u30a6\u30f3\u306b\u5909\u66f4\u300230\uff5e120\u5206\u309215\u5206\u523b\u307f\u3067\u9078\u629e\u53ef\u80fd\u3002", "CHANGED"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb \u53c2\u52a0\u8005", "'If more than 1, please note in comments'\u306e\u6587\u8a00\u3092\u524a\u9664\u3002\u30c7\u30d5\u30a9\u30eb\u30c8\u3067\u30ed\u30b0\u30a4\u30f3\u30e6\u30fc\u30b6\u30fc\u306e\u30e1\u30fc\u30eb\u304c\u5165\u529b\u6e08\u3002\uff0b\u30dc\u30bf\u30f3\u3067\u8ffd\u52a0\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u8868\u793a\u3002", "CHANGED"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb MTG\u65b9\u6cd5", "\u30c9\u30ed\u30c3\u30d7\u30c0\u30a6\u30f3\u30673\u3064\u306e\u9078\u629e\u80a2: Arches Zoom Link / Arches Zoom (Call-in) / Custom Meeting Link\u3002Custom\u9078\u629e\u6642\u306bURL\u5165\u529b\u6b04\u304c\u51fa\u73fe\u3002", "NEW"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb \u78ba\u8a8d\u30c0\u30a4\u30a2\u30ed\u30b0", "\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u3001\u65e5\u6642\u3001\u5b9f\u65bd\u6642\u9593\u3001MTG\u65b9\u6cd5\u3001\u53c2\u52a0\u8005\u3092\u8868\u793a\u3002\u300c\u3053\u308c\u306f\u307e\u3060\u6700\u7d42\u78ba\u5b9a\u3067\u306f\u3042\u308a\u307e\u305b\u3093...\u300d\u306e\u6ce8\u610f\u6587\u8a00\u4ed8\u304d\u3002", "CHANGED"],
+      ["\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb \u65e5\u7a0b\u30d0\u30ea\u30c7\u30fc\u30b7\u30e7\u30f3", "\u9078\u629e\u3057\u305f\u5b9f\u65bd\u6642\u9593\u304c\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u306e\u5bfe\u5fdc\u53ef\u80fd\u6642\u9593\u67a0\u3092\u8d85\u3048\u308b\u5834\u5408\u3001\u8b66\u544a\u3092\u8868\u793a\u3057\u4e88\u7d04\u78ba\u5b9a\u3092\u30d6\u30ed\u30c3\u30af\u3002", "NEW"],
+      ["\u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u9023\u643a", "Gmail API\u3067\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306b\u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u3092\u7d10\u4ed8\u3051\u3002\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u5411\u3051\u901a\u77e5\u3092\u5168\u3066\u540c\u4e00\u30b9\u30ec\u30c3\u30c9\u306b\u9001\u4fe1\u3002", "NEW"],
+      ["\u901a\u77e5\u8a00\u8a9e\u8a2d\u5b9a", "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u5358\u4f4d\u3067\u901a\u77e5\u30e1\u30fc\u30eb\u306e\u8a00\u8a9e\uff08EN/JP\uff09\u3092\u9078\u629e\u53ef\u80fd\u3002", "NEW"],
+    ]
+  ),
+  new Paragraph({ children: [new PageBreak()] })
+);
+
+// ========== 2. \u30da\u30fc\u30b8\u4ed5\u69d8 ==========
+children.push(
+  heading1("2. \u30da\u30fc\u30b8\u4ed5\u69d8"),
+
+  heading2("2.1 \u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9 (index.html)"),
+  para("\u8a8d\u8a3c\u5f8c\u306e\u30e1\u30a4\u30f3\u30e9\u30f3\u30c7\u30a3\u30f3\u30b0\u30da\u30fc\u30b8\u3002\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u304c\u30a2\u30af\u30bb\u30b9\u6a29\u3092\u6301\u3064\u5168\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u3092\u8868\u793a\u3002"),
+  bullet("\u30b5\u30a4\u30c9\u30d0\u30fc\u30ca\u30d3: \u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u7ba1\u7406\u3001\u30e6\u30fc\u30b6\u30fc\u7ba1\u7406"),
+  bullet("\u901a\u77e5\u30d9\u30eb\uff08\u672a\u8aad\u30d0\u30c3\u30b8\u6570\u8868\u793a\uff09"),
+  bullet("\u8a00\u8a9e\u5207\u66ff\uff08EN / JP\uff09"),
+  bullet("2\u30bf\u30d6: \u9032\u884c\u4e2d\u30d7\u30ed\u30b8\u30a7\u30af\u30c8 / \u904e\u53bb\u30d7\u30ed\u30b8\u30a7\u30af\u30c8"),
+  heading3("API\u8981\u4ef6"),
+  bullet("GET /api/projects \u2014 \u8a8d\u8a3c\u30e6\u30fc\u30b6\u30fc\u306e\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u4e00\u89a7"),
+  bullet("GET /api/notifications \u2014 \u672a\u8aad\u901a\u77e5\u4e00\u89a7"),
+  bullet("PATCH /api/notifications/read-all \u2014 \u5168\u901a\u77e5\u65e2\u8aad"),
+
+  heading2("2.2 \u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u6982\u8981 (project-general.html)"),
+  para("\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306e\u7d71\u8a08\u60c5\u5831\u3001\u30c1\u30fc\u30e0\u60c5\u5831\u3001\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3\u3001\u30d6\u30ea\u30fc\u30d5\u30a3\u30f3\u30b0\u3092\u8868\u793a\u3002"),
+  bullet("\u7d71\u8a08\u30ab\u30fc\u30c9: \u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u63d0\u6848\u6570\u3001\u30a4\u30f3\u30bf\u30d3\u30e5\u30fc\u6570\u3001\u5408\u8a08\u6642\u9593"),
+  bullet("\u30bb\u30b0\u30e1\u30f3\u30c8\u5225\u5185\u8a33\u30c6\u30fc\u30d6\u30eb"),
+  bullet("\u30c1\u30fc\u30e0\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3\uff08\u6642\u7cfb\u5217\uff09"),
+  bullet("\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u8a73\u7d30\uff08\u30c1\u30fc\u30e0\u3001\u5730\u57df\u3001\u30bf\u30b0\u3001\u8acb\u6c42\u30b3\u30fc\u30c9\uff09"),
+  bullet("\u30d6\u30ea\u30fc\u30d5\u30a3\u30f3\u30b0\uff08\u5143\u306e\u554f\u3044\u5408\u308f\u305b\u5185\u5bb9\uff0b\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\u8cea\u554f\uff09"),
+
+  heading2("2.3 \u5019\u88dc\u8005\u30da\u30fc\u30b8 (project-candidates.html)"),
+  para("\u5de6\u30b5\u30a4\u30c9\u30d0\u30fc\u306b\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u30ea\u30b9\u30c8\u3001\u53f3\u30d1\u30cd\u30eb\u306b\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u8a73\u7d30\u3092\u8868\u793a\u3059\u308b\u30b9\u30d7\u30ea\u30c3\u30c8\u30d3\u30e5\u30fc\u3002\u6700\u3082\u5927\u304d\u304f\u5909\u66f4\u3055\u308c\u305f\u30da\u30fc\u30b8\u3002"),
+
+  heading3("2.3.1 \u5de6\u30b5\u30a4\u30c9\u30d0\u30fc"),
+  bullet("[NEW] Export List\u30dc\u30bf\u30f3 \u2014 \u5168\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u3092.xlsx\u3067\u51fa\u529b"),
+  bullet("[NEW] \u30d0\u30eb\u30af\u30a2\u30af\u30b7\u30e7\u30f3\u30d0\u30fc \u2014 \u30c1\u30a7\u30c3\u30af\u30dc\u30c3\u30af\u30b9\u9078\u629e\u6642\u306b\u8868\u793a\uff08\u9078\u629e\u6570 + Export Selected\u30dc\u30bf\u30f3\uff09"),
+  bullet("\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u306f\u30bb\u30b0\u30e1\u30f3\u30c8\u5225\u306b\u6298\u308a\u305f\u305f\u307f\u8868\u793a"),
+
+  heading3("2.3.2 \u53f3\u30d1\u30cd\u30eb [CHANGED]"),
+  para("\u30bf\u30d6\u3092\u5b8c\u5168\u306b\u5ec3\u6b62\u3002\u5168\u60c5\u5831\u30921\u30da\u30fc\u30b8\u306b\u7e26\u4e26\u3073\u3067\u8868\u793a:"),
+  makeTable(
+    ["\u9806\u5e8f", "\u30bb\u30af\u30b7\u30e7\u30f3", "\u5185\u5bb9", "\u5909\u66f4\u70b9"],
+    [
+      ["1", "\u30d8\u30c3\u30c0\u30fc", "ID\u3001\u6c0f\u540d\u3001\u30b9\u30c6\u30fc\u30bf\u30b9\u3001\u66f4\u65b0\u65e5", "\u5909\u66f4\u306a\u3057"],
+      ["2", "\u30a2\u30af\u30b7\u30e7\u30f3\u30dc\u30bf\u30f3", "Book Interview / Request Availability / Not Interested", "\u5909\u66f4\u306a\u3057"],
+      ["3", "\u8077\u52d9\u7d4c\u6b74", "\u30c6\u30fc\u30d6\u30eb: \u4f1a\u793e\u3001\u5f79\u8077\u3001From\u3001To", "Expert Info\u30bf\u30d6\u5185 \u2192 \u30c8\u30c3\u30d7\u30ec\u30d9\u30eb\u306b\u79fb\u52d5"],
+      ["4", "\u7d4c\u9a13", "\u8077\u52d9\u7d4c\u9a13\u306e\u30c6\u30ad\u30b9\u30c8", "Expert Info\u30bf\u30d6\u5185 \u2192 \u30c8\u30c3\u30d7\u30ec\u30d9\u30eb\u306b\u79fb\u52d5"],
+      ["5", "\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\u56de\u7b54", "Q&A\u5f62\u5f0f", "Expert Info\u30bf\u30d6\u5185 \u2192 \u30c8\u30c3\u30d7\u30ec\u30d9\u30eb\u306b\u79fb\u52d5"],
+      ["6", "\u5bfe\u5fdc\u53ef\u80fd\u65e5\u7a0b", "\u65e5\u6642\u30b9\u30ed\u30c3\u30c8\u4e00\u89a7 + \u30c6\u30ad\u30b9\u30c8\u30b3\u30d4\u30fc\u30dc\u30bf\u30f3", "Availability\u30bf\u30d6 \u2192 \u30a4\u30f3\u30e9\u30a4\u30f3\u8868\u793a\u306b\u79fb\u52d5"],
+      ["7", "\u30b3\u30e1\u30f3\u30c8", "\u30b3\u30e1\u30f3\u30c8\u4e00\u89a7\u3001\u5165\u529b\u6b04\u3001\u9001\u4fe1\u30dc\u30bf\u30f3\u3001\u60c5\u5831\u30d0\u30ca\u30fc", "Activities\u30bf\u30d6\u5185 \u2192 \u5e38\u6642\u8868\u793a\u306b\u5909\u66f4"],
+      ["8", "\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3\u30ed\u30b0", "\u6298\u308a\u305f\u305f\u307f\u5f0f\u306e\u30b7\u30b9\u30c6\u30e0\u30a4\u30d9\u30f3\u30c8\u30ed\u30b0", "Activities > Log System\u30b5\u30d6\u30bf\u30d6 \u2192 \u6298\u308a\u305f\u305f\u307f\u30bb\u30af\u30b7\u30e7\u30f3\u306b\u5909\u66f4"],
+    ]
+  ),
+
+  heading3("2.3.3 Excel\u51fa\u529b [NEW]"),
+  boldPara("\u51fa\u529b\u30ab\u30e9\u30e0: ", "ID, Name, Company, Position, Status, Cost, Availability"),
+
+  heading3("2.3.4 API\u8981\u4ef6"),
+  bullet("GET /api/projects/{id}/experts \u2014 \u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u4e00\u89a7"),
+  bullet("POST /api/projects/{id}/experts/{expertId}/comments \u2014 \u30b3\u30e1\u30f3\u30c8\u8ffd\u52a0"),
+  new Paragraph({ children: [new PageBreak()] }),
+
+  heading2("2.4 \u4e88\u7d04\u30e2\u30fc\u30c0\u30eb"),
+  para("\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u8a73\u7d30\u306e\u300cBook for Interview\u300d\u30dc\u30bf\u30f3\u304b\u3089\u958b\u304f\u30e2\u30fc\u30c0\u30eb\u3002"),
+
+  heading3("2.4.1 \u30d5\u30a3\u30fc\u30eb\u30c9\u4e00\u89a7"),
+  makeTable(
+    ["\u30d5\u30a3\u30fc\u30eb\u30c9", "\u7a2e\u5225", "\u5fc5\u9808", "\u30c7\u30d5\u30a9\u30eb\u30c8", "\u5909\u66f4"],
+    [
+      ["\u30bf\u30a4\u30e0\u30be\u30fc\u30f3", "\u30c9\u30ed\u30c3\u30d7\u30c0\u30a6\u30f3\uff0818\u9078\u629e\u80a2\uff09", "\u306f\u3044", "\u30d6\u30e9\u30a6\u30b6\u304b\u3089\u81ea\u52d5\u691c\u51fa", "CHANGED"],
+      ["\u5b9f\u65bd\u6642\u9593", "\u30c9\u30ed\u30c3\u30d7\u30c0\u30a6\u30f3", "\u306f\u3044", "60\u5206", "CHANGED"],
+      ["2\u9031\u9593\u30ab\u30ec\u30f3\u30c0\u30fc", "\u30a4\u30f3\u30bf\u30e9\u30af\u30c6\u30a3\u30d6\u30b0\u30ea\u30c3\u30c9", "\u306f\u3044", "\u2014", "\u5909\u66f4\u306a\u3057"],
+      ["\u5e0c\u671b\u65e5\u6642", "\u8aad\u307f\u53d6\u308a\u5c02\u7528\u30c6\u30ad\u30b9\u30c8", "\u306f\u3044", "\uff08\u30ab\u30ec\u30f3\u30c0\u30fc\u304b\u3089\uff09", "\u5909\u66f4\u306a\u3057"],
+      ["\u53c2\u52a0\u8005", "\u30e1\u30fc\u30eb\u30d5\u30a3\u30fc\u30eb\u30c9", "\u306f\u3044", "\u30ed\u30b0\u30a4\u30f3\u30e6\u30fc\u30b6\u30fc\u306e\u30e1\u30fc\u30eb", "CHANGED"],
+      ["MTG\u65b9\u6cd5", "\u30c9\u30ed\u30c3\u30d7\u30c0\u30a6\u30f3", "\u306f\u3044", "Arches Zoom Link", "NEW"],
+      ["\u901a\u8a33", "\u30c1\u30a7\u30c3\u30af\u30dc\u30c3\u30af\u30b9", "\u3044\u3044\u3048", "\u672a\u30c1\u30a7\u30c3\u30af", "\u5909\u66f4\u306a\u3057"],
+      ["\u5099\u8003", "\u30c6\u30ad\u30b9\u30c8\u30a8\u30ea\u30a2", "\u3044\u3044\u3048", "\uff08\u7a7a\uff09", "\u5909\u66f4\u306a\u3057"],
+    ]
+  ),
+
+  heading3("2.4.2 MTG\u65b9\u6cd5\u306e\u9078\u629e\u80a2 [NEW]"),
+  makeTable(
+    ["\u9078\u629e\u80a2", "\u5024", "\u52d5\u4f5c"],
+    [
+      ["Arches Zoom Link", "arches_zoom", "Arches\u304cZoom\u30df\u30fc\u30c6\u30a3\u30f3\u30b0\u30ea\u30f3\u30af\u3092\u767a\u884c\uff08\u30c7\u30d5\u30a9\u30eb\u30c8\uff09"],
+      ["Arches Zoom (Call-in)", "arches_callin", "Arches\u304cZoom\u306e\u96fb\u8a71\u30c0\u30a4\u30e4\u30eb\u30a4\u30f3\u756a\u53f7\u3092\u63d0\u4f9b"],
+      ["Custom Meeting Link", "client_link", "URL\u5165\u529b\u30d5\u30a3\u30fc\u30eb\u30c9\u304c\u8868\u793a\u3002\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u304c\u81ea\u8eab\u306eZoom/Teams/Meet\u30ea\u30f3\u30af\u3092\u8cbc\u308a\u4ed8\u3051"],
+    ]
+  ),
+
+  heading3("2.4.3 \u65e5\u7a0b\u30d0\u30ea\u30c7\u30fc\u30b7\u30e7\u30f3 [NEW]"),
+  para("Confirm Booking\u30dc\u30bf\u30f3\u62bc\u4e0b\u6642:"),
+  bullet("\u9078\u629e\u3057\u305f\u5b9f\u65bd\u6642\u9593\u304c\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u306e\u5bfe\u5fdc\u53ef\u80fd\u6642\u9593\u67a0\u306b\u5b8c\u5168\u306b\u53ce\u307e\u308b\u304b\u30c1\u30a7\u30c3\u30af"),
+  bullet("\u4f8b: \u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u304c10:00-10:15\u306e\u307f\u7a7a\u304d \u2192 60\u5206\u306eIV\u3092\u8a2d\u5b9a \u2192 \u30d6\u30ed\u30c3\u30af"),
+  boldPara("\u30eb\u30fc\u30eb: ", "interview_end_time <= expert_availability_block_end_time\uff0815\u5206\u5358\u4f4d\u3067\u30c1\u30a7\u30c3\u30af\uff09"),
+
+  heading3("2.4.4 \u78ba\u8a8d\u30c0\u30a4\u30a2\u30ed\u30b0"),
+  bullet("\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u540d\u3001\u5e0c\u671b\u65e5\u6642\u3001\u5b9f\u65bd\u6642\u9593\u3001MTG\u65b9\u6cd5\u3001\u53c2\u52a0\u8005\u3092\u78ba\u8a8d\u8868\u793a"),
+  para("\u6ce8\u610f\u6587\u8a00\uff08\u9ec4\u8272\u80cc\u666f\uff09:"),
+  para("\u300c\u3053\u308c\u306f\u307e\u3060\u6700\u7d42\u78ba\u5b9a\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002\u4e0a\u8a18\u306e\u65e5\u7a0b\u3067\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u306b\u65e5\u7a0b\u8abf\u6574\u4f9d\u983c\u304c\u9001\u4fe1\u3055\u308c\u307e\u3059\u3002\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u304c\u627f\u8afe\u6b21\u7b2c\u3001\u30ab\u30ec\u30f3\u30c0\u30fc\u62db\u5f85\u304c\u767a\u884c\u3055\u308c\u307e\u3059\u3002\u300d"),
+
+  heading3("2.4.5 API\u8981\u4ef6"),
+  bullet("POST /api/projects/{id}/bookings \u2014 \u4e88\u7d04\u30ea\u30af\u30a8\u30b9\u30c8\u4f5c\u6210"),
+  boldPara("\u30ea\u30af\u30a8\u30b9\u30c8\u30dc\u30c7\u30a3: ", "{ expertId, dateTime, duration, timezone, meetingMethod, clientMeetingLink?, attendees[], interpretation, notes }"),
+  new Paragraph({ children: [new PageBreak()] }),
+
+  heading2("2.5 \u30a4\u30f3\u30bf\u30d3\u30e5\u30fc\u7ba1\u7406 (project-interview.html)"),
+  bullet("\u7d71\u8a08: \u4e88\u7d04\u6e08 / \u5b9f\u65bd\u6e08 / \u30ad\u30e3\u30f3\u30bb\u30eb"),
+  bullet("\u30c6\u30fc\u30d6\u30eb: \u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u3001\u30b9\u30c6\u30fc\u30bf\u30b9\u3001\u65e5\u6642\u3001\u5b9f\u65bd\u6642\u9593\u3001\u8cbb\u7528\u3001\u9332\u97f3/\u66f8\u304d\u8d77\u3053\u3057/\u8981\u7d04\u3001\u30a2\u30af\u30b7\u30e7\u30f3"),
+  bullet("\u30ad\u30e3\u30f3\u30bb\u30eb\u30e2\u30fc\u30c0\u30eb: \u7406\u7531\u9078\u629e\uff08\u5fc5\u9808\uff09\uff0b \u8a73\u7d30\u30c6\u30ad\u30b9\u30c8\uff08\u4efb\u610f\uff09"),
+  bullet("\u30d5\u30a3\u30fc\u30c9\u30d0\u30c3\u30af\u30e2\u30fc\u30c0\u30eb: 5\u6bb5\u968e\u661f\u8a55\u4fa1 \uff0b \u30d5\u30ea\u30fc\u30c6\u30ad\u30b9\u30c8"),
+
+  heading2("2.6 \u8acb\u6c42\u7ba1\u7406 (project-billing.html)"),
+  bullet("\u30b5\u30de\u30ea\u30fc\u30ab\u30fc\u30c9: \u5408\u8a08\u8acb\u6c42\u984d\u3001\u5272\u5f15\u3001\u8acb\u6c42\u30b3\u30fc\u30c9"),
+  bullet("\u8cbb\u7528\u5185\u8a33\u30c6\u30fc\u30d6\u30eb: \u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u3001\u65e5\u4ed8\u3001\u7a2e\u5225\u3001\u6642\u9593\u3001\u5358\u4fa1\u3001\u5272\u5f15\u3001\u8cbb\u7528\u3001\u30b9\u30c6\u30fc\u30bf\u30b9"),
+  bullet("\u8acb\u6c42\u66f8\u30ea\u30af\u30a8\u30b9\u30c8\u30dc\u30bf\u30f3\uff0b\u30e2\u30fc\u30c0\u30eb"),
+  new Paragraph({ children: [new PageBreak()] }),
+
+  // ========== 3. \u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u9023\u643a ==========
+  heading1("3. \u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u9023\u643a [NEW]"),
+  para("\u73fe\u884cAIS\u306b\u306f\u5b58\u5728\u3057\u306a\u3044\u65b0\u6a5f\u80fd\u3002Gmail\u30b9\u30ec\u30c3\u30c9\u3092\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306b\u30ea\u30f3\u30af\u3057\u3001\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u5411\u3051\u901a\u77e5\u3092\u5168\u3066\u540c\u4e00\u30b9\u30ec\u30c3\u30c9\u306b\u9001\u4fe1\u3059\u308b\u3002"),
+
+  heading2("3.1 \u8ab2\u984c"),
+  para("\u73fe\u72b6\u3001\u5404\u30b7\u30b9\u30c6\u30e0\u901a\u77e5\u304c\u65b0\u898f\u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u3092\u4f5c\u6210\u3057\u3066\u3057\u307e\u3044\u3001\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u306f\u3069\u306e\u30b9\u30ec\u30c3\u30c9\u3067\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u3059\u308c\u3070\u3088\u3044\u304b\u308f\u304b\u3089\u305a\u6df7\u7dda\u3059\u308b\u3002"),
+
+  heading2("3.2 \u89e3\u6c7a\u7b56"),
+  para("\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306b\u7279\u5b9a\u306e\u30e1\u30fc\u30eb\u30b9\u30ec\u30c3\u30c9\u3092\u7d10\u4ed8\u3051\u3001\u4ee5\u964d\u306e\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u5411\u3051\u901a\u77e5\u306f\u5168\u3066\u305d\u306e\u30b9\u30ec\u30c3\u30c9\u3078\u306e\u8fd4\u4fe1\u3068\u3057\u3066\u9001\u4fe1\u3059\u308b\u3002"),
+
+  heading2("3.3 \u64cd\u4f5c\u30d5\u30ed\u30fc"),
+  bullet("1. Arches\u62c5\u5f53\u8005\u304c\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u6982\u8981\u753b\u9762\u3092\u958b\u304f"),
+  bullet("2. \u300c\u30b9\u30ec\u30c3\u30c9\u3092\u9023\u643a\u300d\u30dc\u30bf\u30f3\u3092\u30af\u30ea\u30c3\u30af"),
+  bullet("3. \u691c\u7d22\u30dc\u30c3\u30af\u30b9\u304c\u8868\u793a\u3055\u308c\u308b"),
+  bullet("4. \u30ad\u30fc\u30ef\u30fc\u30c9\uff08\u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u540d\u3001\u4ef6\u540d\u7b49\uff09\u3092\u5165\u529b\u3057\u3066\u691c\u7d22"),
+  bullet("5. \u62c5\u5f53\u8005\u306eGmail\u53d7\u4fe1\u30dc\u30c3\u30af\u30b9\u304b\u3089Gmail API\u7d4c\u7531\u3067\u691c\u7d22\u7d50\u679c\u3092\u8868\u793a"),
+  bullet("6. \u8a72\u5f53\u30b9\u30ec\u30c3\u30c9\u3092\u9078\u629e"),
+  bullet("7. \u30b9\u30ec\u30c3\u30c9\u306eMessage-ID\u3092DB\u306b\u4fdd\u5b58\uff08\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306b\u7d10\u4ed8\u3051\uff09"),
+  bullet("8. \u4ee5\u964d\u306e\u901a\u77e5\u306f\u5168\u3066\u540c\u4e00\u30b9\u30ec\u30c3\u30c9\u306b\u9001\u4fe1\u3055\u308c\u308b"),
+
+  heading2("3.4 \u6280\u8853\u5b9f\u88c5"),
+  heading3("3.4.1 Gmail API\u9023\u643a"),
+  bullet("Arches\u62c5\u5f53\u8005\u306eGmail\u30a2\u30ab\u30a6\u30f3\u30c8\u3067OAuth2\u8a8d\u8a3c"),
+  bullet("\u5fc5\u8981\u30b9\u30b3\u30fc\u30d7: gmail.readonly\uff08\u30b9\u30ec\u30c3\u30c9\u691c\u7d22\u7528\uff09"),
+  bullet("\u691c\u7d22\u306f\u30b9\u30ec\u30c3\u30c9\u540d\uff08\u4ef6\u540d\uff09\u3067\u5b9f\u884c"),
+
+  heading3("3.4.2 \u30c7\u30fc\u30bf\u30e2\u30c7\u30eb"),
+  makeTable(
+    ["\u30d5\u30a3\u30fc\u30eb\u30c9", "\u578b", "\u8aac\u660e"],
+    [
+      ["project_id", "String", "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8ID\uff08\u4f8b: A109919\uff09"],
+      ["gmail_thread_id", "String", "Gmail API\u64cd\u4f5c\u7528\u306e\u30b9\u30ec\u30c3\u30c9ID"],
+      ["message_id", "String", "RFC 2822 Message-ID\u30d8\u30c3\u30c0\u30fc\uff08\u30a2\u30f3\u30ab\u30fc\u30e1\u30c3\u30bb\u30fc\u30b8\uff09"],
+      ["linked_by", "String", "\u7d10\u4ed8\u3051\u3092\u884c\u3063\u305f\u62c5\u5f53\u8005"],
+      ["linked_at", "DateTime", "\u7d10\u4ed8\u3051\u65e5\u6642"],
+    ]
+  ),
+
+  heading3("3.4.3 \u901a\u77e5\u30e1\u30fc\u30eb\u9001\u4fe1\u6642\u306e\u52d5\u4f5c"),
+  para("\u30b9\u30ec\u30c3\u30c9\u304c\u7d10\u4ed8\u3051\u3089\u308c\u305f\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u306e\u901a\u77e5\u30e1\u30fc\u30eb\u9001\u4fe1\u6642:"),
+  bullet("In-Reply-To\u30d8\u30c3\u30c0\u30fc\u306b\u4fdd\u5b58\u6e08\u307f\u306emessage_id\u3092\u8a2d\u5b9a"),
+  bullet("References\u30d8\u30c3\u30c0\u30fc\u306b\u4fdd\u5b58\u6e08\u307f\u306emessage_id\u3092\u8a2d\u5b9a"),
+  bullet("\u4ef6\u540d\u306b\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u30b3\u30fc\u30c9\u3092\u56fa\u5b9a\u3067\u542b\u3081\u308b: [A109919] \u901a\u77e5\u5185\u5bb9"),
+
+  heading3("3.4.4 Gmail vs Outlook\u4e92\u63db\u6027"),
+  makeTable(
+    ["\u30af\u30e9\u30a4\u30a2\u30f3\u30c8", "\u30b9\u30ec\u30c3\u30c9\u5224\u5b9a\u65b9\u6cd5", "\u5099\u8003"],
+    [
+      ["Gmail", "References\u30d8\u30c3\u30c0\u30fc + \u4ef6\u540d\u306e\u985e\u4f3c\u6027", "\u4ef6\u540d\u306b\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u30b3\u30fc\u30c9\u3092\u542b\u3081\u308b\u3053\u3068\u3067\u5b89\u5b9a\u52d5\u4f5c"],
+      ["Outlook", "In-Reply-To + References\u30d8\u30c3\u30c0\u30fc", "\u4ef6\u540d\u306f\u3042\u307e\u308a\u5f71\u97ff\u3057\u306a\u3044\u3002\u30d8\u30c3\u30c0\u30fc\u304c\u4e3b\u8981\u5224\u5b9a\u57fa\u6e96"],
+    ]
+  ),
+
+  heading3("3.4.5 \u30b9\u30ec\u30c3\u30c9\u4ed8\u3051\u66ff\u3048"),
+  bullet("\u62c5\u5f53\u8005\u306f\u3044\u3064\u3067\u3082\u7d10\u4ed8\u3051\u30b9\u30ec\u30c3\u30c9\u3092\u5909\u66f4\u53ef\u80fd"),
+  bullet("\u5909\u66f4\u524d\u306e\u30b9\u30ec\u30c3\u30c9\u306b\u9001\u4fe1\u6e08\u307f\u306e\u901a\u77e5\u306f\u305d\u306e\u307e\u307e\u6b8b\u308b\uff08\u79fb\u52d5\u4e0d\u53ef\uff09"),
+  bullet("\u5909\u66f4\u5f8c\u306e\u65b0\u3057\u3044\u901a\u77e5\u304b\u3089\u65b0\u30b9\u30ec\u30c3\u30c9\u306b\u9001\u4fe1\u3055\u308c\u308b"),
+
+  heading2("3.5 \u901a\u77e5\u7a2e\u5225"),
+  makeTable(
+    ["\u901a\u77e5", "\u30c8\u30ea\u30ac\u30fc", "\u9001\u4fe1\u65b9\u5f0f"],
+    [
+      ["\u9332\u97f3\u30fb\u66f8\u304d\u8d77\u3053\u3057\u30fb\u8981\u7d04\u5b8c\u4e86", "\u51e6\u7406\u5b8c\u4e86", "\u81ea\u52d5 \u2014 \u5b8c\u4e86\u6b21\u7b2c\u5373\u9001\u4fe1"],
+      ["\u65b0\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u63d0\u6848", "Arches\u62c5\u5f53\u8005\u304c\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u3092\u9078\u629e", "\u624b\u52d5 \u2014 \u300cPromote to Client\u300d\u64cd\u4f5c"],
+    ]
+  ),
+  notePara("\u65e2\u5b58\u306eAIS\u901a\u77e5\u9001\u4fe1\u6a5f\u80fd\u306f\u305d\u306e\u307e\u307e\u6b8b\u3059\u3002\u672c\u6a5f\u80fd\u306f\u901a\u77e5\u306e\u5b9b\u5148\uff08\u9001\u4fe1\u5148\u30b9\u30ec\u30c3\u30c9\uff09\u3092\u5909\u66f4\u3059\u308b\u306e\u307f\u3002"),
+
+  heading2("3.6 \u901a\u77e5\u8a00\u8a9e\u8a2d\u5b9a"),
+  para("\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u5358\u4f4d\u3067\u901a\u77e5\u30e1\u30fc\u30eb\u306e\u8a00\u8a9e\uff08EN / JP\uff09\u3092\u9078\u629e\u53ef\u80fd\u3002"),
+
+  heading2("3.7 API\u8981\u4ef6"),
+  bullet("POST /api/projects/{id}/link-thread \u2014 \u30b9\u30ec\u30c3\u30c9\u7d10\u4ed8\u3051\u4fdd\u5b58"),
+  bullet("DELETE /api/projects/{id}/link-thread \u2014 \u7d10\u4ed8\u3051\u89e3\u9664"),
+  bullet("GET /api/projects/{id}/link-thread \u2014 \u73fe\u5728\u306e\u7d10\u4ed8\u3051\u60c5\u5831\u53d6\u5f97"),
+  bullet("GET /api/gmail/search?q={query} \u2014 Gmail API\u691c\u7d22\u30d7\u30ed\u30ad\u30b7\uff08OAuth\u5fc5\u9808\uff09"),
+  bullet("PATCH /api/projects/{id}/settings \u2014 \u901a\u77e5\u8a00\u8a9e\u8a2d\u5b9a\u66f4\u65b0"),
+  new Paragraph({ children: [new PageBreak()] }),
+
+  // ========== 4. \u6a2a\u65ad\u7684\u4e8b\u9805 ==========
+  heading1("4. \u6a2a\u65ad\u7684\u4e8b\u9805"),
+
+  heading2("4.1 \u8a8d\u8a3c"),
+  para("\u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u3067\u306f\u7c21\u6613\u30d1\u30b9\u30ef\u30fc\u30c9\u30b2\u30fc\u30c8\u3092\u4f7f\u7528\u3002\u672c\u756a\u3067\u306fOAuth2/SSO\u8a8d\u8a3c\u3092\u5b9f\u88c5\u3059\u308b\u3053\u3068\u3002"),
+  bullet("\u30c8\u30fc\u30af\u30f3\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5\u4ed8\u304d\u30bb\u30c3\u30b7\u30e7\u30f3\u7ba1\u7406"),
+  bullet("\u30ed\u30fc\u30eb\u30d9\u30fc\u30b9\u30a2\u30af\u30bb\u30b9: \u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u30e6\u30fc\u30b6\u30fc vs Arches\u62c5\u5f53\u8005"),
+  bullet("Arches\u62c5\u5f53\u8005\u306f\u30b9\u30ec\u30c3\u30c9\u9023\u643a\u6a5f\u80fd\u306e\u305f\u3081Gmail OAuth\u30b9\u30b3\u30fc\u30d7\u304c\u5fc5\u8981"),
+
+  heading2("4.2 \u56fd\u969b\u5316\uff08i18n\uff09"),
+  bullet("EN/JP\u306e2\u8a00\u8a9e\u5bfe\u5fdc\u3002\u5168UI\u30c6\u30ad\u30b9\u30c8\u306fdata-lang\u5c5e\u6027\u3067\u7ffb\u8a33\u30ad\u30fc\u306b\u30de\u30c3\u30d4\u30f3\u30b0"),
+  bullet("\u73fe\u5728213\u306e\u7ffb\u8a33\u30ad\u30fc\u3092\u5b9a\u7fa9"),
+  bullet("\u52d5\u7684\u30b3\u30f3\u30c6\u30f3\u30c4\u306fDOM\u66f4\u65b0\u5f8c\u306bapplyLanguage()\u3092\u547c\u3073\u51fa\u3057"),
+
+  heading2("4.3 \u30bf\u30a4\u30e0\u30be\u30fc\u30f3\u51e6\u7406"),
+  bullet("\u5168\u6642\u523b\u306fUTC\u3067DB\u306b\u4fdd\u5b58"),
+  bullet("\u30e6\u30fc\u30b6\u30fc\u9078\u629e\u306e\u30bf\u30a4\u30e0\u30be\u30fc\u30f3\u3067\u8868\u793a"),
+  bullet("DST\u306f\u30d6\u30e9\u30a6\u30b6\u306eIntl API\u3067\u5b9f\u884c\u6642\u306b\u51e6\u7406"),
+  new Paragraph({ children: [new PageBreak()] }),
+
+  // ========== 5. \u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u4e00\u89a7 ==========
+  heading1("5. \u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u4e00\u89a7"),
+  para("HTML\u30e2\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u304c\u30d3\u30b8\u30e5\u30a2\u30eb\u4ed5\u69d8\u3068\u3057\u3066\u6a5f\u80fd\u3057\u307e\u3059:"),
+  makeTable(
+    ["\u30d5\u30a1\u30a4\u30eb", "\u7528\u9014"],
+    [
+      ["index.html", "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9"],
+      ["project-general.html", "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u6982\u8981\uff08A109919\uff09"],
+      ["project-general-a110031.html", "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u6982\u8981\uff08A110031\uff09"],
+      ["project-candidates.html", "\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u4e00\u89a7\uff0b\u8a73\u7d30\uff0b\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb\uff08A109919\uff09"],
+      ["project-candidates-a110031.html", "\u30a8\u30ad\u30b9\u30d1\u30fc\u30c8\u4e00\u89a7\uff0b\u8a73\u7d30\uff0b\u4e88\u7d04\u30e2\u30fc\u30c0\u30eb\uff08A110031\uff09"],
+      ["project-interview.html", "\u30a4\u30f3\u30bf\u30d3\u30e5\u30fc\u7ba1\u7406\uff08A109919\uff09"],
+      ["project-interview-a110031.html", "\u30a4\u30f3\u30bf\u30d3\u30e5\u30fc\u7ba1\u7406\uff08A110031\uff09"],
+      ["project-billing.html", "\u8acb\u6c42\u7ba1\u7406\uff08A109919\uff09"],
+      ["project-billing-a110031.html", "\u8acb\u6c42\u7ba1\u7406\uff08A110031\uff09"],
+      ["lang.js", "\u8a00\u8a9e\u5207\u66ff\u30b7\u30b9\u30c6\u30e0\uff08213\u306eEN/JP\u7ffb\u8a33\u30ad\u30fc\uff09"],
+      ["auth.js", "\u30d1\u30b9\u30ef\u30fc\u30c9\u30b2\u30fc\u30c8\uff08\u30e2\u30c3\u30af\u5c02\u7528 \u2014 \u672c\u756a\u3067\u306fOAuth\u306b\u7f6e\u63db\uff09"],
+    ]
+  ),
+);
 
 const doc = new Document({
-  styles: {
-    default: { document: { run: { font: "Arial", size: 20 } } },
-    paragraphStyles: [
-      { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 32, bold: true, font: "Arial", color: "2C3E50" },
-        paragraph: { spacing: { before: 360, after: 200 }, outlineLevel: 0 } },
-      { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 26, bold: true, font: "Arial", color: "E67E22" },
-        paragraph: { spacing: { before: 280, after: 160 }, outlineLevel: 1 } },
-      { id: "Heading3", name: "Heading 3", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 22, bold: true, font: "Arial", color: "34495E" },
-        paragraph: { spacing: { before: 200, after: 120 }, outlineLevel: 2 } },
-    ]
-  },
-  numbering: {
-    config: [
-      { reference: "bullets", levels: [{ level: 0, format: LevelFormat.BULLET, text: "\u2022", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers2", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers3", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers4", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers5", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "bullets2", levels: [{ level: 0, format: LevelFormat.BULLET, text: "\u2022", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "bullets3", levels: [{ level: 0, format: LevelFormat.BULLET, text: "\u2022", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "bullets4", levels: [{ level: 0, format: LevelFormat.BULLET, text: "\u2022", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-    ]
-  },
-  sections: [
-    // ===== 表紙 =====
-    {
-      properties: {
-        page: { size: { width: 12240, height: 15840 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-      },
-      children: [
-        new Paragraph({ spacing: { before: 3000 } }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 },
-          children: [new TextRun({ text: "クライアントポータル", font: "Arial", size: 56, bold: true, color: "2C3E50" })] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 100 },
-          children: [new TextRun({ text: "開発仕様書", font: "Arial", size: 40, color: "E67E22" })] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 600 },
-          border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "E67E22", space: 1 } },
-          children: [new TextRun({ text: " ", font: "Arial", size: 20 })] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 100 },
-          children: [new TextRun({ text: "Arches Consulting", font: "Arial", size: 28, color: "7F8C8D" })] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 100 },
-          children: [new TextRun({ text: "Version 1.0 | 2026年3月", font: "Arial", size: 22, color: "7F8C8D" })] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 100 },
-          children: [new TextRun({ text: "社外秘", font: "Arial", size: 20, bold: true, color: "E74C3C" })] }),
-      ]
+  sections: [{
+    properties: {
+      page: { margin: { top: 1000, bottom: 1000, left: 1200, right: 1200 } }
     },
-
-    // ===== 本文 =====
-    {
-      properties: {
-        page: { size: { width: 12240, height: 15840 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
-      },
-      headers: {
-        default: new Header({ children: [new Paragraph({ alignment: AlignmentType.RIGHT,
-          children: [new TextRun({ text: "クライアントポータル - 開発仕様書", font: "Arial", size: 16, color: "999999" })] })] })
-      },
-      footers: {
-        default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER,
-          children: [new TextRun({ text: "Page ", font: "Arial", size: 16 }), new TextRun({ children: [PageNumber.CURRENT], font: "Arial", size: 16 })] })] })
-      },
-      children: [
-        new TableOfContents("目次", { hyperlink: true, headingStyleRange: "1-3" }),
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // ===== 1. システム概要 =====
-        heading1("1. システム概要"),
-        para("クライアントポータルは、AIS（Arches Intelligence System）の一モジュールであり、クライアントにエキスパート管理、インタビュー日程調整、請求管理のセルフサービス機能を提供します。本書はポータル改修の機能要件および技術要件を定義します。"),
-
-        heading2("1.1 アーキテクチャ"),
-        boldPara("マスターシステム: ", "AIS（Arches Intelligence System）- 社内のエキスパートDB・案件管理システム"),
-        boldPara("クライアントポータル: ", "AISのクライアント向けモジュール。全データはAISが正本。"),
-        boldPara("データフロー: ", "AIS（正本）-> ポータル（参照 + 限定的な書き込み）。クライアントのアクション（予約、コメント、辞退）はAISに書き戻され通知を発火。"),
-
-        heading2("1.2 通知アーキテクチャ"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2000, 3680, 3680],
-          rows: [
-            new TableRow({ children: [hCell("チャネル", 2000), hCell("クライアント側", 3680), hCell("Arches側", 3680)] }),
-            new TableRow({ children: [cell("ポータル内", 2000), cell("通知ベルアイコン（バッジ数 + ドロップダウン一覧）", 3680), cell("N/A - Archesは社内AISダッシュボードを使用", 3680)] }),
-            new TableRow({ children: [cell("メール", 2000, altShading), cell("主要イベント時にメール送信（新エキスパート提案、IV確定、書起こし完了）", 3680, altShading), cell("N/A", 3680, altShading)] }),
-            new TableRow({ children: [cell("Slack", 2000), cell("N/A", 3680), cell("案件ごとに専用Slackチャンネルを作成。Slackメールアドレスを案件に登録し、クライアントのアクションはすべてこのアドレスに通知→Slackチャンネルに投下", 3680)] }),
-          ]
-        }),
-
-        heading2("1.3 ユーザー権限（初期リリース）"),
-        para("クライアントユーザーは全員同一権限。ロールベースのアクセス制御（Admin/Viewer/Booker）はv1対象外だが、将来の拡張性を考慮した設計とすること。"),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // ===== 2. データモデル =====
-        heading1("2. データモデル"),
-
-        heading2("2.1 エンティティ関係"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2000, 4360, 3000],
-          rows: [
-            new TableRow({ children: [hCell("エンティティ", 2000), hCell("説明", 4360), hCell("データソース", 3000)] }),
-            new TableRow({ children: [cell("Project", 2000), cell("クライアント案件（セグメント、チームメンバー、ブリーフィングを含む）", 4360), cell("AIS（正本）", 3000)] }),
-            new TableRow({ children: [cell("Expert", 2000, altShading), cell("専門家（プロフィール、経歴、対応可能日程）", 4360, altShading), cell("AIS（正本）", 3000, altShading)] }),
-            new TableRow({ children: [cell("Interview", 2000), cell("クライアントとエキスパート間の予定/完了済み通話", 4360), cell("AIS + ポータル（書き戻し）", 3000)] }),
-            new TableRow({ children: [cell("Billing Item", 2000, altShading), cell("費用明細（インタビュー、通訳、フォローアップ）", 4360, altShading), cell("AIS（正本、既存ロジック）", 3000, altShading)] }),
-            new TableRow({ children: [cell("Comment", 2000), cell("エキスパートへのスレッド形式コメント", 4360), cell("ポータル（書込）-> AIS", 3000)] }),
-            new TableRow({ children: [cell("Notification", 2000, altShading), cell("アプリ内+メール通知", 4360, altShading), cell("AISが生成", 3000, altShading)] }),
-          ]
-        }),
-
-        heading2("2.2 エキスパートステータスフロー"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2000, 4680, 2680],
-          rows: [
-            new TableRow({ children: [hCell("ステータス", 2000), hCell("説明", 4680), hCell("ポータル表示", 2680)] }),
-            new TableRow({ children: [cell("Prospect", 2000), cell("Archesがリーチ中の候補者。まだ精査されていない。", 4680), cell("非表示（社内のみ）", 2680)] }),
-            new TableRow({ children: [cell("Proposed", 2000, altShading), cell("Archesが精査しクライアントに提案した状態。", 4680, altShading), cell("表示（最初に見える状態）", 2680, altShading)] }),
-            new TableRow({ children: [cell("Approved", 2000), cell("クライアントがインタビュー承認。", 4680), cell("表示", 2680)] }),
-            new TableRow({ children: [cell("Declined", 2000, altShading), cell("クライアントが辞退（理由付き）。", 4680, altShading), cell("表示（グレーアウト）", 2680, altShading)] }),
-            new TableRow({ children: [cell("Interview", 2000), cell("インタビュー予約済みまたは進行中。", 4680), cell("表示（IV画面に表示）", 2680)] }),
-            new TableRow({ children: [cell("Billing", 2000, altShading), cell("インタビュー完了、請求発生。", 4680, altShading), cell("表示（Billing画面）", 2680, altShading)] }),
-          ]
-        }),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // ===== 3. 画面仕様 =====
-        heading1("3. 画面仕様"),
-
-        heading2("3.1 プロジェクトダッシュボード"),
-        para("クライアントがアクセス可能な全プロジェクトを一覧表示。「進行中」「過去」タブで切替。"),
-        heading3("3.1.1 必要なAPI"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [1500, 3680, 4180],
-          rows: [
-            new TableRow({ children: [hCell("メソッド", 1500), hCell("エンドポイント", 3680), hCell("説明", 4180)] }),
-            new TableRow({ children: [cell("GET", 1500), cell("/api/projects", 3680), cell("当該クライアント組織の全プロジェクト一覧", 4180)] }),
-            new TableRow({ children: [cell("GET", 1500, altShading), cell("/api/notifications", 3680, altShading), cell("現在のユーザーの未読通知", 4180, altShading)] }),
-          ]
-        }),
-
-        heading2("3.2 プロジェクト概要ページ"),
-        para("プロジェクトのサマリー、セグメント内訳、チーム活動、ブリーフィングを表示するダッシュボード。"),
-
-        heading2("3.3 候補者ページ（エキスパート管理）"),
-        para("左右分割ビュー：左パネルにセグメント別エキスパートリスト、右パネルに選択したエキスパートの詳細。"),
-
-        heading3("3.3.1 左パネル - エキスパートリスト"),
-        bulletItem("セグメント別グループ化（折りたたみ可能）", "bullets"),
-        bulletItem("各エキスパート：ID、名前、会社、役職、コスト、ステータスバッジ表示", "bullets"),
-        bulletItem("チェックボックスによる一括選択", "bullets"),
-        bulletItem("Export Listボタン（リスト上部）- 全エキスパートをExcel出力", "bullets"),
-        bulletItem("バルクアクションバー（チェック時表示）- Export Selected", "bullets"),
-
-        heading3("3.3.2 右パネル - エキスパート詳細（タブなし・縦スクロール）"),
-        para("タブ廃止。以下の順番で全セクションを1ページに縦並び表示："),
-        numberItem("Availability - 対応可能日程（クリップボードコピー機能付き）", "numbers"),
-        numberItem("Working History - 職歴テーブル（会社、役職、期間）", "numbers"),
-        numberItem("Experience - 経歴の段落テキスト", "numbers"),
-        numberItem("Screening Answers - スクリーニングQ&A", "numbers"),
-        numberItem("Comments & Activity - コメント（スレッド形式）+ 折りたたみ可能なアクティビティログ", "numbers"),
-
-        heading3("3.3.3 アクションボタン"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2800, 3280, 3280],
-          rows: [
-            new TableRow({ children: [hCell("ボタン", 2800), hCell("表示条件", 3280), hCell("動作", 3280)] }),
-            new TableRow({ children: [cell("Book for Interview", 2800), cell("空き日程あり", 3280), cell("予約モーダルを開く", 3280)] }),
-            new TableRow({ children: [cell("Request Availability", 2800, altShading), cell("空き日程なし", 3280, altShading), cell("Arches Slackに通知を送信", 3280, altShading)] }),
-            new TableRow({ children: [cell("Not Interested", 2800), cell("未辞退のエキスパート", 3280), cell("辞退モーダル（理由選択）を開く", 3280)] }),
-          ]
-        }),
-
-        heading3("3.3.4 コメントシステム"),
-        bulletItem("クライアントがエキスパートにコメントを投稿可能", "bullets2"),
-        bulletItem("Archesスタッフが返信可能（AISから投稿、ポータルに表示）", "bullets2"),
-        bulletItem("新規コメント時：案件のSlackメールアドレスに通知→Slackチャンネルに投下", "bullets2"),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // --- 3.4 予約モジュール ---
-        heading2("3.4 予約モジュール（モーダル）"),
-        para("最も複雑なUIコンポーネント。タイムゾーン変換、カレンダー表示、時間バリデーション、参加者管理、ミーティング方式選択を処理。"),
-
-        heading3("3.4.1 タイムゾーン処理"),
-        bulletItem("ページ読込時にブラウザのIntl APIでクライアントのタイムゾーンを自動検出（DST対応）", "bullets"),
-        bulletItem("一般的なタイムゾーンラベルのドロップダウン（例：UTC-05:00 Eastern Time）", "bullets"),
-        bulletItem("エキスパートの空き日程はAIS内でエキスパートのローカルTZで保存", "bullets"),
-        bulletItem("カレンダー表示時にクライアント選択TZに変換して表示", "bullets"),
-
-        heading3("3.4.2 カレンダータイムライン"),
-        bulletItem("2週間のローリングウィンドウでエキスパートの空き日程を表示", "bullets2"),
-        bulletItem("15分単位のクリック可能なグリッド", "bullets2"),
-        bulletItem("色分け：緑=空き、オレンジ=選択中、赤=予約済み", "bullets2"),
-
-        heading3("3.4.3 インタビュー時間"),
-        boldPara("形式: ", "ドロップダウン（自由入力不可）"),
-        boldPara("選択肢: ", "30, 45, 60, 75, 90, 105, 120分（15分刻み）"),
-
-        heading3("3.4.4 空き時間バリデーション（重要）"),
-        para("開始時間とインタビュー時間を選択した際、インタビュー全体がエキスパートの空き時間内に収まることを必ず検証すること：", { run: { bold: true, color: "E74C3C" } }),
-        numberItem("選択した開始時間+インタビュー時間をエキスパートのTZに変換", "numbers2"),
-        numberItem("開始から終了までの全15分ブロックが空き日程内にあることを確認", "numbers2"),
-        numberItem("空き時間外のブロックがある場合、警告を表示し確定をブロック", "numbers2"),
-        numberItem("エラーメッセージ：「選択した時間がエキスパートの対応可能時間を超えています。短い時間を選択するか、別の時間枠を選んでください。」", "numbers2"),
-
-        heading3("3.4.5 参加者（Attendees）"),
-        bulletItem("デフォルト：ログインユーザーのメアドが入力済み（読み取り専用）", "bullets3"),
-        bulletItem("「+」ボタンで追加のメール入力フィールドを追加", "bullets3"),
-        bulletItem("「x」ボタンで追加した参加者を削除（デフォルトは削除不可）", "bullets3"),
-
-        heading3("3.4.6 ミーティング方式"),
-        boldPara("形式: ", "ドロップダウン"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2800, 3280, 3280],
-          rows: [
-            new TableRow({ children: [hCell("選択肢", 2800), hCell("動作", 3280), hCell("連携", 3280)] }),
-            new TableRow({ children: [cell("Arches Zoom Link", 2800), cell("Zoomミーティングを自動生成", 3280), cell("Zoom API: ミーティング作成、カレンダーにリンク埋込", 3280)] }),
-            new TableRow({ children: [cell("Arches Zoom (Call-in)", 2800, altShading), cell("ダイヤルイン番号付きZoomを生成", 3280, altShading), cell("Zoom API: テレフォニー有効でミーティング作成", 3280, altShading)] }),
-            new TableRow({ children: [cell("Client-provided Link", 2800), cell("クライアントがURL入力", 3280), cell("入力URLをそのままカレンダー招待に反映", 3280)] }),
-          ]
-        }),
-
-        heading3("3.4.7 カレンダー招待（個人情報保護）"),
-        para("重要：プライバシー保護のため、カレンダー招待はクライアント側とエキスパート側で別々に作成すること：", { run: { bold: true, color: "E74C3C" } }),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2000, 3680, 3680],
-          rows: [
-            new TableRow({ children: [hCell("招待", 2000), hCell("送信先", 3680), hCell("記載内容", 3680)] }),
-            new TableRow({ children: [cell("クライアント側", 2000), cell("クライアントの参加者メールのみ", 3680), cell("エキスパート名（個人メール/電話番号なし）、会議リンク、日時", 3680)] }),
-            new TableRow({ children: [cell("エキスパート側", 2000, altShading), cell("エキスパートのメールのみ", 3680, altShading), cell("クライアント企業名（個人名/メールなし）、会議リンク、日時", 3680, altShading)] }),
-          ]
-        }),
-
-        heading3("3.4.8 予約後のフロー"),
-        numberItem("AISに予約リクエストを「Pending」ステータスで作成", "numbers3"),
-        numberItem("案件のSlackチャンネルに通知", "numbers3"),
-        numberItem("Archesがエキスパートに日程確認の連絡", "numbers3"),
-        numberItem("エキスパート承諾時：Zoom APIでミーティング自動作成", "numbers3"),
-        numberItem("クライアント側・エキスパート側それぞれにカレンダー招待を送信", "numbers3"),
-        numberItem("AISでエキスパートのステータスを「Interview」に更新", "numbers3"),
-        numberItem("クライアントにメール+ポータル内通知：「インタビュー確定」", "numbers3"),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // --- 3.5 インタビュー ---
-        heading2("3.5 インタビューページ"),
-        para("全インタビューをセグメント別に表示。ステータス管理、録音アクセス、事後アクション。"),
-
-        heading3("3.5.1 ステータスカード"),
-        bulletItem("Booked: 予定されているインタビュー数", "bullets"),
-        bulletItem("Conducted: 完了済みインタビュー数", "bullets"),
-        bulletItem("Canceled: キャンセル済みインタビュー数", "bullets"),
-
-        heading3("3.5.2 インタビュー後の自動パイプライン"),
-        numberItem("Zoomでインタビュー完了", "numbers4"),
-        numberItem("Zoom APIで録音を自動取得", "numbers4"),
-        numberItem("音声を文字起こしサービスに送信（Whisper, Deepgram等）", "numbers4"),
-        numberItem("文字起こしをLLMでAI要約を自動生成", "numbers4"),
-        numberItem("録音・文字起こし・要約をインタビューレコードに紐付けて保存", "numbers4"),
-        numberItem("クライアントに通知：「[エキスパート名]の書き起こしが完了しました」", "numbers4"),
-
-        heading3("3.5.3 クライアントのアクション"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2500, 3430, 3430],
-          rows: [
-            new TableRow({ children: [hCell("アクション", 2500), hCell("利用可能条件", 3430), hCell("詳細", 3430)] }),
-            new TableRow({ children: [cell("録音再生", 2500), cell("文字起こし完了後", 3430), cell("録音のストリーミングまたはダウンロード", 3430)] }),
-            new TableRow({ children: [cell("文字起こし表示", 2500, altShading), cell("文字起こし完了後", 3430, altShading), cell("全文テキスト + AI要約の表示", 3430, altShading)] }),
-            new TableRow({ children: [cell("エキスパート評価", 2500), cell("インタビュー完了後", 3430), cell("星評価（1-5）+ テキストフィードバック。AISに蓄積。", 3430)] }),
-            new TableRow({ children: [cell("キャンセル", 2500, altShading), cell("Bookedステータス時", 3430, altShading), cell("理由選択 + コメント。Arches Slackに通知。", 3430, altShading)] }),
-            new TableRow({ children: [cell("時間異議", 2500), cell("完了後", 3430), cell("録音時間と実際の時間に差異がある場合の申告", 3430)] }),
-          ]
-        }),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // --- 3.6 Billing ---
-        heading2("3.6 請求ページ"),
-        para("プロジェクトの費用、通話内訳、請求書管理を表示。"),
-
-        heading3("3.6.1 請求サマリー"),
-        bulletItem("Total Billed: 全完了通話の合計費用", "bullets"),
-        bulletItem("Discount Applied: ボリュームディスカウント等", "bullets"),
-        bulletItem("Billing Code: クライアントの経理コード", "bullets"),
-
-        heading3("3.6.2 費用計算"),
-        para("課金ロジックはAISに既存。ポータルはAISから計算済みの値を表示。費用タイプ："),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2500, 3430, 3430],
-          rows: [
-            new TableRow({ children: [hCell("タイプ", 2500), hCell("説明", 3430), hCell("単価基準", 3430)] }),
-            new TableRow({ children: [cell("Interview", 2500), cell("標準エキスパート通話", 3430), cell("1回あたりの固定料金（エキスパートにより異なる、30/60分で変動）", 3430)] }),
-            new TableRow({ children: [cell("Follow-up Q&A", 2500, altShading), cell("インタビュー後の書面フォローアップ", 3430, altShading), cell("セッション固定料金", 3430, altShading)] }),
-            new TableRow({ children: [cell("Interpretation", 2500), cell("通訳サービス", 3430), cell("セッション固定料金", 3430)] }),
-          ]
-        }),
-
-        new Paragraph({ children: [new PageBreak()] }),
-
-        // ===== 4. 外部連携 =====
-        heading1("4. 外部連携"),
-
-        heading2("4.1 Zoom API"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2500, 6860],
-          rows: [
-            new TableRow({ children: [hCell("機能", 2500), hCell("詳細", 6860)] }),
-            new TableRow({ children: [cell("ミーティング作成", 2500), cell("エキスパート承諾時にZoomリンクを自動生成。Call-inの場合はダイヤルイン番号を含む。", 6860)] }),
-            new TableRow({ children: [cell("録音取得", 2500, altShading), cell("ミーティング終了後、クラウド録音をZoom Webhook/APIで自動ダウンロード。", 6860, altShading)] }),
-            new TableRow({ children: [cell("認証", 2500), cell("Server-to-Server OAuthアプリ（Archesのアカウント）。クライアント認証不要。", 6860)] }),
-          ]
-        }),
-
-        heading2("4.2 文字起こしパイプライン"),
-        new Table({
-          width: { size: 9360, type: WidthType.DXA }, columnWidths: [2500, 6860],
-          rows: [
-            new TableRow({ children: [hCell("ステップ", 2500), hCell("詳細", 6860)] }),
-            new TableRow({ children: [cell("音声入力", 2500), cell("Zoom録音ファイル（mp4/m4a）", 6860)] }),
-            new TableRow({ children: [cell("文字起こし", 2500, altShading), cell("音声認識API（Whisper, Deepgram等）。出力：タイムスタンプ付きテキスト。", 6860, altShading)] }),
-            new TableRow({ children: [cell("AI要約", 2500), cell("LLMで構造化要約を生成（要点、テーマ、アクションアイテム）", 6860)] }),
-            new TableRow({ children: [cell("保存", 2500, altShading), cell("録音（オブジェクトストレージ）、文字起こし+要約（データベース）", 6860, altShading)] }),
-          ]
-        }),
-
-        heading2("4.3 Slack通知"),
-        bulletItem("案件ごとに専用Slackメールアドレスを登録", "bullets"),
-        bulletItem("クライアントのアクション（コメント、予約、辞退、キャンセル）→Slackメールに通知", "bullets"),
-        bulletItem("メール内容がSlackチャンネルに自動投稿", "bullets"),
-
-        // ===== 5. 国際化 =====
-        heading1("5. 国際化（i18n）"),
-        bulletItem("英語・日本語の切替をヘッダーのトグルで実現", "bullets2"),
-        bulletItem("全UIテキストに翻訳キーを使用（モックアップのdata-lang属性）", "bullets2"),
-        bulletItem("言語設定はユーザープロフィールに保存（本番環境）", "bullets2"),
-        bulletItem("200以上の翻訳キーがlang.jsに定義済み（モックアップソースに同梱）", "bullets2"),
-
-        // ===== 6. セキュリティ =====
-        heading1("6. セキュリティ要件"),
-        bulletItem("認証：既存AIS認証システム（SSO/OAuth）", "bullets3"),
-        bulletItem("認可：全APIコールをクライアント組織にスコープ（組織間データアクセス不可）", "bullets3"),
-        bulletItem("カレンダープライバシー：クライアントとエキスパートで別々の招待（3.4.7参照）", "bullets3"),
-        bulletItem("エキスパートPII：個人メール/電話番号をポータルに露出させない", "bullets3"),
-        bulletItem("通信暗号化：全API通信にHTTPS/TLS", "bullets3"),
-
-        // ===== 7. モックアップ参照 =====
-        heading1("7. モックアップ参照"),
-        para("インタラクティブHTMLモックアップは以下で確認可能："),
-        boldPara("リポジトリ: ", "https://github.com/yoshitakasakamoto-collab/client-portal-mockup"),
-        boldPara("パスワード: ", "Client216"),
-        para("注：モックアップは静的JavaScriptデータを使用。本番では本書記載のAIS APIエンドポイントからデータを取得すること。"),
-      ]
-    }
-  ]
+    headers: {
+      default: new Header({
+        children: [new Paragraph({ alignment: AlignmentType.RIGHT,
+          children: [new TextRun({ text: "AIS \u30af\u30e9\u30a4\u30a2\u30f3\u30c8\u30dd\u30fc\u30bf\u30eb \u2014 \u958b\u767a\u4ed5\u69d8\u66f8", font: "Meiryo", size: 16, color: "999999" })] })]
+      })
+    },
+    footers: {
+      default: new Footer({
+        children: [new Paragraph({ alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun({ text: "Page ", font: "Meiryo", size: 16, color: "999999" }),
+            new TextRun({ children: [PageNumber.CURRENT], font: "Meiryo", size: 16, color: "999999" }),
+          ] })]
+      })
+    },
+    children
+  }]
 });
 
-Packer.toBuffer(doc).then(buffer => {
-  fs.writeFileSync("docs/Client_Portal_Dev_Spec_JP.docx", buffer);
-  console.log("JP spec generated: docs/Client_Portal_Dev_Spec_JP.docx");
+Packer.toBuffer(doc).then(buf => {
+  fs.writeFileSync(__dirname + '/Client_Portal_Dev_Spec_JP.docx', buf);
+  console.log('JP spec generated.');
 });
