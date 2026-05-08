@@ -106,6 +106,11 @@ const translations = {
   'Number of Attendees': '参加人数',
   'Options': 'オプション',
   'Request interpretation': '通訳サービスをリクエスト',
+  'Recording': 'レコーディング',
+  'Summary & Transcript': 'サマリー & トランスクリプト',
+  'Interpretation': '通訳',
+  'Others': 'その他',
+  'Please specify...': '内容をご記入ください...',
   'Additional Notes': '備考',
   'Confirm Booking': '予約を確定',
   'Attendees': '参加者',
@@ -254,6 +259,20 @@ function applyLang() {
     } else if (currentLang === 'en') {
       // Restore original EN text (not the key name)
       el.textContent = el.getAttribute('data-lang-en') || key;
+    }
+  });
+
+  // Handle placeholders
+  const placeholderEls = document.querySelectorAll('[data-lang-placeholder]');
+  placeholderEls.forEach(el => {
+    const key = el.getAttribute('data-lang-placeholder');
+    if (!el.hasAttribute('data-lang-placeholder-en')) {
+      el.setAttribute('data-lang-placeholder-en', el.placeholder || '');
+    }
+    if (currentLang === 'jp' && translations[key]) {
+      el.placeholder = translations[key];
+    } else if (currentLang === 'en') {
+      el.placeholder = el.getAttribute('data-lang-placeholder-en') || key;
     }
   });
 }

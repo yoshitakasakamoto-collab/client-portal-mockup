@@ -330,13 +330,29 @@
           </div>
         </div>
 
-        <!-- Interpretation option -->
-        <div class="form-group" style="display:flex;align-items:center;gap:12px;">
-          <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Options">Options</label>
-          <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
-            <input type="checkbox" style="accent-color:#e67e22;"> <span data-lang="Request interpretation">Request interpretation service</span>
-          </label>
+        <!-- Options -->
+        <div class="form-group">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <label style="font-weight:600;font-size:13px;white-space:nowrap;" data-lang="Options">Options</label>
+            <span style="background:#aaa;color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;">Optional</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px 20px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+              <input type="checkbox" style="accent-color:#e67e22;"> <span data-lang="Recording">Recording</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+              <input type="checkbox" style="accent-color:#e67e22;"> <span data-lang="Summary & Transcript">Summary &amp; Transcript</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+              <input type="checkbox" id="optInterpretation" style="accent-color:#e67e22;" onchange="document.getElementById('otherOptionInput').style.display=this.checked?'none':document.getElementById('otherOptionInput').style.display;"> <span data-lang="Interpretation">Interpretation</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+              <input type="checkbox" id="optOther" style="accent-color:#e67e22;" onchange="document.getElementById('otherOptionInput').style.display=this.checked?'block':'none';"> <span data-lang="Others">Others</span>
+            </label>
+          </div>
+          <div id="otherOptionInput" style="display:none;margin-top:8px;">
+            <input type="text" class="form-control" placeholder="Please specify..." style="font-size:13px;" data-lang-placeholder="Please specify...">
+          </div>
         </div>
 
         <!-- Notes -->
