@@ -81,8 +81,8 @@
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
-                      <div class="expert-name">EX-1041870 - Luci Dao</div>
-                      <div class="expert-role">ENGIE North America Inc. - Engineering Senior Advisor</div>
+                      <div class="expert-name">EX-1041870 - Maya Brennan</div>
+                      <div class="expert-role">Vantage Grid Energy Inc. - Engineering Senior Advisor</div>
                       <div class="expert-meta">
                         <span class="expert-cost">$800/call</span>
                         <span class="badge-status badge-candidates" style="font-size:11px;padding:1px 6px;" data-lang="Proposed">Proposed</span>
@@ -94,8 +94,8 @@
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
-                      <div class="expert-name">EX-1041955 - Robert Chen</div>
-                      <div class="expert-role">Calpine Corp - VP, Plant Operations</div>
+                      <div class="expert-name">EX-1041955 - Daniel Foster</div>
+                      <div class="expert-role">Meridian Power Corp - VP, Plant Operations</div>
                       <div class="expert-meta">
                         <span class="expert-cost">$1,000/call</span>
                         <span class="badge-status badge-conducted" style="font-size:11px;padding:1px 6px;">Call Done</span>
@@ -116,8 +116,8 @@
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
-                      <div class="expert-name">EX-1041837 - Pretty Dewati (Cathy)</div>
-                      <div class="expert-role">Third Coast - Vice President, Corporate Development</div>
+                      <div class="expert-name">EX-1041837 - Nadia Pratama (Nadia)</div>
+                      <div class="expert-role">Gulfstar - Vice President, Corporate Development</div>
                       <div class="expert-meta">
                         <span class="expert-cost">$700/call</span>
                         <span class="badge-status badge-approved" style="font-size:11px;padding:1px 6px;" data-lang="Approved">Approved</span>
@@ -129,8 +129,8 @@
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
-                      <div class="expert-name">EX-1042100 - James Morton</div>
-                      <div class="expert-role">Williams Companies - Director, Pipeline Engineering</div>
+                      <div class="expert-name">EX-1042100 - Eric Sullivan</div>
+                      <div class="expert-role">Cardinal Pipeline Co. - Director, Pipeline Engineering</div>
                       <div class="expert-meta">
                         <span class="expert-cost">$600/call</span>
                         <span class="badge-status badge-declined" style="font-size:11px;padding:1px 6px;">Declined</span>
@@ -151,8 +151,8 @@
                   <div style="display:flex;align-items:center;gap:10px;">
                     <div class="checkbox-wrapper"><input type="checkbox" onchange="updateBulkActions()"></div>
                     <div style="flex:1;">
-                      <div class="expert-name">EX-1042019 - Thomas Wright</div>
-                      <div class="expert-role">East Texas Electric Cooperative - VP, Power Supply</div>
+                      <div class="expert-name">EX-1042019 - Gregory Hale</div>
+                      <div class="expert-role">Pineywoods Electric Cooperative - VP, Power Supply</div>
                       <div class="expert-meta">
                         <span class="expert-cost">$500/call</span>
                         <span class="badge-status badge-conducted" style="font-size:11px;padding:1px 6px;">Call Done</span>
@@ -179,7 +179,7 @@
         <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
       </div>
       <div class="modal-body">
-        <p style="font-size:13px;color:#555;margin-bottom:16px;">You are about to decline <strong>EX-1041870 - Luci Dao</strong>. Please let us know why (optional).</p>
+        <p style="font-size:13px;color:#555;margin-bottom:16px;">You are about to decline <strong>EX-1041870 - Maya Brennan</strong>. Please let us know why (optional).</p>
         <div class="form-group">
           <label>Reason for declining</label>
           <select class="form-control">
@@ -211,7 +211,7 @@
         <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
       </div>
       <div class="modal-body" style="padding:20px;">
-        <p id="bookModalDesc" style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-1041870 - Luci Dao</strong>.</p>
+        <p id="bookModalDesc" style="font-size:13px;color:#555;margin-bottom:16px;">Select a time slot to schedule an interview with <strong>EX-1041870 - Maya Brennan</strong>.</p>
 
         <!-- Your Timezone -->
         <div class="form-group" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
@@ -400,22 +400,22 @@
     /* ========== Expert Data ========== */
     const experts = {
       1: {
-        id: 'EX-1041870', name: 'Luci Dao', company: 'ENGIE North America Inc.', role: 'Engineering Senior Advisor',
+        id: 'EX-1041870', name: 'Maya Brennan', company: 'Vantage Grid Energy Inc.', role: 'Engineering Senior Advisor',
         status: 'Proposed', statusClass: 'badge-candidates', updated: '2026/03/15', cost: '$800/call',
         slots: ['Mar 18 (Tue), 10:00 AM - 12:00 PM EST','Mar 19 (Wed), 2:00 PM - 4:00 PM EST','Mar 20 (Thu), 9:00 AM - 11:00 AM EST'],
         slotsShort: ['Mar 18, 10:00-12:00 EST','Mar 19, 14:00-16:00 EST','Mar 20, 09:00-11:00 EST'],
         experience: [
-          'This expert currently serves as <strong>Engineering Senior Advisor - Transmission and Interconnection</strong> at <strong>ENGIE North America</strong>, leading congestion analysis and siting for BESS, wind, and solar assets.',
-          'Previously served as <strong>Nodal Trader</strong> at <strong>EDF Trading</strong> and <strong>Congestion Trader</strong> at <strong>Shell Energy</strong>, trading CRRs/FTRs and day-ahead markets.',
+          'This expert currently serves as <strong>Engineering Senior Advisor - Transmission and Interconnection</strong> at <strong>Vantage Grid Energy</strong>, leading congestion analysis and siting for BESS, wind, and solar assets.',
+          'Previously served as <strong>Nodal Trader</strong> at <strong>Northwind Trading</strong> and <strong>Congestion Trader</strong> at <strong>Beacon Energy</strong>, trading CRRs/FTRs and day-ahead markets.',
           'Possesses deep understanding of the <strong><u>U.S. power and energy infrastructure market</u></strong>, including battery revenue generation and profitability in the Electric Reliability Council of Texas market.',
           'Experienced in analyzing <strong><u>transmission modeling, congestion analysis, and power market fundamentals</u></strong>, including building production cost models (Uplan/PowerWorld).',
           'Knowledgeable about <strong><u>optimal interconnection points and evaluating future transmission impacts</u></strong> on project economics.',
           'Provides insights on <strong><u>LMP formation, congestion, and asset-backed trading strategies</u></strong>, giving hands-on understanding of day-ahead market dynamics.'
         ],
         history: [
-          { company: 'ENGIE North America', position: 'Engineering Senior Advisor - Transmission and Interconnection', from: '2021/01', to: '2025/12' },
-          { company: 'EDF Trading', position: 'Nodal Trader', from: '2018/03', to: '2021/01' },
-          { company: 'Shell Energy', position: 'Congestion Trader', from: '2015/06', to: '2018/03' }
+          { company: 'Vantage Grid Energy', position: 'Engineering Senior Advisor - Transmission and Interconnection', from: '2021/01', to: '2025/12' },
+          { company: 'Northwind Trading', position: 'Nodal Trader', from: '2018/03', to: '2021/01' },
+          { company: 'Beacon Energy', position: 'Congestion Trader', from: '2015/06', to: '2018/03' }
         ],
         screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
         screeningA: '20+ years working on transmission modeling, congestion analysis, and power market fundamentals, including building production cost models (Uplan/PowerWorld) used to forecast prices and optimize asset placement. Extensive experience identifying optimal interconnection points and evaluating future transmission impacts on project economics.',
@@ -427,31 +427,31 @@
         comments: [
           { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 2:30 PM',
             text: 'Could you check if this expert has direct experience with LNG regasification terminals? Our client is particularly interested in that area as well.',
-            reply: { time: 'Mar 16, 2026 - 4:15 PM', text: 'We confirmed with the expert \u2014 she has 2 years of indirect experience with LNG regasification through her work at Shell Energy, where she handled congestion analysis for assets near Sabine Pass. We\'ve updated the screening answers to reflect this. Let us know if you need more detail!' }
+            reply: { time: 'Mar 16, 2026 - 4:15 PM', text: 'We confirmed with the expert \u2014 she has 2 years of indirect experience with LNG regasification through her work at Beacon Energy, where she handled congestion analysis for assets near Sabine Pass. We\'ve updated the screening answers to reflect this. Let us know if you need more detail!' }
           },
           { author: 'Emily Turner', org: 'Arches Consulting SEA', avatar: 'ET', avatarBg: '#e67e22', time: 'Mar 16, 2026 - 5:00 PM',
             text: 'Great, thank you! That\'s helpful. We\'ll proceed with booking an interview.', reply: null }
         ]
       },
       2: {
-        id: 'EX-1041955', name: 'Robert Chen', company: 'Calpine Corp', role: 'VP, Plant Operations',
+        id: 'EX-1041955', name: 'Daniel Foster', company: 'Meridian Power Corp', role: 'VP, Plant Operations',
         status: 'Call Done', statusClass: 'badge-conducted', updated: '2026/03/12', cost: '$1,000/call',
         slots: ['Mar 21 (Fri), 9:00 AM - 11:00 AM CST','Mar 24 (Mon), 1:00 PM - 3:00 PM CST'],
         slotsShort: ['Mar 21, 09:00-11:00 CST','Mar 24, 13:00-15:00 CST'],
         experience: [
-          'This expert currently serves as <strong>VP of Plant Operations</strong> at <strong>Calpine Corporation</strong>, overseeing a fleet of 6 combined-cycle gas turbine (CCGT) plants across Texas and Louisiana.',
-          'Previously held the role of <strong>Director of Engineering</strong> at <strong>NRG Energy</strong>, where he led turbine upgrade programs and heat rate improvement initiatives.',
+          'This expert currently serves as <strong>VP of Plant Operations</strong> at <strong>Meridian Power Corporation</strong>, overseeing a fleet of 6 combined-cycle gas turbine (CCGT) plants across Texas and Louisiana.',
+          'Previously held the role of <strong>Director of Engineering</strong> at <strong>Summit Energy</strong>, where he led turbine upgrade programs and heat rate improvement initiatives.',
           'Has extensive knowledge of <strong><u>gas-fired power generation economics</u></strong>, including spark spread analysis, capacity factor optimization, and maintenance cost benchmarking.',
           'Expert in <strong><u>plant-level operational efficiency</u></strong>, having implemented digital twin monitoring systems that reduced unplanned outages by 30%.',
           'Experienced in <strong><u>regulatory compliance and environmental permitting</u></strong> for gas-fired assets, including EPA MATS and regional air quality standards.'
         ],
         history: [
-          { company: 'Calpine Corporation', position: 'VP, Plant Operations', from: '2020/06', to: 'Present' },
-          { company: 'NRG Energy', position: 'Director of Engineering', from: '2016/02', to: '2020/05' },
-          { company: 'GE Power', position: 'Field Service Engineer', from: '2011/09', to: '2016/01' }
+          { company: 'Meridian Power Corporation', position: 'VP, Plant Operations', from: '2020/06', to: 'Present' },
+          { company: 'Summit Energy', position: 'Director of Engineering', from: '2016/02', to: '2020/05' },
+          { company: 'Volt Dynamics', position: 'Field Service Engineer', from: '2011/09', to: '2016/01' }
         ],
         screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
-        screeningA: '15+ years in gas-fired power generation, from hands-on turbine engineering at GE to fleet-level operational leadership at Calpine. Deep understanding of CCGT economics, O&M optimization, and the evolving role of gas plants in grids with high renewable penetration. Currently managing a 4.2 GW portfolio.',
+        screeningA: '15+ years in gas-fired power generation, from hands-on turbine engineering at GE to fleet-level operational leadership at Meridian Power. Deep understanding of CCGT economics, O&M optimization, and the evolving role of gas plants in grids with high renewable penetration. Currently managing a 4.2 GW portfolio.',
         logs: [
           { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 10, 2026 - 9:00 AM' },
           { text: 'Approved by <strong>Emily Turner</strong>', time: 'Mar 10, 2026 - 3:00 PM' },
@@ -467,21 +467,21 @@
         ]
       },
       3: {
-        id: 'EX-1041837', name: 'Pretty Dewati (Cathy)', company: 'Third Coast', role: 'Vice President, Corporate Development',
+        id: 'EX-1041837', name: 'Nadia Pratama (Nadia)', company: 'Gulfstar', role: 'Vice President, Corporate Development',
         status: 'Approved', statusClass: 'badge-approved', updated: '2026/03/14', cost: '$700/call',
         slots: ['Mar 19 (Wed), 10:00 AM - 12:00 PM CST','Mar 20 (Thu), 3:00 PM - 5:00 PM CST','Mar 22 (Sat), 9:00 AM - 11:00 AM CST'],
         slotsShort: ['Mar 19, 10:00-12:00 CST','Mar 20, 15:00-17:00 CST','Mar 22, 09:00-11:00 CST'],
         experience: [
-          'This expert currently serves as <strong>Vice President of Corporate Development</strong> at <strong>Third Coast Midstream</strong>, leading M&A activity and strategic partnerships for gas gathering and processing assets.',
-          'Previously worked as <strong>Investment Banking Associate</strong> at <strong>Goldman Sachs</strong> in the Natural Resources group, advising on $5B+ of midstream transactions.',
+          'This expert currently serves as <strong>Vice President of Corporate Development</strong> at <strong>Gulfstar Midstream</strong>, leading M&A activity and strategic partnerships for gas gathering and processing assets.',
+          'Previously worked as <strong>Investment Banking Associate</strong> at <strong>Sterling Hale</strong> in the Natural Resources group, advising on $5B+ of midstream transactions.',
           'Deep expertise in <strong><u>gas pipeline valuation and deal structuring</u></strong>, including dropdown transactions, IDR restructurings, and joint venture formations.',
           'Knowledgeable about <strong><u>midstream contract structures</u></strong>, including minimum volume commitments (MVCs), acreage dedications, and fee-based vs. percent-of-proceeds arrangements.',
           'Experienced in <strong><u>Permian Basin and Eagle Ford gas infrastructure</u></strong>, with direct involvement in greenfield pipeline projects from FID through commissioning.'
         ],
         history: [
-          { company: 'Third Coast Midstream', position: 'VP, Corporate Development', from: '2022/03', to: 'Present' },
-          { company: 'Goldman Sachs', position: 'Investment Banking Associate - Natural Resources', from: '2018/07', to: '2022/02' },
-          { company: 'Deloitte', position: 'Consultant - Energy & Resources', from: '2015/09', to: '2018/06' }
+          { company: 'Gulfstar Midstream', position: 'VP, Corporate Development', from: '2022/03', to: 'Present' },
+          { company: 'Sterling Hale', position: 'Investment Banking Associate - Natural Resources', from: '2018/07', to: '2022/02' },
+          { company: 'Crestline Advisory', position: 'Consultant - Energy & Resources', from: '2015/09', to: '2018/06' }
         ],
         screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
         screeningA: '10+ years in midstream oil & gas, spanning consulting, investment banking, and corporate development. Directly involved in evaluating and executing pipeline acquisitions, building financial models for gathering systems, and negotiating long-term shipper contracts. Strong understanding of regulatory and commercial dynamics in the Permian and Eagle Ford basins.',
@@ -499,23 +499,23 @@
         ]
       },
       4: {
-        id: 'EX-1042100', name: 'James Morton', company: 'Williams Companies', role: 'Director, Pipeline Engineering',
+        id: 'EX-1042100', name: 'Eric Sullivan', company: 'Cardinal Pipeline Co.', role: 'Director, Pipeline Engineering',
         status: 'Declined', statusClass: 'badge-declined', updated: '2026/03/11', cost: '$600/call',
         slots: [],
         slotsShort: [],
         experience: [
-          'This expert currently serves as <strong>Director of Pipeline Engineering</strong> at <strong>Williams Companies</strong>, managing design and integrity programs for 30,000+ miles of natural gas pipelines.',
-          'Previously held the role of <strong>Senior Engineer</strong> at <strong>Kinder Morgan</strong>, focused on pipeline integrity management and inline inspection programs.',
+          'This expert currently serves as <strong>Director of Pipeline Engineering</strong> at <strong>Cardinal Pipeline Co.</strong>, managing design and integrity programs for 30,000+ miles of natural gas pipelines.',
+          'Previously held the role of <strong>Senior Engineer</strong> at <strong>Halcyon Midstream</strong>, focused on pipeline integrity management and inline inspection programs.',
           'Has deep technical knowledge of <strong><u>pipeline design, construction, and integrity management</u></strong>, including ASME B31.8, API 1160, and PHMSA regulatory compliance.',
           'Expert in <strong><u>pipeline capacity expansion projects</u></strong>, including looping, compression additions, and conversion of oil pipelines to gas service.'
         ],
         history: [
-          { company: 'Williams Companies', position: 'Director, Pipeline Engineering', from: '2019/08', to: 'Present' },
-          { company: 'Kinder Morgan', position: 'Senior Pipeline Engineer', from: '2014/03', to: '2019/07' },
-          { company: 'Enterprise Products', position: 'Pipeline Engineer', from: '2010/06', to: '2014/02' }
+          { company: 'Cardinal Pipeline Co.', position: 'Director, Pipeline Engineering', from: '2019/08', to: 'Present' },
+          { company: 'Halcyon Midstream', position: 'Senior Pipeline Engineer', from: '2014/03', to: '2019/07' },
+          { company: 'Frontier Products', position: 'Pipeline Engineer', from: '2010/06', to: '2014/02' }
         ],
         screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
-        screeningA: '15+ years in natural gas pipeline engineering across three major midstream operators. Expertise spans pipeline design, construction oversight, integrity management, and capacity expansion. Currently responsible for capital project prioritization and execution across Williams\' Transco and Northwest Pipeline systems.',
+        screeningA: '15+ years in natural gas pipeline engineering across three major midstream operators. Expertise spans pipeline design, construction oversight, integrity management, and capacity expansion. Currently responsible for capital project prioritization and execution across Cardinal\' Transco and Northwest Pipeline systems.',
         logs: [
           { text: 'Profile proposed by <strong>Arches Team</strong>', time: 'Mar 10, 2026 - 11:00 AM' },
           { text: 'Declined by <strong>Emily Turner</strong> - Already have coverage in this area', time: 'Mar 11, 2026 - 10:00 AM' }
@@ -523,21 +523,21 @@
         comments: []
       },
       5: {
-        id: 'EX-1042019', name: 'Thomas Wright', company: 'East Texas Electric Cooperative', role: 'VP, Power Supply',
+        id: 'EX-1042019', name: 'Gregory Hale', company: 'Pineywoods Electric Cooperative', role: 'VP, Power Supply',
         status: 'Call Done', statusClass: 'badge-conducted', updated: '2026/03/13', cost: '$500/call',
         slots: ['Mar 24 (Mon), 10:00 AM - 12:00 PM CST'],
         slotsShort: ['Mar 24, 10:00-12:00 CST'],
         experience: [
-          'This expert currently serves as <strong>VP of Power Supply</strong> at <strong>East Texas Electric Cooperative</strong>, managing wholesale power procurement and transmission planning for a 16-county service territory.',
-          'Previously worked as <strong>Transmission Planning Manager</strong> at <strong>Oncor Electric Delivery</strong>, responsible for 345kV and 138kV expansion studies.',
+          'This expert currently serves as <strong>VP of Power Supply</strong> at <strong>Pineywoods Electric Cooperative</strong>, managing wholesale power procurement and transmission planning for a 16-county service territory.',
+          'Previously worked as <strong>Transmission Planning Manager</strong> at <strong>Trinity Electric Delivery</strong>, responsible for 345kV and 138kV expansion studies.',
           'Has direct experience with <strong><u>ERCOT transmission planning processes</u></strong>, including Regional Planning Group participation and CREZ line project evaluation.',
           'Knowledgeable about <strong><u>cooperative utility economics</u></strong>, including wholesale rate structures, demand response programs, and distributed generation impacts on transmission usage.',
           'Experienced in <strong><u>power purchase agreement (PPA) negotiation</u></strong> for both gas-fired and renewable resources, including tolling agreements and capacity contracts.'
         ],
         history: [
-          { company: 'East Texas Electric Cooperative', position: 'VP, Power Supply', from: '2021/04', to: 'Present' },
-          { company: 'Oncor Electric Delivery', position: 'Transmission Planning Manager', from: '2016/01', to: '2021/03' },
-          { company: 'Burns & McDonnell', position: 'Power Systems Engineer', from: '2012/08', to: '2015/12' }
+          { company: 'Pineywoods Electric Cooperative', position: 'VP, Power Supply', from: '2021/04', to: 'Present' },
+          { company: 'Trinity Electric Delivery', position: 'Transmission Planning Manager', from: '2016/01', to: '2021/03' },
+          { company: 'Pierce & Holloway', position: 'Power Systems Engineer', from: '2012/08', to: '2015/12' }
         ],
         screeningQ: 'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
         screeningA: '13+ years in electric power systems spanning engineering consulting, T&D planning, and wholesale power procurement. Direct involvement in ERCOT transmission planning, PPA negotiations for gas and renewable resources, and cooperative utility resource planning. Provides a unique perspective combining technical transmission knowledge with commercial power supply decision-making.',
@@ -565,8 +565,8 @@
 
     // Existing booked interviews (shown on timeline as reference)
     const bookedInterviews = [
-      { label: 'Robert Chen', day: 12, startHour: 10, startMin: 0, endHour: 10, endMin: 45, tz: 'EST' },
-      { label: 'Thomas Wright', day: 11, startHour: 14, startMin: 0, endHour: 15, endMin: 0, tz: 'CST' }
+      { label: 'Daniel Foster', day: 12, startHour: 10, startMin: 0, endHour: 10, endMin: 45, tz: 'EST' },
+      { label: 'Gregory Hale', day: 11, startHour: 14, startMin: 0, endHour: 15, endMin: 0, tz: 'CST' }
     ];
 
     /* ========== Render Expert Detail ========== */
