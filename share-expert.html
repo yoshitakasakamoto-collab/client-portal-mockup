@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#e67e22">
+  <title>Expert Profile · Arches</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+    :root{
+      --orange:#e67e22; --orange-d:#cf6f15; --ink:#1f2328; --muted:#6b7280;
+      --line:#e8e8ea; --bg:#f4f5f7; --card:#ffffff;
+    }
+    html,body{height:100%;}
+    body{
+      font-family:'Inter','Noto Sans JP',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--ink); background:var(--bg); line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+    }
+    /* phone frame on desktop, full-bleed on mobile */
+    .shell{max-width:460px;margin:0 auto;min-height:100%;background:var(--bg);
+      position:relative;box-shadow:0 0 40px rgba(0,0,0,.06);}
+    /* ---------- top bar ---------- */
+    .topbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);
+      padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;}
+    .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;}
+    .brand .mark{width:26px;height:26px;border-radius:7px;background:var(--orange);color:#fff;
+      display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+    .brand small{display:block;font-weight:500;font-size:10px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+    .topbtn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;
+      font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:5px;cursor:pointer;}
+    .topbtn:active{background:#f1f1f3;}
+    /* ---------- demo switcher ---------- */
+    .switcher{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);
+      scrollbar-width:none;}
+    .switcher::-webkit-scrollbar{display:none;}
+    .chip{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;
+      padding:6px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;}
+    .chip.on{background:#fff5ec;border-color:var(--orange);color:var(--orange-d);}
+    /* ---------- content ---------- */
+    .wrap{padding:16px 16px 120px;}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;}
+    /* hero */
+    .hero{display:flex;gap:14px;align-items:flex-start;}
+    .avatar{width:56px;height:56px;border-radius:14px;flex:0 0 auto;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;
+      background:linear-gradient(135deg,#f0883e,#d96a12);}
+    .hid{font-size:12px;font-weight:600;color:var(--orange-d);letter-spacing:.02em;}
+    .hname{font-size:19px;font-weight:700;line-height:1.25;margin-top:1px;}
+    .hrole{font-size:13px;color:var(--muted);margin-top:3px;}
+    .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+    .pill{font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:999px;background:#f1f1f3;color:#444;}
+    .pill.status{}
+    .pill.cost{background:#fff5ec;color:var(--orange-d);}
+    /* quick facts */
+    .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+    .fact{background:#fafafa;border:1px solid var(--line);border-radius:11px;padding:10px;text-align:center;}
+    .fact b{display:block;font-size:16px;font-weight:700;}
+    .fact span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
+    /* section */
+    .sec-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;
+      letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+    .sec-title .i{font-size:15px;}
+    ul.bullets{list-style:none;display:flex;flex-direction:column;gap:11px;}
+    ul.bullets li{position:relative;padding-left:20px;font-size:14px;}
+    ul.bullets li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;
+      background:var(--orange);}
+    ul.bullets li strong{font-weight:600;}
+    ul.bullets li u{text-decoration:none;background:linear-gradient(transparent 60%,#ffe2c4 60%);}
+    /* timeline */
+    .tl{display:flex;flex-direction:column;}
+    .tl-item{display:flex;gap:12px;}
+    .tl-rail{display:flex;flex-direction:column;align-items:center;}
+    .tl-dot{width:11px;height:11px;border-radius:50%;background:#fff;border:2.5px solid var(--orange);margin-top:4px;flex:0 0 auto;}
+    .tl-line{width:2px;flex:1;background:var(--line);margin:2px 0;}
+    .tl-item:last-child .tl-line{display:none;}
+    .tl-body{padding-bottom:16px;}
+    .tl-co{font-size:14px;font-weight:600;}
+    .tl-pos{font-size:13px;color:#444;}
+    .tl-date{font-size:11.5px;color:var(--muted);margin-top:2px;}
+    /* QA */
+    .qa-q{font-size:13px;font-weight:600;color:#444;margin-bottom:7px;}
+    .qa-a{font-size:14px;color:#333;background:#fafafa;border:1px solid var(--line);border-left:3px solid var(--orange);
+      border-radius:0 10px 10px 0;padding:12px 13px;}
+    /* slots */
+    .slots{display:flex;flex-direction:column;gap:8px;}
+    .slot{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:11px;padding:11px 13px;
+      font-size:13.5px;font-weight:500;cursor:pointer;background:#fff;}
+    .slot:active{background:#fff5ec;border-color:var(--orange);}
+    .slot .cal{font-size:16px;}
+    .slot .pick{margin-left:auto;font-size:12px;font-weight:600;color:var(--orange-d);}
+    .noslot{font-size:13px;color:var(--muted);font-style:italic;}
+    /* sticky action bar */
+    .actionbar{position:fixed;left:0;right:0;bottom:0;z-index:40;
+      max-width:460px;margin:0 auto;background:#fff;border-top:1px solid var(--line);
+      padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;}
+    .btn{flex:1;border:none;border-radius:12px;padding:14px;font-size:14.5px;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:7px;}
+    .btn-primary{background:var(--orange);color:#fff;}
+    .btn-primary:active{background:var(--orange-d);}
+    .btn-ghost{flex:0 0 auto;width:54px;background:#f1f1f3;color:var(--ink);}
+    .btn-ghost:active{background:#e6e6e9;}
+    /* footer note */
+    .foot{text-align:center;font-size:11px;color:var(--muted);padding:4px 16px 0;}
+    /* toast */
+    .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);
+      background:#1f2328;color:#fff;font-size:13px;font-weight:500;padding:11px 18px;border-radius:999px;
+      opacity:0;pointer-events:none;transition:.25s;z-index:60;white-space:nowrap;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    /* privacy banner */
+    .privacy{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#8a6d3b;
+      background:#fff8ea;border:1px solid #f3e2bf;border-radius:11px;padding:9px 12px;margin-bottom:14px;}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- top bar -->
+    <div class="topbar">
+      <div class="brand">
+        <span class="mark">A</span>
+        <div>Arches Expert<small>Shared profile</small></div>
+      </div>
+      <button class="topbtn" onclick="shareProfile()">&#128279; <span>Share</span></button>
+    </div>
+
+    <!-- demo expert switcher (mockup only) -->
+    <div class="switcher" id="switcher"></div>
+
+    <div class="wrap" id="content"><!-- rendered by JS --></div>
+
+    <!-- sticky actions -->
+    <div class="actionbar">
+      <button class="btn btn-primary" onclick="toast('Interview request sent to Arches ✓')">&#128197; Request interview</button>
+      <button class="btn btn-ghost" onclick="shareProfile()" aria-label="Share">&#128228;</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ---- sample expert data (mirrors project-candidates) ---- */
+    const experts = {
+      1: {
+        id:'EX-1041870', name:'Luci Dao', company:'ENGIE North America Inc.', role:'Engineering Senior Advisor',
+        status:'Proposed', statusBg:'#fff3e0', statusFg:'#e65100', cost:'$800 / call',
+        segment:'Gas-fired generation', years:'20+ yrs', location:'Texas, US',
+        experience:[
+          'Currently <strong>Engineering Senior Advisor &ndash; Transmission &amp; Interconnection</strong> at <strong>ENGIE North America</strong>, leading congestion analysis and siting for BESS, wind and solar assets.',
+          'Previously <strong>Nodal Trader</strong> at <strong>EDF Trading</strong> and <strong>Congestion Trader</strong> at <strong>Shell Energy</strong>, trading CRRs/FTRs and day-ahead markets.',
+          'Deep understanding of the <u>U.S. power &amp; energy infrastructure market</u>, including battery revenue generation in ERCOT.',
+          'Hands-on with <u>transmission modeling, congestion analysis and production cost models</u> (Uplan / PowerWorld).',
+          'Provides insight on <u>LMP formation, congestion and asset-backed trading strategies</u>.'
+        ],
+        history:[
+          {co:'ENGIE North America', pos:'Engineering Senior Advisor &ndash; Transmission &amp; Interconnection', date:'2021/01 &ndash; Present'},
+          {co:'EDF Trading', pos:'Nodal Trader', date:'2018/03 &ndash; 2021/01'},
+          {co:'Shell Energy', pos:'Congestion Trader', date:'2015/06 &ndash; 2018/03'}
+        ],
+        screeningQ:'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA:'20+ years on transmission modeling, congestion analysis and power-market fundamentals, including building production cost models (Uplan/PowerWorld) used to forecast prices and optimize asset placement. Extensive experience identifying optimal interconnection points and evaluating future transmission impacts on project economics.',
+        slots:['Mar 18 (Tue) 10:00–12:00 EST','Mar 19 (Wed) 14:00–16:00 EST','Mar 20 (Thu) 09:00–11:00 EST']
+      },
+      2: {
+        id:'EX-1041955', name:'Robert Chen', company:'Calpine Corp', role:'VP, Plant Operations',
+        status:'Call Done', statusBg:'#e8f5e9', statusFg:'#2e7d32', cost:'$1,000 / call',
+        segment:'Gas-fired generation', years:'15+ yrs', location:'Houston, US',
+        experience:[
+          'Currently <strong>VP of Plant Operations</strong> at <strong>Calpine Corporation</strong>, overseeing a fleet of 6 combined-cycle gas turbine (CCGT) plants across Texas and Louisiana.',
+          'Previously <strong>Director of Engineering</strong> at <strong>NRG Energy</strong>, leading turbine upgrade and heat-rate improvement programs.',
+          'Extensive knowledge of <u>gas-fired generation economics</u> &mdash; spark spread, capacity factor optimization and maintenance cost benchmarking.',
+          'Implemented <u>digital-twin monitoring</u> that cut unplanned outages by 30%.',
+          'Experienced in <u>regulatory compliance &amp; environmental permitting</u> (EPA MATS, regional air quality).'
+        ],
+        history:[
+          {co:'Calpine Corporation', pos:'VP, Plant Operations', date:'2020/06 &ndash; Present'},
+          {co:'NRG Energy', pos:'Director of Engineering', date:'2016/02 &ndash; 2020/05'},
+          {co:'GE Power', pos:'Field Service Engineer', date:'2011/09 &ndash; 2016/01'}
+        ],
+        screeningQ:'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA:'15+ years in gas-fired power generation, from hands-on turbine engineering at GE to fleet-level operational leadership at Calpine. Deep understanding of CCGT economics, O&M optimization, and the evolving role of gas plants in grids with high renewable penetration. Currently managing a 4.2 GW portfolio.',
+        slots:['Mar 21 (Fri) 09:00–11:00 CST','Mar 24 (Mon) 13:00–15:00 CST']
+      },
+      3: {
+        id:'EX-1041837', name:'Pretty Dewati (Cathy)', company:'Third Coast', role:'VP, Corporate Development',
+        status:'Approved', statusBg:'#e8f5e9', statusFg:'#2e7d32', cost:'$700 / call',
+        segment:'Gas pipelines', years:'10+ yrs', location:'Houston, US',
+        experience:[
+          'Currently <strong>VP of Corporate Development</strong> at <strong>Third Coast Midstream</strong>, leading M&amp;A and strategic partnerships for gas gathering &amp; processing assets.',
+          'Previously <strong>Investment Banking Associate</strong> at <strong>Goldman Sachs</strong> (Natural Resources), advising on $5B+ of midstream transactions.',
+          'Deep expertise in <u>gas pipeline valuation and deal structuring</u> &mdash; dropdowns, IDR restructurings, JV formation.',
+          'Knowledgeable on <u>midstream contract structures</u> (MVCs, acreage dedications, fee-based vs POP).',
+          'Direct involvement in <u>Permian &amp; Eagle Ford</u> greenfield pipeline projects from FID through commissioning.'
+        ],
+        history:[
+          {co:'Third Coast Midstream', pos:'VP, Corporate Development', date:'2022/03 &ndash; Present'},
+          {co:'Goldman Sachs', pos:'IB Associate &ndash; Natural Resources', date:'2018/07 &ndash; 2022/02'},
+          {co:'Deloitte', pos:'Consultant &ndash; Energy &amp; Resources', date:'2015/09 &ndash; 2018/06'}
+        ],
+        screeningQ:'Describe your direct experience in the US market with gas-fired power plants, gas pipeline infrastructure, and/or transmission assets.',
+        screeningA:'10+ years in midstream oil & gas across consulting, investment banking and corporate development. Directly involved in evaluating and executing pipeline acquisitions, building financial models for gathering systems, and negotiating long-term shipper contracts. Strong grasp of regulatory and commercial dynamics in the Permian and Eagle Ford basins.',
+        slots:['Mar 19 (Wed) 10:00–12:00 CST','Mar 20 (Thu) 15:00–17:00 CST','Mar 22 (Sat) 09:00–11:00 CST']
+      }
+    };
+
+    function initials(name){
+      const clean = name.replace(/\(.*?\)/g,'').trim().split(/\s+/);
+      return ((clean[0]||'')[0]||'') + ((clean[1]||'')[0]||'');
+    }
+
+    function render(id){
+      const e = experts[id]; if(!e) return;
+      const slotsHtml = e.slots.length
+        ? `<div class="slots">${e.slots.map(s=>`<div class="slot" onclick="toast('Slot requested ✓')"><span class="cal">&#128197;</span><span>${s}</span><span class="pick">Request</span></div>`).join('')}</div>`
+        : `<div class="noslot">No availability shared yet &mdash; tap &ldquo;Request interview&rdquo; and we&rsquo;ll collect slots.</div>`;
+
+      document.getElementById('content').innerHTML = `
+        <div class="privacy">&#128274; Confidential &middot; shared with your team only. Do not forward outside your firm.</div>
+
+        <div class="card">
+          <div class="hero">
+            <div class="avatar">${initials(e.name)}</div>
+            <div style="flex:1;min-width:0;">
+              <div class="hid">${e.id}</div>
+              <div class="hname">${e.name}</div>
+              <div class="hrole">${e.role} &middot; ${e.company}</div>
+            </div>
+          </div>
+          <div class="pill-row">
+            <span class="pill status" style="background:${e.statusBg};color:${e.statusFg};">${e.status}</span>
+            <span class="pill cost">${e.cost}</span>
+            <span class="pill">${e.segment}</span>
+          </div>
+          <div class="facts">
+            <div class="fact"><b>${e.years}</b><span>Experience</span></div>
+            <div class="fact"><b>${e.slots.length||'–'}</b><span>Open slots</span></div>
+            <div class="fact"><b>${e.location.split(',')[0]}</b><span>Based in</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="sec-title"><span class="i">&#11088;</span> Why this expert</div>
+          <ul class="bullets">${e.experience.map(x=>`<li>${x}</li>`).join('')}</ul>
+        </div>
+
+        <div class="card">
+          <div class="sec-title"><span class="i">&#128188;</span> Work history</div>
+          <div class="tl">${e.history.map(h=>`
+            <div class="tl-item">
+              <div class="tl-rail"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div class="tl-body">
+                <div class="tl-co">${h.co}</div>
+                <div class="tl-pos">${h.pos}</div>
+                <div class="tl-date">${h.date}</div>
+              </div>
+            </div>`).join('')}</div>
+        </div>
+
+        <div class="card">
+          <div class="sec-title"><span class="i">&#9989;</span> Screening</div>
+          <div class="qa-q">${e.screeningQ}</div>
+          <div class="qa-a">${e.screeningA}</div>
+        </div>
+
+        <div class="card">
+          <div class="sec-title"><span class="i">&#128336;</span> Availability</div>
+          ${slotsHtml}
+        </div>
+
+        <div class="foot">Powered by <strong>Arches Expert Network</strong> &middot; profile #${e.id}</div>
+      `;
+      // update switcher state + url + title
+      document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c.dataset.id===String(id)));
+      window.scrollTo({top:0,behavior:'instant'});
+      try{ history.replaceState(null,'', '?id='+id); }catch(_){}
+      document.title = `${e.name} · Arches Expert`;
+      current = id;
+    }
+
+    let current = 1;
+
+    /* build demo switcher */
+    document.getElementById('switcher').innerHTML =
+      Object.keys(experts).map(k=>`<div class="chip" data-id="${k}" onclick="render('${k}')">${experts[k].id} &middot; ${experts[k].name.split(' ')[0]}</div>`).join('');
+
+    /* share */
+    async function shareProfile(){
+      const e = experts[current];
+      const url = location.href;
+      const text = `${e.name} — ${e.role}, ${e.company} (${e.id}). Shared via Arches Expert Network.`;
+      if(navigator.share){
+        try{ await navigator.share({title:`${e.name} · Arches Expert`, text, url}); return; }catch(_){}
+      }
+      try{ await navigator.clipboard.writeText(url); toast('Link copied ✓'); }
+      catch(_){ toast('Copy this link: '+url); }
+    }
+
+    let toastT;
+    function toast(msg){
+      const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+      clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200);
+    }
+
+    /* init from ?id= */
+    const q = new URLSearchParams(location.search).get('id');
+    render(experts[q] ? q : 1);
+  </script>
+</body>
+</html>
